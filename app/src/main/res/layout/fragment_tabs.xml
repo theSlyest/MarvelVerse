@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.ListFragment">
+    tools:context=".activities.TabsFragment">
 
-    <ci.slyest.the.marvel.verse.presentation.views.AutoFitGridRecyclerView
+    <ci.slyest.the.marvel.verse.presentation.utils.AutoFitGridRecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

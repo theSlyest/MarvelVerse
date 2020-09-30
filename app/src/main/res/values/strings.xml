@@ -8,9 +8,11 @@
     <string name="label_series">Series</string>
     <string name="label_stories">Stories</string>
 
-    <string name="label_id">Stories</string>
-    <string name="label_description">Stories</string>
-    <string name="label_urls">Stories</string>
+    <string name="label_id">ID</string>
+    <string name="label_description">Description</string>
+    <string name="label_web">Web</string>
+
+    <string name="msg_no_description">(No description for the moment.)</string>
 
     <string name="desc_thumbnail">Thumbnail</string>
 </resources>

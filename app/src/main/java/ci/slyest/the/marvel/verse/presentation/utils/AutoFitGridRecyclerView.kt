@@ -1,4 +1,4 @@
-package ci.slyest.the.marvel.verse.presentation.views
+package ci.slyest.the.marvel.verse.presentation.utils
 
 import android.content.Context
 import android.util.AttributeSet

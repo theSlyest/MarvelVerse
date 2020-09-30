@@ -11,6 +11,7 @@ class CharacterDataSource(private val viewModel: CharacterViewModel)
     private var count: Int? = null
 
     private lateinit var disposable: Disposable
+    private var waiting = false
 
     init {
         viewModel.characters(1)
@@ -19,28 +20,39 @@ class CharacterDataSource(private val viewModel: CharacterViewModel)
             }
     }
 
+    private fun dispose() {
+        waiting = false
+        disposable.dispose()
+    }
+
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Character>) {
         val position = computeInitialLoadPosition(params, count!!)
         val loadSize = computeInitialLoadSize(params, position, count!!)
 
-        disposable = viewModel.characters(loadSize, position)
-            .subscribe({ wrapper ->
-                disposable.dispose()
-                callback.onResult(wrapper.data.results, position, count!!)
-            }, {
-                disposable.dispose()
-                loadInitial(params, callback)
-            })
+        if (!waiting) {
+            disposable = viewModel.characters(loadSize, position)
+                .subscribe({ wrapper ->
+                    dispose()
+                    callback.onResult(wrapper.data.results, position, count!!)
+                }, {
+                    dispose()
+                    loadInitial(params, callback)
+                })
+            waiting = true
+        }
     }
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Character>) {
-        disposable = viewModel.characters(params.loadSize, params.startPosition)
-            .subscribe({ wrapper ->
-                disposable.dispose()
-                callback.onResult(wrapper.data.results)
-            }, {
-                disposable.dispose()
-                loadRange(params, callback)
-            })
+        if (!waiting) {
+            disposable = viewModel.characters(params.loadSize, params.startPosition)
+                .subscribe({ wrapper ->
+                    dispose()
+                    callback.onResult(wrapper.data.results)
+                }, {
+                    dispose()
+                    loadRange(params, callback)
+                })
+            waiting = true
+        }
     }
 }

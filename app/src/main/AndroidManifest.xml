@@ -12,9 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.CharacterActivity"></activity>
+        <activity
+            android:name=".activities.CharacterActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activities.TabsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.TabsActivity" />
+        </activity>
         <activity
             android:name=".activities.TabsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:screenOrientation="user">
             <intent-filter>

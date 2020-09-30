@@ -1,13 +1,17 @@
 package ci.slyest.the.marvel.verse.presentation.activities
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.adapters.CharacterAdapter
+import ci.slyest.the.marvel.verse.presentation.repositories.characterPagedList
+import ci.slyest.the.marvel.verse.presentation.utils.MarvelGlideModule
+import ci.slyest.the.marvel.verse.presentation.utils.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -17,10 +21,10 @@ private const val ARG_TYPE = "type"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ListFragment.create] factory method to
+ * Use the [TabsFragment.create] factory method to
  * create an instance of this fragment.
  */
-class ListFragment : Fragment() {
+class TabsFragment : Fragment() {
 
     private val mViewModel by viewModel<CharacterViewModel>()
 
@@ -45,12 +49,17 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (resourceTypeIndex == 0) {
-            val adapter = CharacterAdapter()
-//            mViewModel.setQueryParams()
-            mViewModel.pagedList.observe(viewLifecycleOwner, { pagedList ->
+            val glide = Glide.with(this)
+            val adapter = CharacterAdapter(glide)
+            mViewModel.setQueryParams()
+            characterPagedList?.observe(viewLifecycleOwner, { pagedList ->
                 adapter.submitList(pagedList)
             })
+
             recycler.adapter = adapter
+            recycler.onItemClick { _, position, _ ->
+                context?.let { CharacterActivity.start(it, position) }
+            }
         }
     }
 
@@ -65,7 +74,7 @@ class ListFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun create(resourceTypeIndex: Int) =
-            ListFragment().apply {
+            TabsFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_TYPE, resourceTypeIndex)
                 }

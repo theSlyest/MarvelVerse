@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.presentation.R
+import com.bumptech.glide.RequestManager
 
 
-class CharacterAdapter: PagedListAdapter<Character, CharacterViewHolder>(ASYNC_DIFFER) {
+class CharacterAdapter(private val glide: RequestManager): PagedListAdapter<Character, CharacterViewHolder>(ASYNC_DIFFER) {
 
     companion object {
         val ASYNC_DIFFER: AsyncDifferConfig<Character> = AsyncDifferConfig.Builder<Character>(
@@ -24,7 +25,7 @@ class CharacterAdapter: PagedListAdapter<Character, CharacterViewHolder>(ASYNC_D
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.character_item, parent, false)
-        return CharacterViewHolder(view)
+        return CharacterViewHolder(view, glide)
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
@@ -33,5 +34,13 @@ class CharacterAdapter: PagedListAdapter<Character, CharacterViewHolder>(ASYNC_D
             holder.bind(character)
         else
             holder.clear()
+
+    }
+
+    override fun getItemId(position: Int): Long {
+        getItem(position)?.let { character ->
+            return character.id.toLong()
+        }
+        return super.getItemId(position)
     }
 }

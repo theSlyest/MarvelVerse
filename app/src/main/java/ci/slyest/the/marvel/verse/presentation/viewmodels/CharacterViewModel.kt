@@ -10,6 +10,7 @@ import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.usecases.CharactersUseCase
 import ci.slyest.the.marvel.verse.presentation.models.Status
 import ci.slyest.the.marvel.verse.presentation.models.Response
+import ci.slyest.the.marvel.verse.presentation.repositories.characterPagedList
 import ci.slyest.the.marvel.verse.presentation.sources.CharacterDataSourceFactory
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
@@ -24,13 +25,10 @@ class CharacterViewModel(private val useCase: CharactersUseCase): ViewModel() {
         }
 
     private val characterPagingConfig = PagedList.Config.Builder()
-        .setPageSize(20)
-        .setPrefetchDistance(40)
-        .setEnablePlaceholders(true)
+        .setPageSize(33)
+        .setPrefetchDistance(33)
+        .setEnablePlaceholders(false)
         .build()
-
-    var pagedList: LiveData<PagedList<Character>> =
-        LivePagedListBuilder(CharacterDataSourceFactory(this), characterPagingConfig).build()
 
     private lateinit var disposable: Disposable
 
@@ -42,6 +40,12 @@ class CharacterViewModel(private val useCase: CharactersUseCase): ViewModel() {
     private var mEvents: String? = null
     private var mStories: String? = null
     private var mOrderBy: String? = null
+
+    init {
+        if (characterPagedList == null)
+            characterPagedList =
+                LivePagedListBuilder(CharacterDataSourceFactory(this), characterPagingConfig).build()
+    }
 
     fun setQueryParams(
         name: String? = null,
