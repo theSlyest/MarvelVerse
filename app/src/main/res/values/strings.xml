@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Marvel Verse</string>
+
+    <string name="label_characters">Characters</string>
+    <string name="label_comics">Comics</string>
+    <string name="label_creators">Creators</string>
+    <string name="label_events">Events</string>
+    <string name="label_series">Series</string>
+    <string name="label_stories">Stories</string>
+
+    <string name="label_id">Stories</string>
+    <string name="label_description">Stories</string>
+    <string name="label_urls">Stories</string>
+
+    <string name="desc_thumbnail">Thumbnail</string>
+</resources>
