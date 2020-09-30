@@ -19,5 +19,5 @@ object MarvelModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    internal fun service() = retrofit.create(CharacterService::class.java)
+    internal fun service() = retrofit.create(MarvelService::class.java)
 }

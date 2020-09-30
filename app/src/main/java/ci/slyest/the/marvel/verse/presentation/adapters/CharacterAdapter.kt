@@ -24,7 +24,7 @@ class CharacterAdapter(private val glide: RequestManager): PagedListAdapter<Char
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.character_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)
         return CharacterViewHolder(view, glide)
     }
 

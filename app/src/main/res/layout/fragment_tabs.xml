@@ -14,5 +14,5 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:columnWidth="@dimen/recycler_column"
         android:clipToPadding="true"
-        tools:listitem="@layout/character_item" />
+        tools:listitem="@layout/recycler_item" />
 </RelativeLayout>

@@ -2,13 +2,14 @@ package ci.slyest.the.marvel.verse.presentation.sources
 
 import androidx.paging.PositionalDataSource
 import ci.slyest.the.marvel.verse.domain.entities.Character
+import ci.slyest.the.marvel.verse.domain.entities.Comic
 import ci.slyest.the.marvel.verse.presentation.repositories.PAGE_SIZE
 import ci.slyest.the.marvel.verse.presentation.repositories.PREFETCH_DISTANCE
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
 import io.reactivex.rxjava3.disposables.Disposable
 
-class CharacterDataSource(private val viewModel: CharacterViewModel)
-    : PositionalDataSource<Character>() {
+class ComicDataSource(private val viewModel: ComicViewModel)
+    : PositionalDataSource<Comic>() {
 
     private var count: Int? = null
 

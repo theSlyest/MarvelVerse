@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.core.Single
 import java.util.*
 
 interface CharacterRepository {
+
     fun characters(
         name: String? = null,
         nameStartsWith: String? = null,
@@ -18,5 +19,5 @@ interface CharacterRepository {
         offset: Int? = null
     ): Single<CharacterDataWrapper>
 
-    fun characterById(id: Int): Single<CharacterDataWrapper>
+//    fun characterById(id: Int): Single<CharacterDataWrapper>
 }

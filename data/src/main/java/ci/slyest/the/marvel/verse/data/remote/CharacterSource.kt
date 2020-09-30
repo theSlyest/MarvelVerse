@@ -2,21 +2,10 @@ package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import io.reactivex.rxjava3.core.Single
-import java.math.BigInteger
-import java.security.MessageDigest
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CharacterSource(private val characterService: CharacterService) {
-
-    private fun getTimestamp(): String = Timestamp(System.currentTimeMillis()).time.toString()
-
-    private fun getHash(ts: String): String {
-        val str = ts + PRIVATE_KEY + PUBLIC_KEY
-        val md = MessageDigest.getInstance("MD5")
-        return BigInteger(1, md.digest(str.toByteArray())).toString(16)
-    }
+class CharacterSource(private val marvelService: MarvelService) : MarvelSource() {
 
     fun characters(
         name: String? = null,
@@ -35,7 +24,7 @@ class CharacterSource(private val characterService: CharacterService) {
         val since: String? = modifiedSince?.run {
             SimpleDateFormat("yyyy-MM-dd", Locale.US).format(this)
         }
-        return characterService.characters(
+        return marvelService.characters(
             PUBLIC_KEY, ts, hash, name, nameStartsWith, since,
             comics, series, events, stories, orderBy, limit, offset)
     }
@@ -43,6 +32,6 @@ class CharacterSource(private val characterService: CharacterService) {
     fun characterById(id: Int): Single<CharacterDataWrapper> {
         val ts = getTimestamp()
         val hash = getHash(ts)
-        return characterService.characterById(id, PUBLIC_KEY, ts, hash)
+        return marvelService.characterById(id, PUBLIC_KEY, ts, hash)
     }
 }

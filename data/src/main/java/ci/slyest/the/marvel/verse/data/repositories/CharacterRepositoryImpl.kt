@@ -2,6 +2,7 @@ package ci.slyest.the.marvel.verse.data.repositories
 
 import ci.slyest.the.marvel.verse.data.remote.CharacterSource
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
 import ci.slyest.the.marvel.verse.domain.repositories.CharacterRepository
 import io.reactivex.rxjava3.core.Single
 import java.util.*
@@ -22,7 +23,4 @@ class CharacterRepositoryImpl(private val characterSource: CharacterSource) : Ch
     ): Single<CharacterDataWrapper>
             = characterSource.characters(name, nameStartsWith, modifiedSince, comics, series, events,
         stories, orderBy, limit, offset)
-
-    override fun characterById(id: Int): Single<CharacterDataWrapper>
-            = characterSource.characterById(id)
 }

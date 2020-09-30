@@ -1,7 +1,5 @@
 package ci.slyest.the.marvel.verse.domain.entities
 
-import java.util.*
-
 data class Character (
     val id: Int, // optional: The unique ID of the character resource.
     val name: String, // optional: The name of the character.
@@ -13,5 +11,5 @@ data class Character (
     val comics: ComicList, // optional: A resource list containing comics which feature this character.,
     val stories: StoryList, // optional: A resource list of stories in which this character appears.,
     val events: EventList, // optional: A resource list of events in which this character appears.,
-    val series: SeriesList // optional: A resource list of series in which this character appears.
+    val series: ResourceList // optional: A resource list of series in which this character appears.
 )

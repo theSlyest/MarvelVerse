@@ -4,13 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.usecases.CharactersUseCase
-import ci.slyest.the.marvel.verse.presentation.models.Status
 import ci.slyest.the.marvel.verse.presentation.models.Response
+import ci.slyest.the.marvel.verse.presentation.models.Status
 import ci.slyest.the.marvel.verse.presentation.repositories.characterPagedList
+import ci.slyest.the.marvel.verse.presentation.repositories.pagingConfig
 import ci.slyest.the.marvel.verse.presentation.sources.CharacterDataSourceFactory
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
@@ -23,12 +22,6 @@ class CharacterViewModel(private val useCase: CharactersUseCase): ViewModel() {
         get() {
             return mutableState
         }
-
-    private val characterPagingConfig = PagedList.Config.Builder()
-        .setPageSize(33)
-        .setPrefetchDistance(33)
-        .setEnablePlaceholders(false)
-        .build()
 
     private lateinit var disposable: Disposable
 
@@ -44,7 +37,7 @@ class CharacterViewModel(private val useCase: CharactersUseCase): ViewModel() {
     init {
         if (characterPagedList == null)
             characterPagedList =
-                LivePagedListBuilder(CharacterDataSourceFactory(this), characterPagingConfig).build()
+                LivePagedListBuilder(CharacterDataSourceFactory(this), pagingConfig).build()
     }
 
     fun setQueryParams(

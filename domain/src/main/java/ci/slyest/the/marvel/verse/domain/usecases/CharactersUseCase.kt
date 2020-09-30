@@ -7,7 +7,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
 
-class CharactersUseCase  : KoinComponent {
+class CharactersUseCase : KoinComponent {
 
     private val characterRepository: CharacterRepository by inject()
 
