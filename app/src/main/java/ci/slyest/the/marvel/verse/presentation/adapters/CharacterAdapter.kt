@@ -34,7 +34,6 @@ class CharacterAdapter(private val glide: RequestManager): PagedListAdapter<Char
             holder.bind(character)
         else
             holder.clear()
-
     }
 
     override fun getItemId(position: Int): Long {

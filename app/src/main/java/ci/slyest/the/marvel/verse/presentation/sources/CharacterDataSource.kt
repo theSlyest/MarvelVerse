@@ -13,8 +13,9 @@ class CharacterDataSource(private val viewModel: CharacterViewModel)
     private var count: Int? = null
 
     private lateinit var disposable: Disposable
+
     private var waiting = false
-    private val initSingle = viewModel.characters(PAGE_SIZE + 2 * PREFETCH_DISTANCE)
+    private var initSingle = viewModel.characters(PAGE_SIZE + 2 * PREFETCH_DISTANCE).cache()
 
     init {
         initSingle.blockingSubscribe { wrapper ->
@@ -29,9 +30,10 @@ class CharacterDataSource(private val viewModel: CharacterViewModel)
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Character>) {
         val position = computeInitialLoadPosition(params, count!!)
-        val loadSize = computeInitialLoadSize(params, position, count!!)
+//        val loadSize = computeInitialLoadSize(params, position, count!!)
 
         callback.onResult(initSingle.blockingGet().data.results, position, count!!)
+        initSingle = null
     }
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Character>) {

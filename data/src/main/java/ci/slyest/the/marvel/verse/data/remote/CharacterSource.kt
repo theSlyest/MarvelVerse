@@ -29,9 +29,9 @@ class CharacterSource(private val marvelService: MarvelService) : MarvelSource()
             comics, series, events, stories, orderBy, limit, offset)
     }
 
-    fun characterById(id: Int): Single<CharacterDataWrapper> {
-        val ts = getTimestamp()
-        val hash = getHash(ts)
-        return marvelService.characterById(id, PUBLIC_KEY, ts, hash)
-    }
+//    fun characterById(id: Int): Single<CharacterDataWrapper> {
+//        val ts = getTimestamp()
+//        val hash = getHash(ts)
+//        return marvelService.characterById(id, PUBLIC_KEY, ts, hash)
+//    }
 }

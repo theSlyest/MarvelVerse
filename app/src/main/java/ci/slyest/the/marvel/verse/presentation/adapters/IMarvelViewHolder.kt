@@ -10,7 +10,7 @@ import com.bumptech.glide.RequestManager
 abstract class IMarvelViewHolder<T>(itemView: View, private val glide: RequestManager)
     : RecyclerView.ViewHolder(itemView) {
 
-    protected var textName: TextView = itemView.findViewById(R.id.text_name)
+    protected var textName: TextView = itemView.findViewById(R.id.text_title)
     protected var textSecondary: TextView = itemView.findViewById(R.id.text_secondary)
     private var imgThumbnail: ImageView = itemView.findViewById(R.id.img_thumbnail)
 

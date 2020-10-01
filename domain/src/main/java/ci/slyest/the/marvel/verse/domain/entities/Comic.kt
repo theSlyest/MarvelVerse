@@ -6,7 +6,7 @@ data class Comic(
     val title: String, // optional: The canonical title of the comic.
     val issueNumber: Double, // optional: The number of the issue in the series: will generally be 0 for collection formats).
     val variantDescription: String, // optional: If the issue is a variant: e.g. an alternate cover, second printing, or director’s cut), a text description of the variant.
-    val description: String, // optional: The preferred description of the comic.
+    val description: String?, // optional: The preferred description of the comic.
     val modified: String, // optional: The date the resource was most recently modified.
     val isbn: String, // optional: The ISBN for the comic: generally only populated for collection formats).
     val upc: String, // optional: The UPC barcode number for the comic: generally only populated for periodical formats).

@@ -40,10 +40,10 @@ class CharacterActivity : AppCompatActivity() {
                     .into(img_thumbnail)
 
                 title = character.name.substringBefore('(')
-                text_name.text = title
+                text_title.text = title
                 text_secondary.text = character.name.substringAfter('(', "")
                     .substringBefore(')')
-                text_id.text = position.toString()
+                text_id.text = character.id.toString()
                 text_description.text = character.description.ifEmpty { getString(R.string.msg_no_description) }
                 var first = true
                 var strUrls = ""

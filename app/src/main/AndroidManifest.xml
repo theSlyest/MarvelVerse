@@ -14,11 +14,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.CharacterActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".activities.TabsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.TabsActivity" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activities.ComicActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".activities.TabsActivity"

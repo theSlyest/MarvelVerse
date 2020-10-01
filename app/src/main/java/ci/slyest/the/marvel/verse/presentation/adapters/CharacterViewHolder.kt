@@ -10,7 +10,6 @@ class CharacterViewHolder(itemView: View, glide: RequestManager)
 
     override fun bind(item: Character) {
         textName.text = item.name.substringBefore('(')
-
         textSecondary.text = item.name.substringAfter('(', "")
             .substringBefore(')')
 

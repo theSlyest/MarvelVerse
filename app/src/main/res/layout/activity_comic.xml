@@ -47,39 +47,44 @@
                     <ImageView
                         android:id="@+id/img_thumbnail"
                         android:layout_width="140dp"
-                        android:layout_height="120dp"
-                        app:srcCompat="@drawable/ic_marvel"
+                        android:layout_height="215dp"
+                        android:contentDescription="@string/desc_thumbnail"
                         android:scaleType="centerCrop"
-                        android:contentDescription="@string/desc_thumbnail" />
+                        app:srcCompat="@drawable/ic_marvel" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
-                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/text_secondary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:gravity="bottom"
-                            android:textAllCaps="true"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="?android:attr/textColorSecondaryInverse"
-                            tools:text="Secondary" />
 
                         <TextView
                             android:id="@+id/text_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:lines="2"
                             android:maxLines="2"
-                            android:layout_marginTop="8dp"
-                            android:textAllCaps="true"
-                            android:textAppearance="?attr/textAppearanceHeadline5"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textColor="?android:attr/textColorPrimaryInverse"
-                            tools:text="Name" />
+                            tools:text="Title" />
+
+                        <GridView
+                            android:id="@+id/grid_dates"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            tools:listitem="@layout/grid_item"
+                            android:numColumns="2"/>
+
+                        <GridView
+                            android:id="@+id/grid_creators"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            tools:listitem="@layout/grid_item"
+                            android:numColumns="2"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -90,28 +95,38 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="8dp"
                         android:layout_gravity="end">
 
                         <TextView
+                            android:id="@+id/text_format"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:textAppearance="?attr/textAppearanceBody2"
-                            android:text="@string/label_id" />
+                            android:textStyle="bold"
+                            tools:text="Format" />
 
                         <TextView
                             android:id="@+id/text_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:textAppearance="?attr/textAppearanceBody2"
-                            tools:text="Character ID" />
-                    </LinearLayout>
+                            android:layout_alignParentEnd="true"
+                            tools:text="Comic ID" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/text_id"
+                            android:text="@string/label_id"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -130,6 +145,14 @@
                         android:layout_marginTop="8dp"
                         android:textAppearance="?attr/textAppearanceBody1"
                         tools:text="Description" />
+
+                    <TextView
+                        android:id="@+id/text_variant_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        tools:text="Variant Description" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -160,14 +183,24 @@
             android:layout_margin="8dp">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_comics"
+                android:id="@+id/btn_creators"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 app:shapeAppearance="@style/AppTheme.ButtonShape"
                 style="@style/AppTheme.DetailsButton"
-                android:text="@string/label_comics"/>
+                android:text="@string/label_creators"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_characters"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_characters"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_stories"
@@ -184,19 +217,9 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 app:shapeAppearance="@style/AppTheme.ButtonShape"
                 style="@style/AppTheme.DetailsButton"
                 android:text="@string/label_events"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_series"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:shapeAppearance="@style/AppTheme.ButtonShape"
-                style="@style/AppTheme.DetailsButton"
-                android:text="@string/label_series"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

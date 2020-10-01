@@ -11,6 +11,7 @@
     <string name="label_id">ID</string>
     <string name="label_description">Description</string>
     <string name="label_web">Web</string>
+    <string name="label_format">Format</string>
 
     <string name="msg_no_description">(No description for the moment.)</string>
 

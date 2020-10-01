@@ -1,6 +1,5 @@
 package ci.slyest.the.marvel.verse.presentation.adapters
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -11,7 +10,7 @@ import ci.slyest.the.marvel.verse.presentation.R
 import com.bumptech.glide.RequestManager
 
 
-abstract class ComicAdapter(private val glide: RequestManager): PagedListAdapter<Comic, ComicViewHolder>(ASYNC_DIFFER) {
+class ComicAdapter(private val glide: RequestManager): PagedListAdapter<Comic, ComicViewHolder>(ASYNC_DIFFER) {
 
     companion object {
         val ASYNC_DIFFER: AsyncDifferConfig<Comic> = AsyncDifferConfig.Builder<Comic>(
@@ -35,7 +34,6 @@ abstract class ComicAdapter(private val glide: RequestManager): PagedListAdapter
             holder.bind(comic)
         else
             holder.clear()
-
     }
 
     override fun getItemId(position: Int): Long {

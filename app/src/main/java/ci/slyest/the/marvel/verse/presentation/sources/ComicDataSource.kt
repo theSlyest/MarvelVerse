@@ -1,11 +1,10 @@
 package ci.slyest.the.marvel.verse.presentation.sources
 
 import androidx.paging.PositionalDataSource
-import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.domain.entities.Comic
 import ci.slyest.the.marvel.verse.presentation.repositories.PAGE_SIZE
 import ci.slyest.the.marvel.verse.presentation.repositories.PREFETCH_DISTANCE
-import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
+import ci.slyest.the.marvel.verse.presentation.viewmodels.ComicViewModel
 import io.reactivex.rxjava3.disposables.Disposable
 
 class ComicDataSource(private val viewModel: ComicViewModel)
@@ -15,7 +14,7 @@ class ComicDataSource(private val viewModel: ComicViewModel)
 
     private lateinit var disposable: Disposable
     private var waiting = false
-    private val initSingle = viewModel.characters(PAGE_SIZE + 2 * PREFETCH_DISTANCE)
+    private var initSingle = viewModel.comics(PAGE_SIZE + 2 * PREFETCH_DISTANCE).cache()
 
     init {
         initSingle.blockingSubscribe { wrapper ->
@@ -28,16 +27,17 @@ class ComicDataSource(private val viewModel: ComicViewModel)
         disposable.dispose()
     }
 
-    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Character>) {
+    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Comic>) {
         val position = computeInitialLoadPosition(params, count!!)
-        val loadSize = computeInitialLoadSize(params, position, count!!)
+//        val loadSize = computeInitialLoadSize(params, position, count!!)
 
         callback.onResult(initSingle.blockingGet().data.results, position, count!!)
+        initSingle = null
     }
 
-    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Character>) {
+    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Comic>) {
         if (!waiting) {
-            disposable = viewModel.characters(params.loadSize, params.startPosition)
+            disposable = viewModel.comics(params.loadSize, params.startPosition)
                 .subscribe({ wrapper ->
                     dispose()
                     callback.onResult(wrapper.data.results)

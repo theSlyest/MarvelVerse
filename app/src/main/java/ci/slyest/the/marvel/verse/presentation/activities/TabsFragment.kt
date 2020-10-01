@@ -8,17 +8,18 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.adapters.CharacterAdapter
+import ci.slyest.the.marvel.verse.presentation.adapters.ComicAdapter
 import ci.slyest.the.marvel.verse.presentation.models.Status
 import ci.slyest.the.marvel.verse.presentation.repositories.characterPagedList
+import ci.slyest.the.marvel.verse.presentation.repositories.comicPagedList
 import ci.slyest.the.marvel.verse.presentation.utils.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
+import ci.slyest.the.marvel.verse.presentation.viewmodels.ComicViewModel
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_tabs.*
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_TYPE = "type"
 
 /**
@@ -28,7 +29,8 @@ private const val ARG_TYPE = "type"
  */
 class TabsFragment : Fragment() {
 
-    private val mViewModel by viewModel<CharacterViewModel>()
+    private val characterViewModel by viewModel<CharacterViewModel>()
+    private val comicViewModel by viewModel<ComicViewModel>()
 
     private var resourceTypeIndex = 0
 
@@ -55,7 +57,7 @@ class TabsFragment : Fragment() {
         when (resourceTypeIndex) {
             0 -> { // Characters
                 val adapter = CharacterAdapter(glide)
-                mViewModel.setQueryParams()
+                characterViewModel.setQueryParams()
                 characterPagedList?.observe(viewLifecycleOwner, { pagedList ->
                     adapter.submitList(pagedList)
                 })
@@ -65,7 +67,7 @@ class TabsFragment : Fragment() {
                     context?.let { CharacterActivity.start(it, position) }
                 }
 
-                mViewModel.state.observe(viewLifecycleOwner, { response ->
+                characterViewModel.state.observe(viewLifecycleOwner, { response ->
                     activity?.findViewById<ProgressBar>(R.id.progress_bar)?.let { progressBar ->
                         when (response.status) {
                             Status.LOADING -> progressBar.visibility = View.VISIBLE
@@ -76,7 +78,25 @@ class TabsFragment : Fragment() {
             }
 
             1 -> { // Comics
+                val adapter = ComicAdapter(glide)
+                comicViewModel.setQueryParams()
+                comicPagedList?.observe(viewLifecycleOwner, { pagedList ->
+                    adapter.submitList(pagedList)
+                })
 
+                recycler.adapter = adapter
+                recycler.onItemClick { _, position, _ ->
+                    context?.let { ComicActivity.start(it, position) }
+                }
+
+                comicViewModel.state.observe(viewLifecycleOwner, { response ->
+                    activity?.findViewById<ProgressBar>(R.id.progress_bar)?.let { progressBar ->
+                        when (response.status) {
+                            Status.LOADING -> progressBar.visibility = View.VISIBLE
+                            else -> progressBar.visibility = View.INVISIBLE
+                        }
+                    }
+                })
             }
             else -> {}
         }
