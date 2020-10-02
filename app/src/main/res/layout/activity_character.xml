@@ -21,17 +21,79 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/text_attribution"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            style="@style/AppTheme.Attribution"
+            tools:text="Data provided by Marvel. © 2020 MARVEL" />
+
+        <LinearLayout
+            android:id="@+id/button_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/text_attribution"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_comics"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_comics"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_stories"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_stories"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_events"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_events"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_series"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_series"/>
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_above="@+id/button_panel"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,8 +108,8 @@
 
                     <ImageView
                         android:id="@+id/img_thumbnail"
-                        android:layout_width="140dp"
-                        android:layout_height="120dp"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
                         app:srcCompat="@drawable/ic_marvel"
                         android:scaleType="centerCrop"
                         android:contentDescription="@string/desc_thumbnail" />
@@ -63,7 +125,7 @@
                             android:id="@+id/text_secondary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="2"
+                            android:maxLines="3"
                             android:gravity="bottom"
                             android:textAllCaps="true"
                             android:textAppearance="?attr/textAppearanceBody2"
@@ -74,7 +136,7 @@
                             android:id="@+id/text_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="2"
+                            android:maxLines="3"
                             android:layout_marginTop="8dp"
                             android:textAllCaps="true"
                             android:textAppearance="?attr/textAppearanceHeadline5"
@@ -152,51 +214,5 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="8dp">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_comics"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:shapeAppearance="@style/AppTheme.ButtonShape"
-                style="@style/AppTheme.DetailsButton"
-                android:text="@string/label_comics"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_stories"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:shapeAppearance="@style/AppTheme.ButtonShape"
-                style="@style/AppTheme.DetailsButton"
-                android:text="@string/label_stories"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_events"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:shapeAppearance="@style/AppTheme.ButtonShape"
-                style="@style/AppTheme.DetailsButton"
-                android:text="@string/label_events"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_series"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:shapeAppearance="@style/AppTheme.ButtonShape"
-                style="@style/AppTheme.DetailsButton"
-                android:text="@string/label_series"/>
-        </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

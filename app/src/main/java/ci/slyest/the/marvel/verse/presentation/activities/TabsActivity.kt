@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ci.slyest.the.marvel.verse.presentation.R
+import ci.slyest.the.marvel.verse.presentation.utils.setAttribution
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_tabs.*
 
@@ -24,6 +25,7 @@ class TabsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tabs)
+        setAttribution(this, text_attribution)
 
         setSupportActionBar(toolbar)
 

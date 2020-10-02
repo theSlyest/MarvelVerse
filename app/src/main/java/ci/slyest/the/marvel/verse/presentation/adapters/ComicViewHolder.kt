@@ -9,12 +9,13 @@ class ComicViewHolder(itemView: View, glide: RequestManager)
     : IMarvelViewHolder<Comic>(itemView, glide) {
 
     override fun bind(item: Comic) {
-        textName.text = item.title.substringBefore('#')
-        textSecondary.text = if (item.title.indexOf('#') == -1)
-            null
-        else
-            item.title.substring(item.title.indexOf('#'))
-
-        loadThumbnail(item.thumbnail.path + "." + item.thumbnail.extension)
+        with(item) {
+            loadThumbnail("${thumbnail.path}/portrait_uncanny.${thumbnail.extension}")
+            textName.text = title.substringBefore('#')
+            textSecondary.text = if (title.indexOf('#') == -1)
+                null
+            else
+                title.substring(title.indexOf('#'))
+        }
     }
 }

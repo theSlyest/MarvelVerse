@@ -8,10 +8,7 @@
         android:id="@+id/text_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         style="?attr/textAppearanceListItemSmall"
-        android:textSize="12sp"
-        android:textColor="?android:attr/textColorSecondaryInverse"
         android:textStyle="bold"
         tools:text="Label" />
     <TextView
@@ -19,7 +16,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="?attr/textAppearanceListItemSecondary"
-        android:textSize="11sp"
-        android:textColor="?android:attr/textColorSecondaryInverse"
         tools:text="Value" />
 </LinearLayout>

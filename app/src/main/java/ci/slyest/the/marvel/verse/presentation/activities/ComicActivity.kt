@@ -2,14 +2,15 @@ package ci.slyest.the.marvel.verse.presentation.activities
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.text.method.LinkMovementMethod
+import android.view.MenuItem
 import android.widget.SimpleAdapter
 import androidx.appcompat.app.AppCompatActivity
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.repositories.comicPagedList
+import ci.slyest.the.marvel.verse.presentation.utils.fromHtml
+import ci.slyest.the.marvel.verse.presentation.utils.setAttribution
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_comic.*
 import java.util.*
@@ -23,6 +24,7 @@ class ComicActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comic)
+        setAttribution(this, text_attribution)
 
         setSupportActionBar(toolbar)
 
@@ -33,61 +35,46 @@ class ComicActivity : AppCompatActivity() {
         comicPagedList?.value
             ?.get(position)
             ?.let { comic ->
-                Glide.with(this)
-                    .load(comic.thumbnail.path.replace("http:", "https:")
-                            + "." + comic.thumbnail.extension)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_marvel)
-                    .into(img_thumbnail)
+                with(comic) {
+                    Glide.with(this@ComicActivity)
+                        .load(thumbnail.path.replace("http:", "https:")
+                                + "/portrait_uncanny.${thumbnail.extension}")
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_marvel)
+                        .into(img_thumbnail)
 
-                title = comic.title
-                text_title.text = title
-                text_id.text = comic.id.toString()
-                text_description.text = if (comic.description.isNullOrEmpty())
-                    getString(R.string.msg_no_description)
-                else
-                    comic.description
-                text_variant_description.text = comic.variantDescription
-                text_format.text = comic.format
+                    this@ComicActivity.title = title
+                    text_title.text = title
+                    text_id.text = id.toString()
+                    text_format.text = format
 
-                val dateAdapter = SimpleAdapter(this,
-                    comic.dates.mapNotNull { date ->
-                        if (date.date.startsWith("-"))
-                            null
+                    val creatorAdapter = SimpleAdapter(this@ComicActivity,
+                        creators.items.map { creator ->
+                            mapOf("role" to creator.role.capitalize(Locale.ROOT), "name" to creator.name)
+                        },
+                        R.layout.grid_item,
+                        arrayOf("role", "name"),
+                        intArrayOf(R.id.text_label, R.id.text_value))
+                    grid_creators.adapter = creatorAdapter
+
+                    var first = true
+                    var strUrls = ""
+                    urls.forEach { url ->
+                        if (first)
+                            first = false
                         else
-                            mapOf(
-                                "type" to date.type.substringBefore("Date"),
-                                "date" to date.date.substringBefore('T'))
-                    },
-                    R.layout.grid_item,
-                    arrayOf("type", "date"),
-                    intArrayOf(R.id.text_label, R.id.text_value))
-                grid_dates.adapter = dateAdapter
+                            strUrls += " | "
 
-                val creatorAdapter = SimpleAdapter(this,
-                    comic.creators.items.map { creator ->
-                        mapOf("role" to creator.role, "name" to creator.name)
-                    },
-                    R.layout.grid_item,
-                    arrayOf("role", "name"),
-                    intArrayOf(R.id.text_label, R.id.text_value))
-                grid_creators.adapter = creatorAdapter
+                        strUrls += "<a href=\"${url.url}\">${url.type.capitalize(Locale.ROOT)}</a>"
+                    }
 
-                var first = true
-                var strUrls = ""
-                comic.urls.forEach { url ->
-                    if (first)
-                        first = false
+                    text_urls.text = fromHtml(strUrls)
+                    text_variant_description.text = fromHtml(variantDescription)
+                    text_description.text = if (description.isNullOrEmpty())
+                        getString(R.string.msg_no_description)
                     else
-                        strUrls += " | "
-
-                    strUrls += "<a href=\"${url.url}\">${url.type.capitalize(Locale.ROOT)}</a>"
+                        fromHtml(description)
                 }
-
-                text_urls.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                    Html.fromHtml(strUrls, Html.FROM_HTML_MODE_LEGACY)
-                else
-                    Html.fromHtml(strUrls)
 
                 text_urls.movementMethod = LinkMovementMethod.getInstance()
             }
@@ -102,4 +89,12 @@ class ComicActivity : AppCompatActivity() {
             }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }

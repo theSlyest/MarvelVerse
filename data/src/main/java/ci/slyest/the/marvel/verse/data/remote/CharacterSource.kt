@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Single
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CharacterSource(private val marvelService: MarvelService) : MarvelSource() {
+class CharacterSource(private val marvelService: MarvelService) : IMarvelSource() {
 
     fun characters(
         name: String? = null,

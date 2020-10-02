@@ -9,10 +9,11 @@ class CharacterViewHolder(itemView: View, glide: RequestManager)
     : IMarvelViewHolder<Character>(itemView, glide) {
 
     override fun bind(item: Character) {
-        textName.text = item.name.substringBefore('(')
-        textSecondary.text = item.name.substringAfter('(', "")
-            .substringBefore(')')
-
-        loadThumbnail(item.thumbnail.path + "." + item.thumbnail.extension)
+        with(item) {
+            loadThumbnail("${thumbnail.path}/standard_fantastic.${thumbnail.extension}")
+            textName.text = name.substringBefore('(')
+            textSecondary.text = name.substringAfter('(', "")
+                .substringBefore(')')
+        }
     }
 }

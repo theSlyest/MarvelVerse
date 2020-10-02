@@ -4,7 +4,7 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import java.sql.Timestamp
 
-abstract class MarvelSource {
+abstract class IMarvelSource {
 
     protected fun getTimestamp(): String = Timestamp(System.currentTimeMillis()).time.toString()
 
