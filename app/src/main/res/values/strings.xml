@@ -17,4 +17,6 @@
     <string name="msg_no_description">(No description for the moment.)</string>
 
     <string name="desc_thumbnail">Thumbnail</string>
+
+    <string name="hint_search">Search %s</string>
 </resources>
