@@ -30,7 +30,6 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         name: String? = null,
         nameStartsWith: String? = null,
         modifiedSince: Date? = null,
-        comics: String? = null,
         series: String? = null,
         events: String? = null,
         stories: String? = null,
@@ -41,7 +40,7 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         val ts = getTimestamp()
         return characterService.comicCharacters(
             comicId, PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            comics, series, events, stories, orderBy, limit, offset)
+            series, events, stories, orderBy, limit, offset)
     }
 
     fun eventCharacters(
@@ -51,7 +50,6 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         modifiedSince: Date? = null,
         comics: String? = null,
         series: String? = null,
-        events: String? = null,
         stories: String? = null,
         orderBy: String? = null,
         limit: Int? = null,
@@ -60,7 +58,7 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         val ts = getTimestamp()
         return characterService.eventCharacters(
             eventId, PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            comics, series, events, stories, orderBy, limit, offset)
+            comics, series, stories, orderBy, limit, offset)
     }
 
     fun seriesCharacters(
@@ -69,7 +67,6 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         nameStartsWith: String? = null,
         modifiedSince: Date? = null,
         comics: String? = null,
-        series: String? = null,
         events: String? = null,
         stories: String? = null,
         orderBy: String? = null,
@@ -79,7 +76,7 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         val ts = getTimestamp()
         return characterService.seriesCharacters(
             seriesId, PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            comics, series, events, stories, orderBy, limit, offset)
+            comics, events, stories, orderBy, limit, offset)
     }
 
     fun storyCharacters(
@@ -90,7 +87,6 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         comics: String? = null,
         series: String? = null,
         events: String? = null,
-        stories: String? = null,
         orderBy: String? = null,
         limit: Int? = null,
         offset: Int? = null
@@ -98,7 +94,7 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         val ts = getTimestamp()
         return characterService.storyCharacters(
             storyId, PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            comics, series, events, stories, orderBy, limit, offset)
+            comics, series, events, orderBy, limit, offset)
     }
 
 //    fun characterById(id: Int): Single<CharacterDataWrapper> {

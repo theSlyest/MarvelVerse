@@ -29,7 +29,6 @@ class CharacterRepositoryImpl(private val characterSource: CharacterSource) : Ch
         name: String?,
         nameStartsWith: String?,
         modifiedSince: Date?,
-        comics: String?,
         series: String?,
         events: String?,
         stories: String?,
@@ -37,8 +36,8 @@ class CharacterRepositoryImpl(private val characterSource: CharacterSource) : Ch
         limit: Int?,
         offset: Int?
     ): Single<CharacterDataWrapper>
-            = characterSource.comicCharacters(comicId, name, nameStartsWith, modifiedSince, comics, series, events,
-        stories, orderBy, limit, offset)
+            = characterSource.comicCharacters(comicId, name, nameStartsWith, modifiedSince, series,
+        events, stories, orderBy, limit, offset)
 
     override fun eventCharacters(
         eventId: Int,
@@ -47,14 +46,13 @@ class CharacterRepositoryImpl(private val characterSource: CharacterSource) : Ch
         modifiedSince: Date?,
         comics: String?,
         series: String?,
-        events: String?,
         stories: String?,
         orderBy: String?,
         limit: Int?,
         offset: Int?
     ): Single<CharacterDataWrapper>
-            = characterSource.eventCharacters(eventId, name, nameStartsWith, modifiedSince, comics, series, events,
-        stories, orderBy, limit, offset)
+            = characterSource.eventCharacters(eventId, name, nameStartsWith, modifiedSince, comics,
+        series, stories, orderBy, limit, offset)
 
     override fun seriesCharacters(
         seriesId: Int,
@@ -62,15 +60,14 @@ class CharacterRepositoryImpl(private val characterSource: CharacterSource) : Ch
         nameStartsWith: String?,
         modifiedSince: Date?,
         comics: String?,
-        series: String?,
         events: String?,
         stories: String?,
         orderBy: String?,
         limit: Int?,
         offset: Int?
     ): Single<CharacterDataWrapper>
-            = characterSource.seriesCharacters(seriesId, name, nameStartsWith, modifiedSince, comics, series, events,
-        stories, orderBy, limit, offset)
+            = characterSource.seriesCharacters(seriesId, name, nameStartsWith, modifiedSince, comics,
+        events, stories, orderBy, limit, offset)
 
     override fun storyCharacters(
         storyId: Int,
@@ -80,11 +77,10 @@ class CharacterRepositoryImpl(private val characterSource: CharacterSource) : Ch
         comics: String?,
         series: String?,
         events: String?,
-        stories: String?,
         orderBy: String?,
         limit: Int?,
         offset: Int?
     ): Single<CharacterDataWrapper>
-            = characterSource.storyCharacters(storyId, name, nameStartsWith, modifiedSince, comics, series, events,
-        stories, orderBy, limit, offset)
+            = characterSource.storyCharacters(storyId, name, nameStartsWith, modifiedSince, comics,
+        series, events, orderBy, limit, offset)
 }

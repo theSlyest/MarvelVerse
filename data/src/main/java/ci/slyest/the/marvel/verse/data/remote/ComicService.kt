@@ -66,7 +66,6 @@ interface ComicService {
         @Query("hasDigitalIssue") hasDigitalIssue: Boolean?,
         @Query("modifiedSince") modifiedSince: String?, // yyyy-MM-ddThh:mm
         @Query("creators") creators: String?,
-        @Query("characters") characters: String?,
         @Query("series") series: String?,
         @Query("events") events: String?,
         @Query("stories") stories: String?,
@@ -100,7 +99,6 @@ interface ComicService {
         @Query("issn") issn: String?,
         @Query("hasDigitalIssue") hasDigitalIssue: Boolean?,
         @Query("modifiedSince") modifiedSince: String?, // yyyy-MM-ddThh:mm
-        @Query("creators") creators: String?,
         @Query("characters") characters: String?,
         @Query("series") series: String?,
         @Query("events") events: String?,
@@ -138,7 +136,6 @@ interface ComicService {
         @Query("creators") creators: String?,
         @Query("characters") characters: String?,
         @Query("series") series: String?,
-        @Query("events") events: String?,
         @Query("stories") stories: String?,
         @Query("sharedAppearances") sharedAppearances: String?,
         @Query("collaborators") collaborators: String?,
@@ -172,7 +169,6 @@ interface ComicService {
         @Query("modifiedSince") modifiedSince: String?, // yyyy-MM-ddThh:mm
         @Query("creators") creators: String?,
         @Query("characters") characters: String?,
-        @Query("series") series: String?,
         @Query("events") events: String?,
         @Query("stories") stories: String?,
         @Query("sharedAppearances") sharedAppearances: String?,
@@ -209,7 +205,6 @@ interface ComicService {
         @Query("characters") characters: String?,
         @Query("series") series: String?,
         @Query("events") events: String?,
-        @Query("stories") stories: String?,
         @Query("sharedAppearances") sharedAppearances: String?,
         @Query("collaborators") collaborators: String?,
         @Query("orderBy") orderBy: String?,

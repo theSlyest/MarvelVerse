@@ -62,7 +62,6 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
         hasDigitalIssue: Boolean?,
         modifiedSince: Date?,
         creators: String?,
-        characters: String?,
         series: String?,
         events: String?,
         stories: String?,
@@ -74,7 +73,7 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
     ): Single<ComicDataWrapper>
             = comicSource.characterComics(characterId, format, formatType, noVariants, dateDescriptor,
         dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc, isbn,
-        ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series, events, stories,
+        ean, issn, hasDigitalIssue, modifiedSince, creators, series, events, stories,
         sharedAppearances, collaborators, orderBy, limit, offset)
 
     override fun creatorComics(
@@ -96,7 +95,6 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
         issn: String?,
         hasDigitalIssue: Boolean?,
         modifiedSince: Date?,
-        creators: String?,
         characters: String?,
         series: String?,
         events: String?,
@@ -109,7 +107,7 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
     ): Single<ComicDataWrapper>
             = comicSource.creatorComics(creatorId, format, formatType, noVariants, dateDescriptor,
         dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc, isbn,
-        ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series, events, stories,
+        ean, issn, hasDigitalIssue, modifiedSince, characters, series, events, stories,
         sharedAppearances, collaborators, orderBy, limit, offset)
 
     override fun eventComics(
@@ -134,7 +132,6 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
         creators: String?,
         characters: String?,
         series: String?,
-        events: String?,
         stories: String?,
         sharedAppearances: String?,
         collaborators: String?,
@@ -144,7 +141,7 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
     ): Single<ComicDataWrapper>
             = comicSource.eventComics(eventId, format, formatType, noVariants, dateDescriptor,
         dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc, isbn,
-        ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series, events, stories,
+        ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series, stories,
         sharedAppearances, collaborators, orderBy, limit, offset)
 
     override fun seriesComics(
@@ -168,7 +165,6 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
         modifiedSince: Date?,
         creators: String?,
         characters: String?,
-        series: String?,
         events: String?,
         stories: String?,
         sharedAppearances: String?,
@@ -179,7 +175,7 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
     ): Single<ComicDataWrapper>
             = comicSource.seriesComics(seriesId, format, formatType, noVariants, dateDescriptor,
         dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc, isbn,
-        ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series, events, stories,
+        ean, issn, hasDigitalIssue, modifiedSince, creators, characters, events, stories,
         sharedAppearances, collaborators, orderBy, limit, offset)
 
     override fun storyComics(
@@ -205,7 +201,6 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
         characters: String?,
         series: String?,
         events: String?,
-        stories: String?,
         sharedAppearances: String?,
         collaborators: String?,
         orderBy: String?,
@@ -214,6 +209,6 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
     ): Single<ComicDataWrapper>
             = comicSource.storyComics(storyId, format, formatType, noVariants, dateDescriptor,
         dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc, isbn,
-        ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series, events, stories,
+        ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series, events,
         sharedAppearances, collaborators, orderBy, limit, offset)
 }

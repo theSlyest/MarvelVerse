@@ -63,7 +63,6 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
         hasDigitalIssue: Boolean?,
         modifiedSince: Date?, // yyyy-MM-ddThh:mm
         creators: String?,
-        characters: String?,
         series: String?,
         events: String?,
         stories: String?,
@@ -77,7 +76,7 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
         return comicService.characterComics(
             characterId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
             dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters, series,
+            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, series,
             events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
     }
 
@@ -100,7 +99,6 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
         issn: String?,
         hasDigitalIssue: Boolean?,
         modifiedSince: Date?, // yyyy-MM-ddThh:mm
-        creators: String?,
         characters: String?,
         series: String?,
         events: String?,
@@ -115,7 +113,7 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
         return comicService.creatorComics(
             creatorId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
             dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters, series,
+            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), characters, series,
             events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
     }
 
@@ -141,7 +139,6 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
         creators: String?,
         characters: String?,
         series: String?,
-        events: String?,
         stories: String?,
         sharedAppearances: String?,
         collaborators: String?,
@@ -154,7 +151,7 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
             eventId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
             dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
             isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters, series,
-            events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
+            stories, sharedAppearances, collaborators, orderBy, limit, offset)
     }
 
     fun seriesComics(
@@ -178,7 +175,6 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
         modifiedSince: Date?, // yyyy-MM-ddThh:mm
         creators: String?,
         characters: String?,
-        series: String?,
         events: String?,
         stories: String?,
         sharedAppearances: String?,
@@ -191,7 +187,7 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
         return comicService.seriesComics(
             seriesId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
             dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters, series,
+            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters,
             events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
     }
 
@@ -218,7 +214,6 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
         characters: String?,
         series: String?,
         events: String?,
-        stories: String?,
         sharedAppearances: String?,
         collaborators: String?,
         orderBy: String? = null,
@@ -230,6 +225,6 @@ class ComicSource(private val comicService: ComicService) : IMarvelSource() {
             storyId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
             dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
             isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters, series,
-            events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
+            events, sharedAppearances, collaborators, orderBy, limit, offset)
     }
 }

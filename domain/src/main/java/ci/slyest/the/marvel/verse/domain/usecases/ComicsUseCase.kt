@@ -12,6 +12,11 @@ class ComicsUseCase : KoinComponent {
     private val comicRepository: ComicRepository by inject()
 
     operator fun invoke(
+        characterId: Int? = null,
+        creatorId: Int? = null,
+        eventId: Int? = null,
+        seriesId: Int? = null,
+        storyId: Int? = null,
         format: String? = null,
         formatType: String? = null,
         noVariants: Boolean? = null,
@@ -39,9 +44,37 @@ class ComicsUseCase : KoinComponent {
         orderBy: String? = null,
         limit: Int? = null,
         offset: Int? = null
-    ): Single<ComicDataWrapper>
-            = comicRepository.comics(format, formatType, noVariants, dateDescriptor, dateRange,
-        title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc, isbn, ean,
-        issn, hasDigitalIssue, modifiedSince, creators, characters, series, events, stories,
-        sharedAppearances, collaborators, orderBy, limit, offset)
+    ): Single<ComicDataWrapper> =
+        when {
+            characterId != null ->
+                comicRepository.characterComics(characterId, format, formatType, noVariants, dateDescriptor,
+                    dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId,
+                    upc, isbn, ean, issn, hasDigitalIssue, modifiedSince, creators, series, events,
+                    stories, sharedAppearances, collaborators, orderBy, limit, offset)
+            creatorId != null ->
+                comicRepository.creatorComics(creatorId, format, formatType, noVariants, dateDescriptor,
+                    dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId,
+                    upc, isbn, ean, issn, hasDigitalIssue, modifiedSince, characters, series, events,
+                    stories, sharedAppearances, collaborators, orderBy, limit, offset)
+            eventId != null ->
+                comicRepository.eventComics(eventId, format, formatType, noVariants, dateDescriptor,
+                    dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId,
+                    upc, isbn, ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series,
+                    stories, sharedAppearances, collaborators, orderBy, limit, offset)
+            seriesId != null ->
+                comicRepository.seriesComics(seriesId, format, formatType, noVariants, dateDescriptor,
+                    dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId,
+                    upc, isbn, ean, issn, hasDigitalIssue, modifiedSince, creators, characters,
+                    events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
+            storyId != null ->
+                comicRepository.storyComics(storyId, format, formatType, noVariants, dateDescriptor,
+                    dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId,
+                    upc, isbn, ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series,
+                    events, sharedAppearances, collaborators, orderBy, limit, offset)
+            else ->
+                comicRepository.comics(format, formatType, noVariants, dateDescriptor, dateRange,
+                    title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
+                    isbn, ean, issn, hasDigitalIssue, modifiedSince, creators, characters, series,
+                    events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
+        }
 }

@@ -23,10 +23,10 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
     private lateinit var fragment: ISearchFragment
 
-    private fun loadFragment(resourceType: Int? = null, resourceId: Int? = null, startsWith: String? = null) {
+    private fun loadFragment(resourceType: Int? = null, resourceId: Int? = null) {
         fragment = when(resourceType) {
             ResourceType.CHARACTER.position ->
-                CharacterSearchFragment.create(resourceType, resourceId, startsWith)
+                CharacterSearchFragment.create(resourceType, resourceId)
 //            1 -> ComicSearchFragment()
             else -> EmptySearchFragment()
         }

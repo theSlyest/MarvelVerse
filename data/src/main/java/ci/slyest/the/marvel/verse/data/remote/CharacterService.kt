@@ -35,7 +35,6 @@ interface CharacterService {
         @Query("name") name: String?,
         @Query("nameStartsWith") nameStartsWith: String?,
         @Query("modifiedSince") modifiedSince: String?, // yyyy-MM-ddThh:mm
-        @Query("comics") comics: String?,
         @Query("series") series: String?,
         @Query("events") events: String?,
         @Query("stories") stories: String?,
@@ -55,7 +54,6 @@ interface CharacterService {
         @Query("modifiedSince") modifiedSince: String?, // yyyy-MM-ddThh:mm
         @Query("comics") comics: String?,
         @Query("series") series: String?,
-        @Query("events") events: String?,
         @Query("stories") stories: String?,
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
@@ -72,7 +70,6 @@ interface CharacterService {
         @Query("nameStartsWith") nameStartsWith: String?,
         @Query("modifiedSince") modifiedSince: String?, // yyyy-MM-ddThh:mm
         @Query("comics") comics: String?,
-        @Query("series") series: String?,
         @Query("events") events: String?,
         @Query("stories") stories: String?,
         @Query("orderBy") orderBy: String?,
@@ -92,7 +89,6 @@ interface CharacterService {
         @Query("comics") comics: String?,
         @Query("series") series: String?,
         @Query("events") events: String?,
-        @Query("stories") stories: String?,
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
