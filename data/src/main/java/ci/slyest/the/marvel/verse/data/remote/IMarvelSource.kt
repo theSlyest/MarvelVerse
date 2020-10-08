@@ -3,6 +3,8 @@ package ci.slyest.the.marvel.verse.data.remote
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
 
 abstract class IMarvelSource {
 
@@ -13,4 +15,9 @@ abstract class IMarvelSource {
         val md = MessageDigest.getInstance("MD5")
         return BigInteger(1, md.digest(str.toByteArray())).toString(16)
     }
+
+    protected fun formatDate(modifiedSince: Date?) =
+        modifiedSince?.run {
+            SimpleDateFormat("yyyy-MM-dd", Locale.US).format(this)
+        }
 }

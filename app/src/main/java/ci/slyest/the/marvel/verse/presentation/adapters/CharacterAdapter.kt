@@ -9,7 +9,6 @@ import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.presentation.R
 import com.bumptech.glide.RequestManager
 
-
 class CharacterAdapter(private val glide: RequestManager): PagedListAdapter<Character, CharacterViewHolder>(ASYNC_DIFFER) {
 
     companion object {

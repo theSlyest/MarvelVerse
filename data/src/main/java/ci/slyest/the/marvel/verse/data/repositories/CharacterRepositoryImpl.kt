@@ -23,4 +23,68 @@ class CharacterRepositoryImpl(private val characterSource: CharacterSource) : Ch
     ): Single<CharacterDataWrapper>
             = characterSource.characters(name, nameStartsWith, modifiedSince, comics, series, events,
         stories, orderBy, limit, offset)
+
+    override fun comicCharacters(
+        comicId: Int,
+        name: String?,
+        nameStartsWith: String?,
+        modifiedSince: Date?,
+        comics: String?,
+        series: String?,
+        events: String?,
+        stories: String?,
+        orderBy: String?,
+        limit: Int?,
+        offset: Int?
+    ): Single<CharacterDataWrapper>
+            = characterSource.comicCharacters(comicId, name, nameStartsWith, modifiedSince, comics, series, events,
+        stories, orderBy, limit, offset)
+
+    override fun eventCharacters(
+        eventId: Int,
+        name: String?,
+        nameStartsWith: String?,
+        modifiedSince: Date?,
+        comics: String?,
+        series: String?,
+        events: String?,
+        stories: String?,
+        orderBy: String?,
+        limit: Int?,
+        offset: Int?
+    ): Single<CharacterDataWrapper>
+            = characterSource.eventCharacters(eventId, name, nameStartsWith, modifiedSince, comics, series, events,
+        stories, orderBy, limit, offset)
+
+    override fun seriesCharacters(
+        seriesId: Int,
+        name: String?,
+        nameStartsWith: String?,
+        modifiedSince: Date?,
+        comics: String?,
+        series: String?,
+        events: String?,
+        stories: String?,
+        orderBy: String?,
+        limit: Int?,
+        offset: Int?
+    ): Single<CharacterDataWrapper>
+            = characterSource.seriesCharacters(seriesId, name, nameStartsWith, modifiedSince, comics, series, events,
+        stories, orderBy, limit, offset)
+
+    override fun storyCharacters(
+        storyId: Int,
+        name: String?,
+        nameStartsWith: String?,
+        modifiedSince: Date?,
+        comics: String?,
+        series: String?,
+        events: String?,
+        stories: String?,
+        orderBy: String?,
+        limit: Int?,
+        offset: Int?
+    ): Single<CharacterDataWrapper>
+            = characterSource.storyCharacters(storyId, name, nameStartsWith, modifiedSince, comics, series, events,
+        stories, orderBy, limit, offset)
 }

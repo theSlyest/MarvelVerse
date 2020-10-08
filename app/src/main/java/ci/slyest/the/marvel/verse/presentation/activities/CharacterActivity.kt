@@ -1,39 +1,35 @@
 package ci.slyest.the.marvel.verse.presentation.activities
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import ci.slyest.the.marvel.verse.presentation.R
-import ci.slyest.the.marvel.verse.presentation.repositories.characterPagedList
-import ci.slyest.the.marvel.verse.presentation.utils.fromHtml
-import ci.slyest.the.marvel.verse.presentation.utils.setAttribution
+import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
+import ci.slyest.the.marvel.verse.presentation.common.fromHtml
+import ci.slyest.the.marvel.verse.presentation.common.setAttribution
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_character.*
 import java.util.*
 
-private const val ARG_POSITION = "position"
+class CharacterActivity : IDetailActivity() {
 
-class CharacterActivity : AppCompatActivity() {
-
-    private var position = 0
+    companion object {
+        @JvmStatic
+        fun start(context: Context, position: Int, search: Boolean) =
+            start(context, position, search, CharacterActivity::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_character)
         setAttribution(this, text_attribution)
 
         setSupportActionBar(toolbar)
-
-        // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        position = intent.getIntExtra(ARG_POSITION, 0)
-        characterPagedList?.value
-            ?.get(position)
-            ?.let { character ->
+        ResourceHolder.getCharacter()
+            .let { character ->
                 with(character) {
                     Glide.with(this@CharacterActivity)
                         .load(thumbnail.path.replace("http:", "https:")
@@ -63,23 +59,5 @@ class CharacterActivity : AppCompatActivity() {
 
                 text_urls.movementMethod = LinkMovementMethod.getInstance()
             }
-    }
-
-    companion object {
-        @JvmStatic
-        fun start(context: Context, position: Int) =
-            Intent(context, CharacterActivity::class.java).let { intent ->
-                intent.putExtra(ARG_POSITION, position)
-                context.startActivity(intent)
-            }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 }

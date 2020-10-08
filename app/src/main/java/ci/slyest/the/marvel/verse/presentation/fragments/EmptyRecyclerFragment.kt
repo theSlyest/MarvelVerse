@@ -1,5 +1,5 @@
 package ci.slyest.the.marvel.verse.presentation.fragments
 
-class EmptyFragment : IRecyclerFragment() {
+class EmptyRecyclerFragment : IRecyclerFragment() {
     override fun initRecycler() {}
 }

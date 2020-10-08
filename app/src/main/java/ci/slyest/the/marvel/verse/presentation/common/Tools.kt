@@ -1,4 +1,4 @@
-package ci.slyest.the.marvel.verse.presentation.utils
+package ci.slyest.the.marvel.verse.presentation.common
 
 import android.content.Context
 import android.os.Build

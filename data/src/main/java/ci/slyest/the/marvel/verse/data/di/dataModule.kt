@@ -13,8 +13,8 @@ import org.koin.dsl.module
 val dataModule: Module = module {
 
     single<CharacterRepository> { CharacterRepositoryImpl(characterSource = get()) }
-    single { CharacterSource(marvelService = MarvelModule.service()) }
+    single { CharacterSource(characterService = MarvelModule.characterService()) }
 
     single<ComicRepository> { ComicRepositoryImpl(comicSource = get()) }
-    single { ComicSource(marvelService = MarvelModule.service()) }
+    single { ComicSource(comicService = MarvelModule.comicService()) }
 }

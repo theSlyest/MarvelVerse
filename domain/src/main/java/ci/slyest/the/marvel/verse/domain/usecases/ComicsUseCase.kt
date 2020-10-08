@@ -1,8 +1,6 @@
 package ci.slyest.the.marvel.verse.domain.usecases
 
-import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
-import ci.slyest.the.marvel.verse.domain.repositories.CharacterRepository
 import ci.slyest.the.marvel.verse.domain.repositories.ComicRepository
 import io.reactivex.rxjava3.core.Single
 import org.koin.core.KoinComponent
@@ -14,30 +12,30 @@ class ComicsUseCase : KoinComponent {
     private val comicRepository: ComicRepository by inject()
 
     operator fun invoke(
-        format: String?,
-        formatType: String?,
-        noVariants: Boolean?,
-        dateDescriptor: String?,
-        dateRange: String?,
-        title: String?,
-        titleStartsWith: String?,
-        startYear: Int?,
-        issueNumber: Int?,
-        diamondCode: String?,
-        digitalId: Int?,
-        upc: String?,
-        isbn: String?,
-        ean: String?,
-        issn: String?,
-        hasDigitalIssue: Boolean?,
-        modifiedSince: Date?,
-        creators: String?,
-        characters: String?,
-        series: String?,
-        events: String?,
-        stories: String?,
-        sharedAppearances: String?,
-        collaborators: String?,
+        format: String? = null,
+        formatType: String? = null,
+        noVariants: Boolean? = null,
+        dateDescriptor: String? = null,
+        dateRange: String? = null,
+        title: String? = null,
+        titleStartsWith: String? = null,
+        startYear: Int? = null,
+        issueNumber: Int? = null,
+        diamondCode: String? = null,
+        digitalId: Int? = null,
+        upc: String? = null,
+        isbn: String? = null,
+        ean: String? = null,
+        issn: String? = null,
+        hasDigitalIssue: Boolean? = null,
+        modifiedSince: Date? = null,
+        creators: String? = null,
+        characters: String? = null,
+        series: String? = null,
+        events: String? = null,
+        stories: String? = null,
+        sharedAppearances: String? = null,
+        collaborators: String? = null,
         orderBy: String? = null,
         limit: Int? = null,
         offset: Int? = null

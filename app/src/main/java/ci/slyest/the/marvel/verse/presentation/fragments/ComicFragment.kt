@@ -1,13 +1,11 @@
 package ci.slyest.the.marvel.verse.presentation.fragments
 
-import android.view.View
-import android.widget.ProgressBar
-import ci.slyest.the.marvel.verse.presentation.R
+import android.content.Intent
 import ci.slyest.the.marvel.verse.presentation.activities.ComicActivity
 import ci.slyest.the.marvel.verse.presentation.adapters.ComicAdapter
-import ci.slyest.the.marvel.verse.presentation.models.Status
-import ci.slyest.the.marvel.verse.presentation.repositories.comicPagedList
-import ci.slyest.the.marvel.verse.presentation.utils.onItemClick
+import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
+import ci.slyest.the.marvel.verse.presentation.common.ResourceType
+import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.ComicViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -17,24 +15,19 @@ class ComicFragment : IRecyclerFragment() {
     private val mViewModel by viewModel<ComicViewModel>()
 
     override fun initRecycler() {
+        ResourceHolder.currentType = ResourceType.COMIC
+
+        observeState(mViewModel.state)
+
         val adapter = ComicAdapter(glide)
-        mViewModel.setQueryParams()
-        comicPagedList?.observe(viewLifecycleOwner, { pagedList ->
+        ComicViewModel.pagedList!!.observe(viewLifecycleOwner, { pagedList ->
             adapter.submitList(pagedList)
         })
 
         recycler.adapter = adapter
         recycler.onItemClick { _, position, _ ->
-            context?.let { ComicActivity.start(it, position) }
+            ResourceHolder.putComic(ComicViewModel.pagedList?.value?.get(position)!!)
+            startActivity(Intent(context, ComicActivity::class.java))
         }
-
-        mViewModel.state.observe(viewLifecycleOwner, { response ->
-            activity?.findViewById<ProgressBar>(R.id.progress_bar)?.let { progressBar ->
-                when (response.status) {
-                    Status.LOADING -> progressBar.visibility = View.VISIBLE
-                    else -> progressBar.visibility = View.INVISIBLE
-                }
-            }
-        })
     }
 }

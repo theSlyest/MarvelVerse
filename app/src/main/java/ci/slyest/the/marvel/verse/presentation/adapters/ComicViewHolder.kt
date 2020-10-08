@@ -6,7 +6,7 @@ import com.bumptech.glide.RequestManager
 
 
 class ComicViewHolder(itemView: View, glide: RequestManager)
-    : IMarvelViewHolder<Comic>(itemView, glide) {
+    : IRecyclerViewHolder<Comic>(itemView, glide) {
 
     override fun bind(item: Comic) {
         with(item) {

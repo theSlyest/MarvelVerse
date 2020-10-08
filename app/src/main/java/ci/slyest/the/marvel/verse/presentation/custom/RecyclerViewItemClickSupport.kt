@@ -1,4 +1,4 @@
-package ci.slyest.the.marvel.verse.presentation.utils
+package ci.slyest.the.marvel.verse.presentation.custom
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

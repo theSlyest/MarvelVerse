@@ -1,44 +1,33 @@
 package ci.slyest.the.marvel.verse.presentation.sources
 
-import androidx.paging.PositionalDataSource
 import ci.slyest.the.marvel.verse.domain.entities.Character
-import ci.slyest.the.marvel.verse.presentation.repositories.PAGE_SIZE
-import ci.slyest.the.marvel.verse.presentation.repositories.PREFETCH_DISTANCE
-import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
-import io.reactivex.rxjava3.disposables.Disposable
+import ci.slyest.the.marvel.verse.presentation.viewmodels.ICharacterViewModel
 
-class CharacterDataSource(private val viewModel: CharacterViewModel)
-    : PositionalDataSource<Character>() {
+class CharacterDataSource(var viewModel: ICharacterViewModel)
+    : IMarvelDataSource<Character>() {
 
-    private var count: Int? = null
-
-    private lateinit var disposable: Disposable
-
-    private var waiting = false
-    private var initSingle = viewModel.characters(PAGE_SIZE + 2 * PREFETCH_DISTANCE).cache()
+    private var initSingle =
+        viewModel.fetch(ICharacterViewModel.PAGE_SIZE + 2 * ICharacterViewModel.PREFETCH_DISTANCE).cache()
 
     init {
-        initSingle.blockingSubscribe { wrapper ->
+        disposable = initSingle.subscribe { wrapper ->
+            disposable.dispose()
             count = wrapper.data.total
         }
     }
 
-    private fun dispose() {
-        waiting = false
-        disposable.dispose()
-    }
-
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Character>) {
+        val data = initSingle.blockingGet().data.results
         val position = computeInitialLoadPosition(params, count!!)
 //        val loadSize = computeInitialLoadSize(params, position, count!!)
 
-        callback.onResult(initSingle.blockingGet().data.results, position, count!!)
+        callback.onResult(data, position, count!!)
         initSingle = null
     }
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Character>) {
         if (!waiting) {
-            disposable = viewModel.characters(params.loadSize, params.startPosition)
+            disposable = viewModel.fetch(params.loadSize, params.startPosition)
                 .subscribe({ wrapper ->
                     dispose()
                     callback.onResult(wrapper.data.results)

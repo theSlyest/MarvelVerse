@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ci.slyest.the.marvel.verse.presentation.R
 import com.bumptech.glide.RequestManager
 
-abstract class IMarvelViewHolder<T>(itemView: View, private val glide: RequestManager)
+abstract class IRecyclerViewHolder<T>(itemView: View, private val glide: RequestManager)
     : RecyclerView.ViewHolder(itemView) {
 
     protected var textName: TextView = itemView.findViewById(R.id.text_title)
