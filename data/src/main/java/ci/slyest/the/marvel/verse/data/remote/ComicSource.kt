@@ -1,230 +1,57 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.ComicRequest
 import io.reactivex.rxjava3.core.Single
 import java.util.*
 
 class ComicSource(private val comicService: ComicService) : IMarvelSource() {
 
-    fun comics(
-        format: String?,
-        formatType: String?,
-        noVariants: Boolean?,
-        dateDescriptor: String?,
-        dateRange: String?,
-        title: String?,
-        titleStartsWith: String?,
-        startYear: Int?,
-        issueNumber: Int?,
-        diamondCode: String?,
-        digitalId: Int?,
-        upc: String?,
-        isbn: String?,
-        ean: String?,
-        issn: String?,
-        hasDigitalIssue: Boolean?,
-        modifiedSince: Date?, // yyyy-MM-ddThh:mm
-        creators: String?,
-        characters: String?,
-        series: String?,
-        events: String?,
-        stories: String?,
-        sharedAppearances: String?,
-        collaborators: String?,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<ComicDataWrapper> {
+    fun comics(req: ComicRequest): Single<ComicDataWrapper> {
         val ts = getTimestamp()
-        return comicService.comics(
-            PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
-            dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters, series,
-            events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
-    }
-
-    fun characterComics(
-        characterId: Int,
-        format: String?,
-        formatType: String?,
-        noVariants: Boolean?,
-        dateDescriptor: String?,
-        dateRange: String?,
-        title: String?,
-        titleStartsWith: String?,
-        startYear: Int?,
-        issueNumber: Int?,
-        diamondCode: String?,
-        digitalId: Int?,
-        upc: String?,
-        isbn: String?,
-        ean: String?,
-        issn: String?,
-        hasDigitalIssue: Boolean?,
-        modifiedSince: Date?, // yyyy-MM-ddThh:mm
-        creators: String?,
-        series: String?,
-        events: String?,
-        stories: String?,
-        sharedAppearances: String?,
-        collaborators: String?,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<ComicDataWrapper> {
-        val ts = getTimestamp()
-        return comicService.characterComics(
-            characterId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
-            dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, series,
-            events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
-    }
-
-    fun creatorComics(
-        creatorId: Int,
-        format: String?,
-        formatType: String?,
-        noVariants: Boolean?,
-        dateDescriptor: String?,
-        dateRange: String?,
-        title: String?,
-        titleStartsWith: String?,
-        startYear: Int?,
-        issueNumber: Int?,
-        diamondCode: String?,
-        digitalId: Int?,
-        upc: String?,
-        isbn: String?,
-        ean: String?,
-        issn: String?,
-        hasDigitalIssue: Boolean?,
-        modifiedSince: Date?, // yyyy-MM-ddThh:mm
-        characters: String?,
-        series: String?,
-        events: String?,
-        stories: String?,
-        sharedAppearances: String?,
-        collaborators: String?,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<ComicDataWrapper> {
-        val ts = getTimestamp()
-        return comicService.creatorComics(
-            creatorId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
-            dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), characters, series,
-            events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
-    }
-
-    fun eventComics(
-        eventId: Int,
-        format: String?,
-        formatType: String?,
-        noVariants: Boolean?,
-        dateDescriptor: String?,
-        dateRange: String?,
-        title: String?,
-        titleStartsWith: String?,
-        startYear: Int?,
-        issueNumber: Int?,
-        diamondCode: String?,
-        digitalId: Int?,
-        upc: String?,
-        isbn: String?,
-        ean: String?,
-        issn: String?,
-        hasDigitalIssue: Boolean?,
-        modifiedSince: Date?, // yyyy-MM-ddThh:mm
-        creators: String?,
-        characters: String?,
-        series: String?,
-        stories: String?,
-        sharedAppearances: String?,
-        collaborators: String?,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<ComicDataWrapper> {
-        val ts = getTimestamp()
-        return comicService.eventComics(
-            eventId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
-            dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters, series,
-            stories, sharedAppearances, collaborators, orderBy, limit, offset)
-    }
-
-    fun seriesComics(
-        seriesId: Int,
-        format: String?,
-        formatType: String?,
-        noVariants: Boolean?,
-        dateDescriptor: String?,
-        dateRange: String?,
-        title: String?,
-        titleStartsWith: String?,
-        startYear: Int?,
-        issueNumber: Int?,
-        diamondCode: String?,
-        digitalId: Int?,
-        upc: String?,
-        isbn: String?,
-        ean: String?,
-        issn: String?,
-        hasDigitalIssue: Boolean?,
-        modifiedSince: Date?, // yyyy-MM-ddThh:mm
-        creators: String?,
-        characters: String?,
-        events: String?,
-        stories: String?,
-        sharedAppearances: String?,
-        collaborators: String?,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<ComicDataWrapper> {
-        val ts = getTimestamp()
-        return comicService.seriesComics(
-            seriesId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
-            dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters,
-            events, stories, sharedAppearances, collaborators, orderBy, limit, offset)
-    }
-
-    fun storyComics(
-        storyId: Int,
-        format: String?,
-        formatType: String?,
-        noVariants: Boolean?,
-        dateDescriptor: String?,
-        dateRange: String?,
-        title: String?,
-        titleStartsWith: String?,
-        startYear: Int?,
-        issueNumber: Int?,
-        diamondCode: String?,
-        digitalId: Int?,
-        upc: String?,
-        isbn: String?,
-        ean: String?,
-        issn: String?,
-        hasDigitalIssue: Boolean?,
-        modifiedSince: Date?, // yyyy-MM-ddThh:mm
-        creators: String?,
-        characters: String?,
-        series: String?,
-        events: String?,
-        sharedAppearances: String?,
-        collaborators: String?,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<ComicDataWrapper> {
-        val ts = getTimestamp()
-        return comicService.storyComics(
-            storyId, PUBLIC_KEY, ts, getHash(ts), format, formatType, noVariants, dateDescriptor,
-            dateRange, title, titleStartsWith, startYear, issueNumber, diamondCode, digitalId, upc,
-            isbn, ean, issn, hasDigitalIssue, formatDate(modifiedSince), creators, characters, series,
-            events, sharedAppearances, collaborators, orderBy, limit, offset)
+        return when {
+            req.characterId != null ->
+                comicService.characterComics(req.characterId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
+                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
+                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
+                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
+                    req.creators, req.series, req.events, req.stories, req.sharedAppearances,
+                    req.collaborators, req.orderBy, req.limit, req.offset)
+            req.creatorId != null ->
+                comicService.creatorComics(req.creatorId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
+                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
+                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
+                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
+                    req.characters, req.series, req.events, req.stories, req.sharedAppearances,
+                    req.collaborators, req.orderBy, req.limit, req.offset)
+            req.eventId != null ->
+                comicService.eventComics(req.eventId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
+                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
+                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
+                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
+                    req.creators, req.characters, req.series, req.stories, req.sharedAppearances,
+                    req.collaborators, req.orderBy, req.limit, req.offset)
+            req.seriesId != null ->
+                comicService.seriesComics(req.seriesId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
+                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
+                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
+                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
+                    req.creators, req.characters, req.events, req.stories, req.sharedAppearances,
+                    req.collaborators, req.orderBy, req.limit, req.offset)
+            req.storyId != null ->
+                comicService.storyComics(req.storyId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
+                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
+                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
+                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
+                    req.creators, req.characters, req.series, req.events, req.sharedAppearances,
+                    req.collaborators, req.orderBy, req.limit, req.offset)
+            else -> 
+                comicService.comics(PUBLIC_KEY, ts, getHash(ts), req.format, req.formatType,
+                    req.noVariants, req.dateDescriptor, req.dateRange, req.title, req.titleStartsWith,
+                    req.startYear, req.issueNumber, req.diamondCode, req.digitalId, req.upc, req.isbn,
+                    req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince), req.creators,
+                    req.characters, req.series, req.events, req.stories, req.sharedAppearances,
+                    req.collaborators, req.orderBy, req.limit, req.offset)
+        }
     }
 }

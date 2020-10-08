@@ -1,100 +1,37 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
 import io.reactivex.rxjava3.core.Single
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CharacterSource(private val characterService: CharacterService) : IMarvelSource() {
 
-    fun characters(
-        name: String? = null,
-        nameStartsWith: String? = null,
-        modifiedSince: Date? = null,
-        comics: String? = null,
-        series: String? = null,
-        events: String? = null,
-        stories: String? = null,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<CharacterDataWrapper> {
+    fun characters(req: CharacterRequest): Single<CharacterDataWrapper> {
         val ts = getTimestamp()
-        return characterService.characters(
-            PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            comics, series, events, stories, orderBy, limit, offset)
-    }
-
-    fun comicCharacters(
-        comicId: Int,
-        name: String? = null,
-        nameStartsWith: String? = null,
-        modifiedSince: Date? = null,
-        series: String? = null,
-        events: String? = null,
-        stories: String? = null,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<CharacterDataWrapper> {
-        val ts = getTimestamp()
-        return characterService.comicCharacters(
-            comicId, PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            series, events, stories, orderBy, limit, offset)
-    }
-
-    fun eventCharacters(
-        eventId: Int,
-        name: String? = null,
-        nameStartsWith: String? = null,
-        modifiedSince: Date? = null,
-        comics: String? = null,
-        series: String? = null,
-        stories: String? = null,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<CharacterDataWrapper> {
-        val ts = getTimestamp()
-        return characterService.eventCharacters(
-            eventId, PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            comics, series, stories, orderBy, limit, offset)
-    }
-
-    fun seriesCharacters(
-        seriesId: Int,
-        name: String? = null,
-        nameStartsWith: String? = null,
-        modifiedSince: Date? = null,
-        comics: String? = null,
-        events: String? = null,
-        stories: String? = null,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<CharacterDataWrapper> {
-        val ts = getTimestamp()
-        return characterService.seriesCharacters(
-            seriesId, PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            comics, events, stories, orderBy, limit, offset)
-    }
-
-    fun storyCharacters(
-        storyId: Int,
-        name: String? = null,
-        nameStartsWith: String? = null,
-        modifiedSince: Date? = null,
-        comics: String? = null,
-        series: String? = null,
-        events: String? = null,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<CharacterDataWrapper> {
-        val ts = getTimestamp()
-        return characterService.storyCharacters(
-            storyId, PUBLIC_KEY, ts, getHash(ts), name, nameStartsWith, formatDate(modifiedSince),
-            comics, series, events, orderBy, limit, offset)
+        return when {
+            req.comicId != null ->
+                characterService.comicCharacters(req.comicId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.series,
+                    req.events, req.stories, req.orderBy, req.limit, req.offset)
+            req.eventId != null ->
+                characterService.eventCharacters(req.eventId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
+                    req.series, req.stories, req.orderBy, req.limit, req.offset)
+            req.seriesId != null ->
+                characterService.seriesCharacters(req.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
+                    req.events, req.stories, req.orderBy, req.limit, req.offset)
+            req.storyId != null ->
+                characterService.storyCharacters(req.storyId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
+                    req.series, req.events, req.orderBy, req.limit, req.offset)
+            else ->
+                characterService.characters(PUBLIC_KEY, ts, getHash(ts), req.name, req.nameStartsWith,
+                    formatDate(req.modifiedSince), req.comics, req.series, req.events, req.stories,
+                    req.orderBy, req.limit, req.offset)
+        }
     }
 
 //    fun characterById(id: Int): Single<CharacterDataWrapper> {

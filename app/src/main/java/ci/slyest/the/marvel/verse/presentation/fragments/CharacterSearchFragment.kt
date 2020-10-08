@@ -20,7 +20,7 @@ class CharacterSearchFragment : ISearchFragment() {
         observeState(mViewModel.state)
 
         val adapter = CharacterAdapter(glide)
-        mViewModel.setQueryParams(nameStartsWith = startsWith)
+        mViewModel.setRequest(nameStartsWith = startsWith)
         mViewModel.pagedList?.observe(viewLifecycleOwner, { pagedList ->
             adapter.submitList(pagedList)
         })
@@ -32,6 +32,6 @@ class CharacterSearchFragment : ISearchFragment() {
     }
 
     override fun refresh(startsWith: String?) {
-        mViewModel.setQueryParams(nameStartsWith = startsWith)
+        mViewModel.setRequest(nameStartsWith = startsWith)
     }
 }

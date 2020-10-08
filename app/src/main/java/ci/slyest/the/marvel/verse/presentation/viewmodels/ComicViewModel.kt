@@ -5,6 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.Comic
 import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.ComicRequest
 import ci.slyest.the.marvel.verse.domain.usecases.ComicsUseCase
 import ci.slyest.the.marvel.verse.presentation.models.Response
 import ci.slyest.the.marvel.verse.presentation.models.Status
@@ -34,7 +35,7 @@ class ComicViewModel(private val useCase: ComicsUseCase): IComicViewModel() {
 
     override fun fetch(limit: Int?, offset: Int?) : Single<ComicDataWrapper> {
         mutableState.postValue(Response(status = Status.LOADING))
-        useCase(limit = limit, offset = offset).let { single ->
+        useCase(ComicRequest(limit = limit, offset = offset)).let { single ->
             disposable = single.subscribe({
                 mutableState.postValue(Response(status = Status.SUCCESSFUL))
                 disposable.dispose()

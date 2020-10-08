@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.app_bar_nav.toolbar
 
 class SearchActivity : AppCompatActivity() {
 
-    private lateinit var searchView: SearchView
+//    private lateinit var searchView: SearchView
     private lateinit var fragment: ISearchFragment
 
     private fun loadFragment(resourceType: Int? = null, resourceId: Int? = null) {
