@@ -3,11 +3,11 @@ package ci.slyest.the.marvel.verse.domain.entities
 import java.util.*
 
 class ComicRequest (
-    val characterId: Int? = null,
-    val creatorId: Int? = null,
-    val eventId: Int? = null,
-    val seriesId: Int? = null,
-    val storyId: Int? = null,
+    var characterId: Int? = null,
+    var creatorId: Int? = null,
+    var eventId: Int? = null,
+    var seriesId: Int? = null,
+    var storyId: Int? = null,
     var format: String? = null,
     var formatType: String? = null,
     var noVariants: Boolean? = null,

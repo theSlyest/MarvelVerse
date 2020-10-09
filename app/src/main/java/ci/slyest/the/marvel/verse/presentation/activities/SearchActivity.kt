@@ -10,24 +10,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.IntentExtra
-import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.fragments.CharacterSearchFragment
+import ci.slyest.the.marvel.verse.presentation.fragments.ComicSearchFragment
 import ci.slyest.the.marvel.verse.presentation.fragments.EmptySearchFragment
 import ci.slyest.the.marvel.verse.presentation.fragments.ISearchFragment
-import kotlinx.android.synthetic.main.activity_tabs.*
-import kotlinx.android.synthetic.main.app_bar_nav.toolbar
+import kotlinx.android.synthetic.main.app_bar_nav.*
 
 class SearchActivity : AppCompatActivity() {
 
-//    private lateinit var searchView: SearchView
+    private lateinit var searchView: SearchView
     private lateinit var fragment: ISearchFragment
+    private var resourceType: Int? = null
+    private var resourceId: Int? = null
 
-    private fun loadFragment(resourceType: Int? = null, resourceId: Int? = null) {
+    private fun loadFragment(resourceType: Int? = null, resourceId: Int? = null, startsWith: String? = null) {
         fragment = when(resourceType) {
-            ResourceType.CHARACTER.position ->
-                CharacterSearchFragment.create(resourceType, resourceId)
-//            1 -> ComicSearchFragment()
+            ResourceType.CHARACTER.ordinal ->
+                CharacterSearchFragment.create(resourceType, resourceId, startsWith)
+            ResourceType.COMIC.ordinal ->
+                ComicSearchFragment.create(resourceType, resourceId, startsWith)
             else -> EmptySearchFragment()
         }
         supportFragmentManager.beginTransaction()
@@ -42,29 +44,31 @@ class SearchActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        handleIntent(true, intent)
+        handleIntent(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        handleIntent(false, intent)
+        handleIntent(intent)
     }
 
-    private fun handleIntent(first: Boolean, intent: Intent?) {
-        tabs.getTabAt(ResourceHolder.currentType.position)?.select()
+    private fun handleIntent(intent: Intent?) {
         intent?.let {
-            var startsWith: String? = null
+            if (resourceType == null)
+                resourceType = it.getIntExtra(IntentExtra.RESOURCE_TYPE.key, ResourceType.CHARACTER.ordinal)
 
-            if (first) {
-                val resourceType = it.getIntExtra(IntentExtra.RESOURCE_TYPE.key, 0)
-                val resourceId = it.getIntExtra(IntentExtra.RESOURCE_ID.key, -1)
-                loadFragment()
-            } else {
-                if (Intent.ACTION_SEARCH == it.action) {
-                    startsWith = it.getStringExtra(SearchManager.QUERY)
-                    //use the query to search your data somehow
-                }
-                fragment.refresh(startsWith)
+            if (resourceId == null)
+                resourceId = it.getIntExtra(IntentExtra.RESOURCE_ID.key, -1)
+
+            var startsWith: String? = null
+            if (Intent.ACTION_SEARCH == it.action)
+                startsWith = it.getStringExtra(SearchManager.QUERY)
+
+            if (resourceId != -1 || startsWith != null) {
+                if (this::fragment.isInitialized)
+                    fragment.refresh(startsWith)
+                else
+                    loadFragment(resourceType, resourceId, startsWith)
             }
         }
     }
@@ -75,10 +79,14 @@ class SearchActivity : AppCompatActivity() {
 
         // Get the SearchView and set the searchable configuration
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu?.findItem(R.id.action_search)?.actionView as SearchView).apply {
+        searchView = (menu?.findItem(R.id.action_search)?.actionView as SearchView).apply {
             // Assumes current activity is the searchable activity
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
         }
+
+        if (resourceId == -1)
+            searchView.isIconified = false
+
         return true
     }
 

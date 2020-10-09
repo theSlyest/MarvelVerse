@@ -13,12 +13,6 @@ import java.util.*
 
 class CharacterActivity : IDetailActivity() {
 
-    companion object {
-        @JvmStatic
-        fun start(context: Context, position: Int, search: Boolean) =
-            start(context, position, search, CharacterActivity::class.java)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

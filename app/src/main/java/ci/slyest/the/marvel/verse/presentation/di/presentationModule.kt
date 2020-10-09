@@ -4,6 +4,7 @@ import ci.slyest.the.marvel.verse.domain.usecases.CharactersUseCase
 import ci.slyest.the.marvel.verse.domain.usecases.ComicsUseCase
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterSearchViewModel
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
+import ci.slyest.the.marvel.verse.presentation.viewmodels.ComicSearchViewModel
 import ci.slyest.the.marvel.verse.presentation.viewmodels.ComicViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -16,5 +17,6 @@ val presentationModule: Module = module {
     single { CharactersUseCase() }
 
     viewModel { ComicViewModel(useCase = get()) }
+    viewModel { ComicSearchViewModel(useCase = get()) }
     single { ComicsUseCase() }
 }

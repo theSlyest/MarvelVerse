@@ -24,9 +24,7 @@ abstract class IMarvelViewModel: ViewModel() {
 
     protected var mutableState: MutableLiveData<Response> = MutableLiveData()
     val state: LiveData<Response>
-        get() {
-            return mutableState
-        }
+        get() = mutableState
 
     protected lateinit var disposable: Disposable
 

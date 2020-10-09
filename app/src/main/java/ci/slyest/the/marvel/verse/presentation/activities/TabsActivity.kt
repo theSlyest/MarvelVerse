@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ci.slyest.the.marvel.verse.presentation.R
+import ci.slyest.the.marvel.verse.presentation.common.IntentExtra
 import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.common.setAttribution
@@ -48,23 +49,6 @@ class TabsActivity : AppCompatActivity() {
         TabLayoutMediator(tabs, pager) { tab, position ->
             tab.text = resources.getStringArray(R.array.resource_types)[position]
         }.attach()
-
-        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                tab?.let {
-                    ResourceHolder.currentType = ResourceType.values()[it.position]
-                }
-//                searchView.isIconified = true
-//                hideKeyboard()
-//                if (tabs.visibility == View.GONE)
-//                    showTabs()
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -74,7 +58,9 @@ class TabsActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            startActivity(Intent(this, SearchActivity::class.java))
+            val intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra(IntentExtra.RESOURCE_TYPE.key, tabs.selectedTabPosition)
+            startActivity(intent)
             return true
         }
         return super.onOptionsItemSelected(item)

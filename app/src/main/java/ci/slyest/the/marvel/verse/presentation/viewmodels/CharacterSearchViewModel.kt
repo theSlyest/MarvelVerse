@@ -11,19 +11,18 @@ import ci.slyest.the.marvel.verse.presentation.models.Response
 import ci.slyest.the.marvel.verse.presentation.models.Status
 import ci.slyest.the.marvel.verse.presentation.sources.CharacterDataSourceFactory
 import io.reactivex.rxjava3.core.Single
-import java.util.*
 
-class CharacterSearchViewModel(private val useCase: CharactersUseCase): ICharacterViewModel() {
+class CharacterSearchViewModel(private val useCase: CharactersUseCase): ICharacterViewModel(), ISearchViewModel<Character> {
 
-    var pagedList: LiveData<PagedList<Character>>? = null
-    private lateinit var request: CharacterRequest
+    var request = CharacterRequest()
+    private lateinit var pagedList: LiveData<PagedList<Character>>
+    override val data: LiveData<PagedList<Character>>
+        get() = pagedList
 
-    fun setRequest(characterRequest: CharacterRequest) {
-        request = characterRequest
+    override fun applyRequest() {
         pagedList =
             LivePagedListBuilder(CharacterDataSourceFactory(this), pagingConfig).build()
     }
-
 
     override fun fetch(limit: Int?, offset: Int?) : Single<CharacterDataWrapper> {
         mutableState.postValue(Response(status = Status.LOADING))

@@ -11,18 +11,17 @@ import ci.slyest.the.marvel.verse.presentation.models.Response
 import ci.slyest.the.marvel.verse.presentation.models.Status
 import ci.slyest.the.marvel.verse.presentation.sources.ComicDataSourceFactory
 import io.reactivex.rxjava3.core.Single
-import java.util.*
 
-class ComicSearchViewModel(private val useCase: ComicsUseCase): IComicViewModel() {
+class ComicSearchViewModel(private val useCase: ComicsUseCase): IComicViewModel(), ISearchViewModel<Comic> {
 
-    var pagedList: LiveData<PagedList<Comic>>? = null
-    private lateinit var request: ComicRequest
+    var request = ComicRequest()
+    private lateinit var pagedList: LiveData<PagedList<Comic>>
+    override val data
+        get() = pagedList
 
-    fun setRequest(comicRequest: ComicRequest) {
-        request = comicRequest
-        if (pagedList == null)
-            pagedList =
-                LivePagedListBuilder(ComicDataSourceFactory(this), pagingConfig).build()
+    override fun applyRequest() {
+        pagedList =
+            LivePagedListBuilder(ComicDataSourceFactory(this), pagingConfig).build()
     }
 
     override fun fetch(limit: Int?, offset: Int?) : Single<ComicDataWrapper> {
