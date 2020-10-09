@@ -3,6 +3,7 @@ package ci.slyest.the.marvel.verse.presentation.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.view.View
 import android.widget.SimpleAdapter
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.*
@@ -45,6 +46,11 @@ class ComicActivity: IDetailActivity() {
                         intArrayOf(R.id.text_label, R.id.text_value))
                     grid_creators.adapter = creatorAdapter
 
+//                    val params = grid_creators.layoutParams
+//                    params.height *= creatorAdapter.count / (params.width / 128)
+//                    grid_creators.layoutParams = params
+//                    grid_creators.requestLayout()
+
                     var first = true
                     var strUrls = ""
                     urls.forEach { url ->
@@ -66,7 +72,6 @@ class ComicActivity: IDetailActivity() {
 
                 text_urls.movementMethod = LinkMovementMethod.getInstance()
 
-
                 btn_characters.setOnClickListener {
                     val intent = Intent(this, SearchActivity::class.java)
                     intent.putExtra(IntentExtra.SOURCE_ID.key, comic.id)
@@ -76,4 +81,6 @@ class ComicActivity: IDetailActivity() {
                 }
             }
     }
+
+
 }

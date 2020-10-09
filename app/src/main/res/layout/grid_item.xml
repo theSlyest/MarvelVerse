@@ -8,13 +8,13 @@
         android:id="@+id/text_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?attr/textAppearanceListItemSmall"
+        style="?attr/textAppearanceBody1"
         android:textStyle="bold"
         tools:text="Label" />
     <TextView
         android:id="@+id/text_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?attr/textAppearanceListItemSecondary"
+        style="?attr/textAppearanceBody2"
         tools:text="Value" />
 </LinearLayout>

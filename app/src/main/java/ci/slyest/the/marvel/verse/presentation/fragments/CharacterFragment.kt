@@ -4,7 +4,6 @@ import android.content.Intent
 import ci.slyest.the.marvel.verse.presentation.activities.CharacterActivity
 import ci.slyest.the.marvel.verse.presentation.adapters.CharacterAdapter
 import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
-import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*

@@ -200,12 +200,16 @@
                         android:textAppearance="?attr/textAppearanceBody1"
                         tools:text="Variant Description" />
 
-                    <GridView
+                    <ci.slyest.the.marvel.verse.presentation.custom.AutoHeightGridView
                         android:id="@+id/grid_creators"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:numColumns="3"
+                        android:layout_marginTop="8dp"
+                        android:columnWidth="@dimen/grid_column"
+                        android:horizontalSpacing="@dimen/grid_spacing"
+                        android:verticalSpacing="@dimen/grid_spacing"
+                        android:numColumns="auto_fit"
+                        android:stretchMode="columnWidth"
                         tools:listitem="@layout/grid_item" />
 
                     <TextView
