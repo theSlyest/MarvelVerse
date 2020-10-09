@@ -13,6 +13,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ComicSearchFragment : ISearchFragment() {
 
     private val mViewModel by viewModel<ComicSearchViewModel>()
+    private lateinit var adapter: ComicAdapter
 
     companion object {
         fun create(resourceType: Int? = null, resourceId: Int? = null, startsWith: String? = null) =
@@ -20,7 +21,6 @@ class ComicSearchFragment : ISearchFragment() {
     }
 
     override fun initRecycler() {
-        val adapter = ComicAdapter(glide)
 
         observeState(mViewModel.state)
         
@@ -39,12 +39,8 @@ class ComicSearchFragment : ISearchFragment() {
             }
         }
 
-        mViewModel.request.titleStartsWith = startsWith
-        mViewModel.applyRequest()
-        mViewModel.data.observe(viewLifecycleOwner, { pagedList ->
-            adapter.submitList(pagedList)
-        })
-
+        adapter = ComicAdapter(glide)
+        refresh(startsWith)
         recycler.adapter = adapter
         recycler.onItemClick { _, position, _ ->
             ResourceHolder.putComic(mViewModel.data.value?.get(position)!!)
@@ -55,5 +51,8 @@ class ComicSearchFragment : ISearchFragment() {
     override fun refresh(startsWith: String?) {
         mViewModel.request.titleStartsWith = startsWith
         mViewModel.applyRequest()
+        mViewModel.data.observe(viewLifecycleOwner, { pagedList ->
+            adapter.submitList(pagedList)
+        })
     }
 }
