@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="resource_types">
+    <string-array name="resource_types"><!-- Same order than the enum class ResourceType -->
         <item>Characters</item>
         <item>Comics</item>
         <item>Stories</item>

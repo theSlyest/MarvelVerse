@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -38,8 +39,17 @@ abstract class IRecyclerFragment: Fragment() {
         state.observe(viewLifecycleOwner, { response ->
             activity?.findViewById<ProgressBar>(R.id.progress_bar)?.let { progressBar ->
                 when (response.status) {
-                    Status.LOADING -> progressBar.visibility = View.VISIBLE
-                    else -> progressBar.visibility = View.INVISIBLE
+                    Status.LOADING -> {
+                        progressBar.visibility = View.VISIBLE
+                        requireActivity().window.setFlags(
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                    }
+                    else -> {
+                        progressBar.visibility = View.INVISIBLE
+                        requireActivity().window
+                            .clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                    }
                 }
             }
         })

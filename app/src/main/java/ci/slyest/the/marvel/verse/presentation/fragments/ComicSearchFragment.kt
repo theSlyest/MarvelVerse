@@ -24,18 +24,18 @@ class ComicSearchFragment : ISearchFragment() {
 
         observeState(mViewModel.state)
         
-        if (resourceId != -1 && resourceType != -1) {
-            when(resourceType) {
+        if (sourceId != -1 && sourceType != -1) {
+            when(sourceType) {
                 ResourceType.CHARACTER.ordinal ->
-                    mViewModel.request.characterId = resourceId
+                    mViewModel.request.characterId = sourceId
                 ResourceType.EVENT.ordinal ->
-                    mViewModel.request.eventId = resourceId
+                    mViewModel.request.eventId = sourceId
                 ResourceType.SERIES.ordinal ->
-                    mViewModel.request.seriesId = resourceId
+                    mViewModel.request.seriesId = sourceId
                 ResourceType.STORY.ordinal ->
-                    mViewModel.request.storyId = resourceId
+                    mViewModel.request.storyId = sourceId
                 ResourceType.CREATOR.ordinal ->
-                    mViewModel.request.creatorId = resourceId
+                    mViewModel.request.creatorId = sourceId
             }
         }
 

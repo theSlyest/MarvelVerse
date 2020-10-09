@@ -15,8 +15,6 @@ class CharacterFragment : IRecyclerFragment() {
     private val mViewModel by viewModel<CharacterViewModel>()
 
     override fun initRecycler() {
-        ResourceHolder.currentType = ResourceType.CHARACTER
-
         observeState(mViewModel.state)
 
         val adapter = CharacterAdapter(glide)

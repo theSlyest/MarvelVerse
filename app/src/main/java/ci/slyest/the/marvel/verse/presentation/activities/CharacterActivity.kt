@@ -1,14 +1,14 @@
 package ci.slyest.the.marvel.verse.presentation.activities
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import ci.slyest.the.marvel.verse.presentation.R
-import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
-import ci.slyest.the.marvel.verse.presentation.common.fromHtml
-import ci.slyest.the.marvel.verse.presentation.common.setAttribution
+import ci.slyest.the.marvel.verse.presentation.common.*
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_character.*
+import kotlinx.android.synthetic.main.activity_character.text_attribution
+import kotlinx.android.synthetic.main.activity_character.toolbar
 import java.util.*
 
 class CharacterActivity : IDetailActivity() {
@@ -52,6 +52,14 @@ class CharacterActivity : IDetailActivity() {
                 }
 
                 text_urls.movementMethod = LinkMovementMethod.getInstance()
+
+                btn_comics.setOnClickListener {
+                    val intent = Intent(this, SearchActivity::class.java)
+                    intent.putExtra(IntentExtra.SOURCE_ID.key, character.id)
+                    intent.putExtra(IntentExtra.SOURCE_TYPE.key, ResourceType.CHARACTER.ordinal)
+                    intent.putExtra(IntentExtra.RESULT_TYPE.key, ResourceType.COMIC.ordinal)
+                    startActivity(intent)
+                }
             }
     }
 }

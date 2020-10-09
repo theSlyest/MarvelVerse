@@ -15,8 +15,6 @@ class ComicFragment : IRecyclerFragment() {
     private val mViewModel by viewModel<ComicViewModel>()
 
     override fun initRecycler() {
-        ResourceHolder.currentType = ResourceType.COMIC
-
         observeState(mViewModel.state)
 
         val adapter = ComicAdapter(glide)

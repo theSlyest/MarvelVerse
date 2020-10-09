@@ -21,15 +21,18 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var searchView: SearchView
     private lateinit var fragment: ISearchFragment
-    private var resourceType: Int? = null
-    private var resourceId: Int? = null
+    private var resultType: Int? = null
+    private var sourceType: Int? = null
+    private var sourceId: Int? = null
+    private var startsWith: String? = null
 
-    private fun loadFragment(resourceType: Int? = null, resourceId: Int? = null, startsWith: String? = null) {
-        fragment = when(resourceType) {
+    private fun loadFragment(resultType: Int? = null, sourceType: Int? = null, sourceId: Int? = null,
+                             startsWith: String? = null) {
+        fragment = when(resultType) {
             ResourceType.CHARACTER.ordinal ->
-                CharacterSearchFragment.create(resourceType, resourceId, startsWith)
+                CharacterSearchFragment.create(sourceType, sourceId, startsWith)
             ResourceType.COMIC.ordinal ->
-                ComicSearchFragment.create(resourceType, resourceId, startsWith)
+                ComicSearchFragment.create(sourceType, sourceId, startsWith)
             else -> EmptySearchFragment()
         }
         supportFragmentManager.beginTransaction()
@@ -54,21 +57,23 @@ class SearchActivity : AppCompatActivity() {
 
     private fun handleIntent(intent: Intent?) {
         intent?.let {
-            if (resourceType == null)
-                resourceType = it.getIntExtra(IntentExtra.RESOURCE_TYPE.key, ResourceType.CHARACTER.ordinal)
+            if (resultType == null)
+                resultType = it.getIntExtra(IntentExtra.RESULT_TYPE.key, ResourceType.CHARACTER.ordinal)
 
-            if (resourceId == null)
-                resourceId = it.getIntExtra(IntentExtra.RESOURCE_ID.key, -1)
+            if (sourceType == null)
+                sourceType = it.getIntExtra(IntentExtra.SOURCE_TYPE.key, ResourceType.CHARACTER.ordinal)
 
-            var startsWith: String? = null
+            if (sourceId == null)
+                sourceId = it.getIntExtra(IntentExtra.SOURCE_ID.key, -1)
+
             if (Intent.ACTION_SEARCH == it.action)
                 startsWith = it.getStringExtra(SearchManager.QUERY)
 
-            if (resourceId != -1 || startsWith != null) {
+            if (sourceId != -1 || startsWith != null) {
                 if (this::fragment.isInitialized)
                     fragment.refresh(startsWith)
                 else
-                    loadFragment(resourceType, resourceId, startsWith)
+                    loadFragment(resultType, sourceType, sourceId, startsWith)
             }
         }
     }
@@ -84,7 +89,7 @@ class SearchActivity : AppCompatActivity() {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
         }
 
-        if (resourceId == -1)
+        if (sourceId == -1)
             searchView.isIconified = false
 
         return true

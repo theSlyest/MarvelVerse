@@ -1,6 +1,6 @@
 package ci.slyest.the.marvel.verse.presentation.common
 
-enum class ResourceType() {
+enum class ResourceType { // Attention: same order than the array resource "resource_types"
     CHARACTER,
     COMIC,
     STORY,

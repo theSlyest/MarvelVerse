@@ -6,8 +6,6 @@ import java.lang.ref.WeakReference
 
 object ResourceHolder {
 
-    var currentType: ResourceType = ResourceType.CHARACTER
-
     private var data: MutableMap<String, WeakReference<Any>> = HashMap()
 
     private fun putData(id: String, any: Any?) {

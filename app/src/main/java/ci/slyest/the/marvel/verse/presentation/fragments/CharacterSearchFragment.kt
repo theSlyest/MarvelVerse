@@ -23,16 +23,16 @@ class CharacterSearchFragment : ISearchFragment() {
     override fun initRecycler() {
         observeState(mViewModel.state)
 
-        if (resourceId != -1 && resourceType != -1) {
-            when(resourceType) {
+        if (sourceId != -1 && sourceType != -1) {
+            when(sourceType) {
                 ResourceType.COMIC.ordinal ->
-                    mViewModel.request.comicId = resourceId
+                    mViewModel.request.comicId = sourceId
                 ResourceType.EVENT.ordinal ->
-                    mViewModel.request.eventId = resourceId
+                    mViewModel.request.eventId = sourceId
                 ResourceType.SERIES.ordinal ->
-                    mViewModel.request.seriesId = resourceId
+                    mViewModel.request.seriesId = sourceId
                 ResourceType.STORY.ordinal ->
-                    mViewModel.request.storyId = resourceId
+                    mViewModel.request.storyId = sourceId
             }
         }
 

@@ -10,13 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.IntentExtra
-import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
-import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.common.setAttribution
 import ci.slyest.the.marvel.verse.presentation.fragments.CharacterFragment
 import ci.slyest.the.marvel.verse.presentation.fragments.ComicFragment
 import ci.slyest.the.marvel.verse.presentation.fragments.EmptyRecyclerFragment
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_tabs.*
 
@@ -59,7 +56,7 @@ class TabsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
             val intent = Intent(this, SearchActivity::class.java)
-            intent.putExtra(IntentExtra.RESOURCE_TYPE.key, tabs.selectedTabPosition)
+            intent.putExtra(IntentExtra.RESULT_TYPE.key, tabs.selectedTabPosition)
             startActivity(intent)
             return true
         }
