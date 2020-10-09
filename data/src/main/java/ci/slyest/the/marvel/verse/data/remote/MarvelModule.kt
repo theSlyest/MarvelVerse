@@ -22,4 +22,6 @@ object MarvelModule {
     internal fun characterService() = retrofit.create(CharacterService::class.java)
 
     internal fun comicService() = retrofit.create(ComicService::class.java)
+
+    internal fun storyService() = retrofit.create(StoryService::class.java)
 }

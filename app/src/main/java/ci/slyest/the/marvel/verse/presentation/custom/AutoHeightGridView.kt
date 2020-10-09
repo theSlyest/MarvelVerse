@@ -11,7 +11,6 @@ class AutoHeightGridView : GridView {
     constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        // HACK! TAKE THAT ANDROID!
         // Calculate entire height by providing a very large height hint.
         // View.MEASURED_SIZE_MASK represents the largest height possible.
         super.onMeasure(widthMeasureSpec,
