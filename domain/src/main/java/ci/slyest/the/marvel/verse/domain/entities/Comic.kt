@@ -29,5 +29,5 @@ data class Comic(
     val creators: ResourceRoleList, // optional: A resource list containing the creators associated with this comic.
     val characters: ResourceRoleList, // optional: A resource list containing the characters which appear in this comic.
     val stories: StoryList, // optional: A resource list containing the stories which appear in this comic.
-    val events: EventList // optional: A resource list containing the events in which this comic appears.
+    val events: ResourceList // optional: A resource list containing the events in which this comic appears.
 )

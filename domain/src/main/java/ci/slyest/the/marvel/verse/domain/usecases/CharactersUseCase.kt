@@ -6,7 +6,6 @@ import ci.slyest.the.marvel.verse.domain.repositories.CharacterRepository
 import io.reactivex.rxjava3.core.Single
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.util.*
 
 class CharactersUseCase : KoinComponent {
 

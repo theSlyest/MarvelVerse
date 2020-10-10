@@ -6,7 +6,6 @@ import io.reactivex.rxjava3.core.Single
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-
 class CharacterByIdUseCase  : KoinComponent {
 
     private val characterRepository: CharacterRepository by inject()
