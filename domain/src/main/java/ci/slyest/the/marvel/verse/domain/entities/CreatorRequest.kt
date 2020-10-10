@@ -9,7 +9,7 @@ class CreatorRequest (
     var storyId: Int? = null,
     var firstName: String? = null,
     var middleName: String? = null,
-    var LastName: String? = null,
+    var lastName: String? = null,
     var suffix: String? = null,
     var firstNameStartsWith: String? = null,
     var middleNameStartsWith: String? = null,

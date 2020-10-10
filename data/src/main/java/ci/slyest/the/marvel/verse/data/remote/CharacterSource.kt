@@ -3,8 +3,6 @@ package ci.slyest.the.marvel.verse.data.remote
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
 import io.reactivex.rxjava3.core.Single
-import java.text.SimpleDateFormat
-import java.util.*
 
 class CharacterSource(private val characterService: CharacterService) : IMarvelSource() {
 

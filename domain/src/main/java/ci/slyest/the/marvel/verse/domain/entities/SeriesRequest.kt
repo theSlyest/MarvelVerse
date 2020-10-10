@@ -3,9 +3,10 @@ package ci.slyest.the.marvel.verse.domain.entities
 import java.util.*
 
 class SeriesRequest (
+    var characterId: Int? = null,
     var comicId: Int? = null,
+    var creatorId: Int? = null,
     var eventId: Int? = null,
-    var seriesId: Int? = null,
     var storyId: Int? = null,
     var title: String? = null,
     var titleStartsWith: String? = null,

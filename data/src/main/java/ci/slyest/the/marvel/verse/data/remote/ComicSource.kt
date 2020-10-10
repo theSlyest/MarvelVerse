@@ -3,7 +3,6 @@ package ci.slyest.the.marvel.verse.data.remote
 import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.ComicRequest
 import io.reactivex.rxjava3.core.Single
-import java.util.*
 
 class ComicSource(private val comicService: ComicService) : IMarvelSource() {
 
