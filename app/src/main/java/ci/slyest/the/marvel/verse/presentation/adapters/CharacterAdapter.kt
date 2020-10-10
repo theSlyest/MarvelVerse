@@ -34,11 +34,4 @@ class CharacterAdapter(private val glide: RequestManager): PagedListAdapter<Char
         else
             holder.clear()
     }
-
-    override fun getItemId(position: Int): Long {
-        getItem(position)?.let { character ->
-            return character.id.toLong()
-        }
-        return super.getItemId(position)
-    }
 }

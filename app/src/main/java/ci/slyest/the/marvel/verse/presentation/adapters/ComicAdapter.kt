@@ -35,11 +35,4 @@ class ComicAdapter(private val glide: RequestManager): PagedListAdapter<Comic, C
         else
             holder.clear()
     }
-
-    override fun getItemId(position: Int): Long {
-        getItem(position)?.let { comic ->
-            return comic.id.toLong()
-        }
-        return super.getItemId(position)
-    }
 }
