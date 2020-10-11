@@ -26,7 +26,7 @@ class SeriesActivity: IDetailActivity() {
                 with(series) {
                     Glide.with(this@SeriesActivity)
                         .load(thumbnail.path.replace("http:", "https:")
-                                + "/portrait_uncanny.${thumbnail.extension}")
+                                + "/standard_fantastic.${thumbnail.extension}")
                         .centerCrop()
                         .placeholder(R.drawable.ic_marvel)
                         .into(img_thumbnail)
@@ -35,6 +35,10 @@ class SeriesActivity: IDetailActivity() {
                     text_title.text = title
                     text_id.text = id.toString()
                     text_rating.text = this.rating
+                    text_secondary.text = if (startYear == endYear)
+                        startYear.toString()
+                    else
+                        "$startYear - $endYear"
 
                     val creatorAdapter = SimpleAdapter(this@SeriesActivity,
                         creators.items.map { creator ->
@@ -57,7 +61,7 @@ class SeriesActivity: IDetailActivity() {
                     }
 
                     text_urls.text = fromHtml(strUrls)
-                    text_description.text = if (description.isEmpty())
+                    text_description.text = if (description.isNullOrEmpty())
                         getString(R.string.msg_no_description)
                     else
                         fromHtml(description)

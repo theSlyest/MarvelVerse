@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.IntentExtra
+import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.common.setAttribution
-import ci.slyest.the.marvel.verse.presentation.fragments.CharacterFragment
-import ci.slyest.the.marvel.verse.presentation.fragments.ComicFragment
-import ci.slyest.the.marvel.verse.presentation.fragments.EmptyRecyclerFragment
+import ci.slyest.the.marvel.verse.presentation.fragments.*
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_tabs.*
 
@@ -27,8 +26,12 @@ class TabsActivity : AppCompatActivity() {
 
             override fun createFragment(position: Int): Fragment {
                 return when(position) {
-                    0 -> CharacterFragment()
-                    1 -> ComicFragment()
+                    ResourceType.CHARACTER.ordinal -> CharacterFragment()
+                    ResourceType.COMIC.ordinal -> ComicFragment()
+                    ResourceType.STORY.ordinal -> StoryFragment()
+                    ResourceType.EVENT.ordinal -> EventFragment()
+                    ResourceType.SERIES.ordinal -> SeriesFragment()
+                    ResourceType.CREATOR.ordinal -> CreatorFragment()
                     else -> EmptyRecyclerFragment()
                 }
             }

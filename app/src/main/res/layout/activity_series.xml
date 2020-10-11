@@ -110,23 +110,36 @@
 
                     <ImageView
                         android:id="@+id/img_thumbnail"
-                        android:layout_width="140dp"
-                        android:layout_height="210dp"
-                        android:contentDescription="@string/desc_thumbnail"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        app:srcCompat="@drawable/ic_marvel"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_marvel" />
+                        android:contentDescription="@string/desc_thumbnail" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
                         android:gravity="center_vertical"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/text_secondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:gravity="bottom"
+                            android:textAllCaps="true"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondaryInverse"
+                            tools:text="Year" />
+
+                        <TextView
                             android:id="@+id/text_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:layout_marginTop="8dp"
                             android:textAllCaps="true"
                             android:textAppearance="?attr/textAppearanceHeadline5"
                             android:textColor="?android:attr/textColorPrimaryInverse"
@@ -191,14 +204,6 @@
                         android:layout_marginTop="8dp"
                         android:textAppearance="?attr/textAppearanceBody1"
                         tools:text="Description" />
-
-                    <TextView
-                        android:id="@+id/text_dates"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textAppearance="?attr/textAppearanceBody1"
-                        tools:text="Variant Description" />
 
                     <ci.slyest.the.marvel.verse.presentation.custom.AutoHeightGridView
                         android:id="@+id/grid_creators"

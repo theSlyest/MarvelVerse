@@ -1,6 +1,7 @@
 package ci.slyest.the.marvel.verse.presentation.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.AsyncDifferConfig
@@ -9,7 +10,23 @@ import ci.slyest.the.marvel.verse.domain.entities.Series
 import ci.slyest.the.marvel.verse.presentation.R
 import com.bumptech.glide.RequestManager
 
-class SeriesAdapter(private val glide: RequestManager): PagedListAdapter<Series, SeriesViewHolder>(ASYNC_DIFFER) {
+class SeriesAdapter(private val glide: RequestManager) :
+    PagedListAdapter<Series, SeriesAdapter.ViewHolder>(ASYNC_DIFFER) {
+
+    class ViewHolder(itemView: View, glide: RequestManager)
+        : IRecyclerViewHolder<Series>(itemView, glide) {
+
+        override fun bind(item: Series) {
+            with(item) {
+                loadThumbnail("${thumbnail.path}/standard_fantastic.${thumbnail.extension}")
+                textName.text = title
+                textSecondary.text = if (startYear == endYear)
+                    startYear.toString()
+                else
+                    "$startYear - $endYear"
+            }
+        }
+    }
 
     companion object {
         val ASYNC_DIFFER: AsyncDifferConfig<Series> = AsyncDifferConfig.Builder<Series>(
@@ -22,12 +39,12 @@ class SeriesAdapter(private val glide: RequestManager): PagedListAdapter<Series,
             }).build()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeriesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)
-        return SeriesViewHolder(view, glide)
+        return ViewHolder(view, glide)
     }
 
-    override fun onBindViewHolder(holder: SeriesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val series = getItem(position)
         if (series != null)
             holder.bind(series)

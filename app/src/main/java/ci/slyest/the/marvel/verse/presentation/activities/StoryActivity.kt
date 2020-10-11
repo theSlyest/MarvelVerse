@@ -24,13 +24,14 @@ class StoryActivity: IDetailActivity() {
         ResourceHolder.getStory()
             .let { story ->
                 with(story) {
-                    Glide.with(this@StoryActivity)
-                        .load(thumbnail.path.replace("http:", "https:")
-                                + "/portrait_uncanny.${thumbnail.extension}")
-                        .centerCrop()
-                        .placeholder(R.drawable.ic_marvel)
-                        .into(img_thumbnail)
-
+                    thumbnail?.let {
+                        Glide.with(this@StoryActivity)
+                            .load(it.path.replace("http:", "https:")
+                                    + "/portrait_uncanny.${it.extension}")
+                            .centerCrop()
+                            .placeholder(R.drawable.ic_marvel)
+                            .into(img_thumbnail)
+                    }
                     this@StoryActivity.title = title
                     text_title.text = title
                     text_id.text = id.toString()

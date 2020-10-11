@@ -26,7 +26,7 @@ class EventActivity: IDetailActivity() {
                 with(event) {
                     Glide.with(this@EventActivity)
                         .load(thumbnail.path.replace("http:", "https:")
-                                + "/portrait_uncanny.${thumbnail.extension}")
+                                + "/standard_fantastic.${thumbnail.extension}")
                         .centerCrop()
                         .placeholder(R.drawable.ic_marvel)
                         .into(img_thumbnail)
@@ -34,7 +34,8 @@ class EventActivity: IDetailActivity() {
                     this@EventActivity.title = title
                     text_title.text = title
                     text_id.text = id.toString()
-                    text_dates.text = "${start.substringBefore('T')} to ${end.substringBefore('T')}"
+                    if (!start.isNullOrEmpty() && !end.isNullOrEmpty())
+                        text_secondary.text = "${start!!.substring(0, 10)} - ${end!!.substring(0, 10)}"
 
                     val creatorAdapter = SimpleAdapter(this@EventActivity,
                         creators.items.map { creator ->

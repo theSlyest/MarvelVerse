@@ -3,7 +3,7 @@ package ci.slyest.the.marvel.verse.domain.entities
 data class Series (
     val id: Int, // optional: The unique ID of the series resource.,
     val title: String, // optional: The canonical title of the series.,
-    val description: String, // optional: A description of the series.,
+    val description: String?, // optional: A description of the series.,
     val resourceURI: String, // optional: The canonical URL identifier for this resource.,
     val urls: List<Url>, // optional: A set of public web site URLs for the resource.,
     val startYear: Int, // optional: The first year of publication for the series.,
@@ -16,6 +16,6 @@ data class Series (
     val events: ResourceList, // optional: A resource list containing events which take place in comics in this series.,
     val characters: ResourceRoleList, // optional: A resource list containing characters which appear in comics in this series.,
     val creators: ResourceRoleList, // optional: A resource list of creators whose work appears in comics in this series.,
-    val next: ResourceSummary, // optional: A summary representation of the series which follows this series.,
-    val previous: ResourceSummary, // optional: A summary representation of the series which preceded this series.
+    val next: ResourceSummary?, // optional: A summary representation of the series which follows this series.,
+    val previous: ResourceSummary?, // optional: A summary representation of the series which preceded this series.
 )

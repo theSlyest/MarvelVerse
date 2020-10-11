@@ -1,6 +1,7 @@
 package ci.slyest.the.marvel.verse.presentation.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.AsyncDifferConfig
@@ -9,7 +10,21 @@ import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.presentation.R
 import com.bumptech.glide.RequestManager
 
-class CharacterAdapter(private val glide: RequestManager): PagedListAdapter<Character, CharacterViewHolder>(ASYNC_DIFFER) {
+class CharacterAdapter(private val glide: RequestManager) :
+    PagedListAdapter<Character, CharacterAdapter.ViewHolder>(ASYNC_DIFFER) {
+
+    class ViewHolder(itemView: View, glide: RequestManager)
+        : IRecyclerViewHolder<Character>(itemView, glide) {
+
+        override fun bind(item: Character) {
+            with(item) {
+                loadThumbnail("${thumbnail.path}/standard_fantastic.${thumbnail.extension}")
+                textName.text = name.substringBefore('(')
+                textSecondary.text = name.substringAfter('(', "")
+                    .substringBefore(')')
+            }
+        }
+    }
 
     companion object {
         val ASYNC_DIFFER: AsyncDifferConfig<Character> = AsyncDifferConfig.Builder<Character>(
@@ -22,12 +37,12 @@ class CharacterAdapter(private val glide: RequestManager): PagedListAdapter<Char
             }).build()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)
-        return CharacterViewHolder(view, glide)
+        return ViewHolder(view, glide)
     }
 
-    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val character = getItem(position)
         if (character != null)
             holder.bind(character)
