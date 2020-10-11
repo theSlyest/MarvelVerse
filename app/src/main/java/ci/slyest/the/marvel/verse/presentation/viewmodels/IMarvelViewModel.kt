@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
-import ci.slyest.the.marvel.verse.presentation.models.Response
+import ci.slyest.the.marvel.verse.presentation.common.Response
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
 

@@ -1,17 +1,17 @@
 package ci.slyest.the.marvel.verse.presentation.sources
 
-import ci.slyest.the.marvel.verse.domain.entities.Comic
-import ci.slyest.the.marvel.verse.presentation.viewmodels.IComicViewModel
+import ci.slyest.the.marvel.verse.domain.entities.Series
+import ci.slyest.the.marvel.verse.presentation.viewmodels.ISeriesViewModel
 
-class ComicDataSource(var viewModel: IComicViewModel)
-    : IMarvelDataSource<Comic>() {
+class SeriesDataSource(var viewModel: ISeriesViewModel)
+    : IMarvelDataSource<Series>() {
 
-    class Factory(viewModel: IComicViewModel) : IMarvelDataSource.Factory<Comic>() {
-        override val source = ComicDataSource(viewModel)
+    class Factory(viewModel: ISeriesViewModel) : IMarvelDataSource.Factory<Series>() {
+        override val source = SeriesDataSource(viewModel)
     }
 
     private var initSingle =
-        viewModel.fetch(IComicViewModel.PAGE_SIZE + 2 * IComicViewModel.PREFETCH_DISTANCE).cache()
+        viewModel.fetch(ISeriesViewModel.PAGE_SIZE + 2 * ISeriesViewModel.PREFETCH_DISTANCE).cache()
 
     init {
         disposable = initSingle.subscribe { wrapper ->
@@ -20,7 +20,7 @@ class ComicDataSource(var viewModel: IComicViewModel)
         }
     }
 
-    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Comic>) {
+    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Series>) {
         val data = initSingle.blockingGet().data.results
         val position = computeInitialLoadPosition(params, count!!)
 //        val loadSize = computeInitialLoadSize(params, position, count!!)
@@ -29,7 +29,7 @@ class ComicDataSource(var viewModel: IComicViewModel)
         initSingle = null
     }
 
-    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Comic>) {
+    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Series>) {
         if (!waiting) {
             disposable = viewModel.fetch(params.loadSize, params.startPosition)
                 .subscribe({ wrapper ->

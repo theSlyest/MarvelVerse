@@ -1,4 +1,4 @@
-package ci.slyest.the.marvel.verse.presentation.models
+package ci.slyest.the.marvel.verse.presentation.common
 
 /**
  * A generic wrapper class around data request

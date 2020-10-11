@@ -7,10 +7,9 @@ import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
 import ci.slyest.the.marvel.verse.domain.usecases.CharactersUseCase
-import ci.slyest.the.marvel.verse.presentation.models.Response
-import ci.slyest.the.marvel.verse.presentation.models.Status
+import ci.slyest.the.marvel.verse.presentation.common.Response
+import ci.slyest.the.marvel.verse.presentation.common.Status
 import ci.slyest.the.marvel.verse.presentation.sources.CharacterDataSource
-import ci.slyest.the.marvel.verse.presentation.sources.CharacterDataSourceFactory
 import io.reactivex.rxjava3.core.Single
 
 class CharacterViewModel(private val useCase: CharactersUseCase): ICharacterViewModel() {
@@ -24,7 +23,7 @@ class CharacterViewModel(private val useCase: CharactersUseCase): ICharacterView
 
     init {
         if (pagedList == null)
-            CharacterDataSourceFactory(this).let { factory ->
+            CharacterDataSource.Factory(this).let { factory ->
                 pagedList = LivePagedListBuilder(factory, pagingConfig).build()
                 dataSource = factory.source
             }

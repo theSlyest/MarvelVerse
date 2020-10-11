@@ -9,8 +9,8 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import ci.slyest.the.marvel.verse.presentation.R
-import ci.slyest.the.marvel.verse.presentation.models.Response
-import ci.slyest.the.marvel.verse.presentation.models.Status
+import ci.slyest.the.marvel.verse.presentation.common.Response
+import ci.slyest.the.marvel.verse.presentation.common.Status
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 

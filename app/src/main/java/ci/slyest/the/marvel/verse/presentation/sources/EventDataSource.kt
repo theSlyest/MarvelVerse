@@ -1,17 +1,17 @@
 package ci.slyest.the.marvel.verse.presentation.sources
 
-import ci.slyest.the.marvel.verse.domain.entities.Comic
-import ci.slyest.the.marvel.verse.presentation.viewmodels.IComicViewModel
+import ci.slyest.the.marvel.verse.domain.entities.Event
+import ci.slyest.the.marvel.verse.presentation.viewmodels.IEventViewModel
 
-class ComicDataSource(var viewModel: IComicViewModel)
-    : IMarvelDataSource<Comic>() {
+class EventDataSource(var viewModel: IEventViewModel)
+    : IMarvelDataSource<Event>() {
 
-    class Factory(viewModel: IComicViewModel) : IMarvelDataSource.Factory<Comic>() {
-        override val source = ComicDataSource(viewModel)
+    class Factory(viewModel: IEventViewModel) : IMarvelDataSource.Factory<Event>() {
+        override val source = EventDataSource(viewModel)
     }
 
     private var initSingle =
-        viewModel.fetch(IComicViewModel.PAGE_SIZE + 2 * IComicViewModel.PREFETCH_DISTANCE).cache()
+        viewModel.fetch(IEventViewModel.PAGE_SIZE + 2 * IEventViewModel.PREFETCH_DISTANCE).cache()
 
     init {
         disposable = initSingle.subscribe { wrapper ->
@@ -20,7 +20,7 @@ class ComicDataSource(var viewModel: IComicViewModel)
         }
     }
 
-    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Comic>) {
+    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Event>) {
         val data = initSingle.blockingGet().data.results
         val position = computeInitialLoadPosition(params, count!!)
 //        val loadSize = computeInitialLoadSize(params, position, count!!)
@@ -29,7 +29,7 @@ class ComicDataSource(var viewModel: IComicViewModel)
         initSingle = null
     }
 
-    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Comic>) {
+    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Event>) {
         if (!waiting) {
             disposable = viewModel.fetch(params.loadSize, params.startPosition)
                 .subscribe({ wrapper ->

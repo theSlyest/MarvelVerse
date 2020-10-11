@@ -7,9 +7,9 @@ import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
 import ci.slyest.the.marvel.verse.domain.usecases.CharactersUseCase
-import ci.slyest.the.marvel.verse.presentation.models.Response
-import ci.slyest.the.marvel.verse.presentation.models.Status
-import ci.slyest.the.marvel.verse.presentation.sources.CharacterDataSourceFactory
+import ci.slyest.the.marvel.verse.presentation.common.Response
+import ci.slyest.the.marvel.verse.presentation.common.Status
+import ci.slyest.the.marvel.verse.presentation.sources.CharacterDataSource
 import io.reactivex.rxjava3.core.Single
 
 class CharacterSearchViewModel(private val useCase: CharactersUseCase): ICharacterViewModel(), ISearchViewModel<Character> {
@@ -21,7 +21,7 @@ class CharacterSearchViewModel(private val useCase: CharactersUseCase): ICharact
 
     override fun applyRequest() {
         pagedList =
-            LivePagedListBuilder(CharacterDataSourceFactory(this), pagingConfig).build()
+            LivePagedListBuilder(CharacterDataSource.Factory(this), pagingConfig).build()
     }
 
     override fun fetch(limit: Int?, offset: Int?) : Single<CharacterDataWrapper> {

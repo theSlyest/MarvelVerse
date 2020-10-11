@@ -6,6 +6,10 @@ import ci.slyest.the.marvel.verse.presentation.viewmodels.ICreatorViewModel
 class CreatorDataSource(var viewModel: ICreatorViewModel)
     : IMarvelDataSource<Creator>() {
 
+    class Factory(viewModel: ICreatorViewModel) : IMarvelDataSource.Factory<Creator>() {
+        override val source = CreatorDataSource(viewModel)
+    }
+
     private var initSingle =
         viewModel.fetch(ICreatorViewModel.PAGE_SIZE + 2 * ICreatorViewModel.PREFETCH_DISTANCE).cache()
 

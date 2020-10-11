@@ -6,6 +6,10 @@ import ci.slyest.the.marvel.verse.presentation.viewmodels.ICharacterViewModel
 class CharacterDataSource(var viewModel: ICharacterViewModel)
     : IMarvelDataSource<Character>() {
 
+    class Factory(viewModel: ICharacterViewModel) : IMarvelDataSource.Factory<Character>() {
+        override val source = CharacterDataSource(viewModel)
+    }
+
     private var initSingle =
         viewModel.fetch(ICharacterViewModel.PAGE_SIZE + 2 * ICharacterViewModel.PREFETCH_DISTANCE).cache()
 

@@ -11,7 +11,7 @@ data class Story (
     val comics: ResourceList, // optional: A resource list containing comics in which this story takes place.
     val series: ResourceList, // optional: A resource list containing series in which this story appears.
     val events: ResourceList, // optional: A resource list of the events in which this story appears.
-    val characters: ResourceList, // optional: A resource list of characters which appear in this story.
-    val creators: ResourceList, // optional: A resource list of creators who worked on this story.
+    val characters: ResourceRoleList, // optional: A resource list of characters which appear in this story.
+    val creators: ResourceRoleList, // optional: A resource list of creators who worked on this story.
     val originalissue: ResourceSummary, // optional: A summary representation of the issue in which this story was originally published.
 )

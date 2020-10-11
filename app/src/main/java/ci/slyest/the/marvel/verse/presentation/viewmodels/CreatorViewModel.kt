@@ -7,10 +7,9 @@ import ci.slyest.the.marvel.verse.domain.entities.Creator
 import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.CreatorRequest
 import ci.slyest.the.marvel.verse.domain.usecases.CreatorsUseCase
-import ci.slyest.the.marvel.verse.presentation.models.Response
-import ci.slyest.the.marvel.verse.presentation.models.Status
+import ci.slyest.the.marvel.verse.presentation.common.Response
+import ci.slyest.the.marvel.verse.presentation.common.Status
 import ci.slyest.the.marvel.verse.presentation.sources.CreatorDataSource
-import ci.slyest.the.marvel.verse.presentation.sources.CreatorDataSourceFactory
 import io.reactivex.rxjava3.core.Single
 
 class CreatorViewModel(private val useCase: CreatorsUseCase): ICreatorViewModel() {
@@ -24,7 +23,7 @@ class CreatorViewModel(private val useCase: CreatorsUseCase): ICreatorViewModel(
 
     init {
         if (pagedList == null)
-            CreatorDataSourceFactory(this).let { factory ->
+            CreatorDataSource.Factory(this).let { factory ->
                 pagedList = LivePagedListBuilder(factory, pagingConfig).build()
                 dataSource = factory.source
             }
