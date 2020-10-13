@@ -28,10 +28,10 @@ class TabsActivity : AppCompatActivity() {
                 return when(position) {
                     ResourceType.CHARACTER.ordinal -> CharacterFragment()
                     ResourceType.COMIC.ordinal -> ComicFragment()
-                    ResourceType.STORY.ordinal -> StoryFragment()
                     ResourceType.EVENT.ordinal -> EventFragment()
                     ResourceType.SERIES.ordinal -> SeriesFragment()
-                    ResourceType.CREATOR.ordinal -> CreatorFragment()
+//                    ResourceType.STORY.ordinal -> StoryFragment()
+//                    ResourceType.CREATOR.ordinal -> CreatorFragment()
                     else -> EmptyRecyclerFragment()
                 }
             }

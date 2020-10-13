@@ -3,9 +3,11 @@
     <string-array name="resource_types"><!-- Same order than the enum class ResourceType -->
         <item>Characters</item>
         <item>Comics</item>
-        <item>Stories</item>
         <item>Events</item>
         <item>Series</item>
+<!--
+        <item>Stories</item>
         <item>Creators</item>
+-->
     </string-array>
 </resources>
