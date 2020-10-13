@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import ci.slyest.the.marvel.verse.presentation.common.IntentExtra
+import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 
 abstract class IDetailActivity: AppCompatActivity() {
 
@@ -37,5 +39,13 @@ abstract class IDetailActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         position = intent.getIntExtra(ARG_POSITION, 0)
         search = intent.getBooleanExtra(ARG_SEARCH, false)
+    }
+
+    fun startResultsActivity(sourceId: Int, sourceType: ResourceType, resultsType: ResourceType) {
+        val intent = Intent(this, SearchActivity::class.java)
+        intent.putExtra(IntentExtra.SOURCE_ID.key, sourceId)
+        intent.putExtra(IntentExtra.SOURCE_TYPE.key, sourceType.ordinal)
+        intent.putExtra(IntentExtra.RESULT_TYPE.key, resultsType.ordinal)
+        startActivity(intent)
     }
 }

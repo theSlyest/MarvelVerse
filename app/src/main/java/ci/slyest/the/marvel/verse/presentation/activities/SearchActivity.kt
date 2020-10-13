@@ -11,10 +11,7 @@ import androidx.appcompat.widget.SearchView
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.IntentExtra
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
-import ci.slyest.the.marvel.verse.presentation.fragments.CharacterSearchFragment
-import ci.slyest.the.marvel.verse.presentation.fragments.ComicSearchFragment
-import ci.slyest.the.marvel.verse.presentation.fragments.EmptySearchFragment
-import ci.slyest.the.marvel.verse.presentation.fragments.ISearchFragment
+import ci.slyest.the.marvel.verse.presentation.fragments.*
 import kotlinx.android.synthetic.main.app_bar_nav.*
 
 class SearchActivity : AppCompatActivity() {
@@ -33,6 +30,14 @@ class SearchActivity : AppCompatActivity() {
                 CharacterSearchFragment.create(sourceType, sourceId, startsWith)
             ResourceType.COMIC.ordinal ->
                 ComicSearchFragment.create(sourceType, sourceId, startsWith)
+            ResourceType.EVENT.ordinal ->
+                EventSearchFragment.create(sourceType, sourceId, startsWith)
+            ResourceType.STORY.ordinal ->
+                StorySearchFragment.create(sourceType, sourceId, startsWith)
+            ResourceType.SERIES.ordinal ->
+                SeriesSearchFragment.create(sourceType, sourceId, startsWith)
+            ResourceType.CREATOR.ordinal ->
+                CreatorSearchFragment.create(sourceType, sourceId, startsWith)
             else -> EmptySearchFragment()
         }
         supportFragmentManager.beginTransaction()

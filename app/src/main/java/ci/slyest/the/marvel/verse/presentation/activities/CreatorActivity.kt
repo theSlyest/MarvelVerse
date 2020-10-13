@@ -1,14 +1,14 @@
 package ci.slyest.the.marvel.verse.presentation.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import ci.slyest.the.marvel.verse.presentation.R
-import ci.slyest.the.marvel.verse.presentation.common.*
+import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
+import ci.slyest.the.marvel.verse.presentation.common.ResourceType
+import ci.slyest.the.marvel.verse.presentation.common.fromHtml
+import ci.slyest.the.marvel.verse.presentation.common.setAttribution
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_creator.*
-import kotlinx.android.synthetic.main.activity_creator.text_attribution
-import kotlinx.android.synthetic.main.activity_creator.toolbar
 import java.util.*
 
 class CreatorActivity : IDetailActivity() {
@@ -52,11 +52,19 @@ class CreatorActivity : IDetailActivity() {
                 text_urls.movementMethod = LinkMovementMethod.getInstance()
 
                 btn_comics.setOnClickListener {
-                    val intent = Intent(this, SearchActivity::class.java)
-                    intent.putExtra(IntentExtra.SOURCE_ID.key, creator.id)
-                    intent.putExtra(IntentExtra.SOURCE_TYPE.key, ResourceType.CREATOR.ordinal)
-                    intent.putExtra(IntentExtra.RESULT_TYPE.key, ResourceType.COMIC.ordinal)
-                    startActivity(intent)
+                    startResultsActivity(creator.id, ResourceType.CREATOR, ResourceType.COMIC)
+                }
+
+                btn_events.setOnClickListener {
+                    startResultsActivity(creator.id, ResourceType.CREATOR, ResourceType.EVENT)
+                }
+
+                btn_stories.setOnClickListener {
+                    startResultsActivity(creator.id, ResourceType.CREATOR, ResourceType.STORY)
+                }
+
+                btn_series.setOnClickListener {
+                    startResultsActivity(creator.id, ResourceType.CREATOR, ResourceType.SERIES)
                 }
             }
     }

@@ -17,6 +17,10 @@ class EventSource(private val eventService: EventService) : IMarvelSource() {
                 eventService.characterEvents(req.characterId!!, PUBLIC_KEY, ts, getHash(ts),
                     req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.creators,
                     req.series, req.comics, req.stories, req.orderBy, req.limit, req.offset)
+            req.creatorId != null ->
+                eventService.creatorEvents(req.creatorId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.characters,
+                    req.series, req.comics, req.stories, req.orderBy, req.limit, req.offset)
             req.seriesId != null ->
                 eventService.seriesEvents(req.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
                     req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.creators,

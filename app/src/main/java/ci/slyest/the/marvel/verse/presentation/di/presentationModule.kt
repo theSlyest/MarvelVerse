@@ -18,13 +18,17 @@ val presentationModule: Module = module {
 
     single { CreatorsUseCase() }
     viewModel { CreatorViewModel(useCase = get()) }
+    viewModel { CreatorSearchViewModel(useCase = get()) }
 
     single { EventsUseCase() }
     viewModel { EventViewModel(useCase = get()) }
+    viewModel { EventSearchViewModel(useCase = get()) }
 
     single { SeriesUseCase() }
     viewModel { SeriesViewModel(useCase = get()) }
+    viewModel { SeriesSearchViewModel(useCase = get()) }
 
     single { StoriesUseCase() }
     viewModel { StoryViewModel(useCase = get()) }
+    viewModel { StorySearchViewModel(useCase = get()) }
 }

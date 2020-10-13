@@ -68,7 +68,7 @@
                 app:shapeAppearance="@style/AppTheme.ButtonShape" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_series"
+                android:id="@+id/btn_events"
                 style="@style/AppTheme.DetailsButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -78,12 +78,12 @@
                 app:shapeAppearance="@style/AppTheme.ButtonShape" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_creators"
+                android:id="@+id/btn_series"
                 style="@style/AppTheme.DetailsButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/label_creators"
+                android:text="@string/label_series"
                 app:shapeAppearance="@style/AppTheme.ButtonShape" />
         </LinearLayout>
 

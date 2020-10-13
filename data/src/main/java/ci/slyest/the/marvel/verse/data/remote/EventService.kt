@@ -44,7 +44,7 @@ interface EventService {
         @Query("offset") offset: Int?
     ): Single<EventDataWrapper>
 
-    @GET("characters/{eventId}/events")
+    @GET("characters/{characterId}/events")
     fun characterEvents(
         @Path("characterId") characterId: Int,
         @Query("apikey") apiKey: String,
@@ -54,6 +54,24 @@ interface EventService {
         @Query("nameStartsWith") nameStartsWith: String?,
         @Query("modifiedSince") modifiedSince: String?, // yyyy-MM-ddThh:mm
         @Query("creators") creators: String?,
+        @Query("series") series: String?,
+        @Query("comics") comics: String?,
+        @Query("stories") stories: String?,
+        @Query("orderBy") orderBy: String?,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?
+    ): Single<EventDataWrapper>
+
+    @GET("characters/{creatorId}/events")
+    fun creatorEvents(
+        @Path("creatorId") creatorId: Int,
+        @Query("apikey") apiKey: String,
+        @Query("ts") ts: String,
+        @Query("hash") hash: String,
+        @Query("name") name: String?,
+        @Query("nameStartsWith") nameStartsWith: String?,
+        @Query("modifiedSince") modifiedSince: String?, // yyyy-MM-ddThh:mm
+        @Query("characters") characters: String?,
         @Query("series") series: String?,
         @Query("comics") comics: String?,
         @Query("stories") stories: String?,

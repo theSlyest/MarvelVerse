@@ -1,6 +1,5 @@
 package ci.slyest.the.marvel.verse.presentation.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.widget.SimpleAdapter
@@ -8,6 +7,15 @@ import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.*
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_comic.*
+import kotlinx.android.synthetic.main.activity_comic.btn_series
+import kotlinx.android.synthetic.main.activity_comic.btn_stories
+import kotlinx.android.synthetic.main.activity_comic.img_thumbnail
+import kotlinx.android.synthetic.main.activity_comic.text_attribution
+import kotlinx.android.synthetic.main.activity_comic.text_description
+import kotlinx.android.synthetic.main.activity_comic.text_id
+import kotlinx.android.synthetic.main.activity_comic.text_title
+import kotlinx.android.synthetic.main.activity_comic.text_urls
+import kotlinx.android.synthetic.main.activity_comic.toolbar
 import java.util.*
 
 class ComicActivity: IDetailActivity() {
@@ -45,11 +53,6 @@ class ComicActivity: IDetailActivity() {
                         intArrayOf(R.id.text_label, R.id.text_value))
                     grid_creators.adapter = creatorAdapter
 
-//                    val params = grid_creators.layoutParams
-//                    params.height *= creatorAdapter.count / (params.width / 128)
-//                    grid_creators.layoutParams = params
-//                    grid_creators.requestLayout()
-
                     var first = true
                     var strUrls = ""
                     urls.forEach { url ->
@@ -72,14 +75,20 @@ class ComicActivity: IDetailActivity() {
                 text_urls.movementMethod = LinkMovementMethod.getInstance()
 
                 btn_characters.setOnClickListener {
-                    val intent = Intent(this, SearchActivity::class.java)
-                    intent.putExtra(IntentExtra.SOURCE_ID.key, comic.id)
-                    intent.putExtra(IntentExtra.SOURCE_TYPE.key, ResourceType.COMIC.ordinal)
-                    intent.putExtra(IntentExtra.RESULT_TYPE.key, ResourceType.CHARACTER.ordinal)
-                    startActivity(intent)
+                    startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.CHARACTER)
+                }
+
+                btn_events.setOnClickListener {
+                    startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.EVENT)
+                }
+
+                btn_stories.setOnClickListener {
+                    startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.STORY)
+                }
+
+                btn_series.setOnClickListener {
+                    startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.SERIES)
                 }
             }
     }
-
-
 }

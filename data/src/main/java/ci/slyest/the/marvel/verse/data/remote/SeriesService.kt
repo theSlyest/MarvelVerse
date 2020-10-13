@@ -71,7 +71,7 @@ interface SeriesService {
         @Query("offset") offset: Int?
     ): Single<SeriesDataWrapper>
 
-    @GET("series/{seriesId}/series")
+    @GET("characters/{characterId}/series")
     fun characterSeries(
         @Path("characterId") characterId: Int,
         @Query("apikey") apiKey: String,
@@ -92,7 +92,7 @@ interface SeriesService {
         @Query("offset") offset: Int?
     ): Single<SeriesDataWrapper>
 
-    @GET("creators/{seriesId}/series")
+    @GET("creators/{creatorId}/series")
     fun creatorSeries(
         @Path("creatorId") creatorId: Int,
         @Query("apikey") apiKey: String,

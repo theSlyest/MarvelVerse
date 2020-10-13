@@ -56,7 +56,7 @@ interface StoryService {
         @Query("offset") offset: Int?
     ): Single<StoryDataWrapper>
 
-    @GET("events/{eventId}/characters")
+    @GET("events/{eventId}/stories")
     fun eventStories(
         @Path("eventId") eventId: Int,
         @Query("apikey") apiKey: String,
@@ -72,7 +72,7 @@ interface StoryService {
         @Query("offset") offset: Int?
     ): Single<StoryDataWrapper>
 
-    @GET("series/{seriesId}/characters")
+    @GET("series/{seriesId}/stories")
     fun seriesStories(
         @Path("seriesId") seriesId: Int,
         @Query("apikey") apiKey: String,

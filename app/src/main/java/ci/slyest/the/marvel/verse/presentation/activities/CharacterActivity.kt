@@ -54,11 +54,19 @@ class CharacterActivity : IDetailActivity() {
                 text_urls.movementMethod = LinkMovementMethod.getInstance()
 
                 btn_comics.setOnClickListener {
-                    val intent = Intent(this, SearchActivity::class.java)
-                    intent.putExtra(IntentExtra.SOURCE_ID.key, character.id)
-                    intent.putExtra(IntentExtra.SOURCE_TYPE.key, ResourceType.CHARACTER.ordinal)
-                    intent.putExtra(IntentExtra.RESULT_TYPE.key, ResourceType.COMIC.ordinal)
-                    startActivity(intent)
+                   startResultsActivity(character.id, ResourceType.CHARACTER, ResourceType.COMIC)
+                }
+
+                btn_events.setOnClickListener {
+                    startResultsActivity(character.id, ResourceType.CHARACTER, ResourceType.EVENT)
+                }
+
+                btn_stories.setOnClickListener {
+                    startResultsActivity(character.id, ResourceType.CHARACTER, ResourceType.STORY)
+                }
+
+                btn_series.setOnClickListener {
+                    startResultsActivity(character.id, ResourceType.CHARACTER, ResourceType.SERIES)
                 }
             }
     }
