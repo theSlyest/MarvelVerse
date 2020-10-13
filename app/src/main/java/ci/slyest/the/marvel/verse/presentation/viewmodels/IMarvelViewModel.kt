@@ -12,8 +12,8 @@ abstract class IMarvelViewModel: ViewModel() {
 
     companion object {
 
-        const val PAGE_SIZE = 33
-        const val PREFETCH_DISTANCE = 33
+        const val PAGE_SIZE = 32
+        const val PREFETCH_DISTANCE = 16
 
         val pagingConfig = PagedList.Config.Builder()
             .setPageSize(PAGE_SIZE)
