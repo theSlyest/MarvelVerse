@@ -11,10 +11,11 @@ import androidx.appcompat.widget.SearchView
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.IntentExtra
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
+import ci.slyest.the.marvel.verse.presentation.databinding.ActivitySearchBinding
 import ci.slyest.the.marvel.verse.presentation.fragments.*
-import kotlinx.android.synthetic.main.app_bar_nav.*
 
 class SearchActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySearchBinding
 
     private lateinit var searchView: SearchView
     private lateinit var fragment: ISearchFragment
@@ -47,9 +48,11 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
 
-        setSupportActionBar(toolbar)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         handleIntent(intent)

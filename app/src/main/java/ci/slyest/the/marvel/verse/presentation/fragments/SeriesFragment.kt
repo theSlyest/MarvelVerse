@@ -6,7 +6,6 @@ import ci.slyest.the.marvel.verse.presentation.adapters.SeriesAdapter
 import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.SeriesViewModel
-import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SeriesFragment : IRecyclerFragment() {
@@ -21,8 +20,8 @@ class SeriesFragment : IRecyclerFragment() {
             adapter.submitList(pagedList)
         })
 
-        recycler.adapter = adapter
-        recycler.onItemClick { _, position, _ ->
+        binding.recycler.adapter = adapter
+        binding.recycler.onItemClick { _, position, _ ->
             ResourceHolder.putSeries(SeriesViewModel.pagedList?.value?.get(position)!!)
             startActivity(Intent(context, SeriesActivity::class.java))
         }

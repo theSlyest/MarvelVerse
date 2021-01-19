@@ -7,7 +7,6 @@ import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.EventSearchViewModel
-import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class EventSearchFragment : ISearchFragment() {
@@ -41,8 +40,8 @@ class EventSearchFragment : ISearchFragment() {
 
         adapter = EventAdapter(glide)
         refresh(startsWith)
-        recycler.adapter = adapter
-        recycler.onItemClick { _, position, _ ->
+        binding.recycler.adapter = adapter
+        binding.recycler.onItemClick { _, position, _ ->
             ResourceHolder.putEvent(mViewModel.data.value?.get(position)!!)
             startActivity(Intent(context, EventActivity::class.java))
         }

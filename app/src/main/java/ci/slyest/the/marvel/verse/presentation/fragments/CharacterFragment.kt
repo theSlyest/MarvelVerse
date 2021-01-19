@@ -6,11 +6,9 @@ import ci.slyest.the.marvel.verse.presentation.adapters.CharacterAdapter
 import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
-import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CharacterFragment : IRecyclerFragment() {
-
     private val mViewModel by viewModel<CharacterViewModel>()
 
     override fun initRecycler() {
@@ -21,8 +19,8 @@ class CharacterFragment : IRecyclerFragment() {
             adapter.submitList(pagedList)
         })
 
-        recycler.adapter = adapter
-        recycler.onItemClick { _, position, _ ->
+        binding.recycler.adapter = adapter
+        binding.recycler.onItemClick { _, position, _ ->
             ResourceHolder.putCharacter(CharacterViewModel.pagedList?.value?.get(position)!!)
             startActivity(Intent(context, CharacterActivity::class.java))
         }

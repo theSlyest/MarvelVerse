@@ -7,19 +7,21 @@ import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.common.fromHtml
 import ci.slyest.the.marvel.verse.presentation.common.setAttribution
+import ci.slyest.the.marvel.verse.presentation.databinding.ActivityCreatorBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_creator.*
 import java.util.*
 
 class CreatorActivity : IDetailActivity() {
+    private lateinit var binding: ActivityCreatorBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_creator)
-        setAttribution(this, text_attribution)
+        binding = ActivityCreatorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setAttribution(this, binding.textAttribution)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         ResourceHolder.getCreator()
@@ -30,12 +32,12 @@ class CreatorActivity : IDetailActivity() {
                                 + "/standard_fantastic.${thumbnail.extension}")
                         .centerCrop()
                         .placeholder(R.drawable.ic_marvel)
-                        .into(img_thumbnail)
+                        .into(binding.imgThumbnail)
 
                     title = fullName
-                    text_title.text = "$lastName $suffix"
-                    text_secondary.text = "$firstName $middleName"
-                    text_id.text = id.toString()
+                    binding.textTitle.text = "$lastName $suffix"
+                    binding.textSecondary.text = "$firstName $middleName"
+                    binding.textId.text = id.toString()
                     var first = true
                     var strUrls = ""
                     creator.urls.forEach { url ->
@@ -46,24 +48,24 @@ class CreatorActivity : IDetailActivity() {
 
                         strUrls += "<a href=\"${url.url}\">${url.type.capitalize(Locale.ROOT)}</a>"
                     }
-                    text_urls.text = fromHtml(strUrls)
+                    binding.textUrls.text = fromHtml(strUrls)
                 }
 
-                text_urls.movementMethod = LinkMovementMethod.getInstance()
+                binding.textUrls.movementMethod = LinkMovementMethod.getInstance()
 
-                btn_comics.setOnClickListener {
+                binding.btnComics.setOnClickListener {
                     startResultsActivity(creator.id, ResourceType.CREATOR, ResourceType.COMIC)
                 }
 
-                btn_events.setOnClickListener {
+                binding.btnEvents.setOnClickListener {
                     startResultsActivity(creator.id, ResourceType.CREATOR, ResourceType.EVENT)
                 }
 
-                btn_stories.setOnClickListener {
+                binding.btnStories.setOnClickListener {
                     startResultsActivity(creator.id, ResourceType.CREATOR, ResourceType.STORY)
                 }
 
-                btn_series.setOnClickListener {
+                binding.btnSeries.setOnClickListener {
                     startResultsActivity(creator.id, ResourceType.CREATOR, ResourceType.SERIES)
                 }
             }

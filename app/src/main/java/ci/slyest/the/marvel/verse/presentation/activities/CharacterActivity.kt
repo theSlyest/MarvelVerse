@@ -1,25 +1,27 @@
 package ci.slyest.the.marvel.verse.presentation.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import ci.slyest.the.marvel.verse.presentation.R
-import ci.slyest.the.marvel.verse.presentation.common.*
+import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
+import ci.slyest.the.marvel.verse.presentation.common.ResourceType
+import ci.slyest.the.marvel.verse.presentation.common.fromHtml
+import ci.slyest.the.marvel.verse.presentation.common.setAttribution
+import ci.slyest.the.marvel.verse.presentation.databinding.ActivityCharacterBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_character.*
-import kotlinx.android.synthetic.main.activity_character.text_attribution
-import kotlinx.android.synthetic.main.activity_character.toolbar
 import java.util.*
 
 class CharacterActivity : IDetailActivity() {
+    private lateinit var binding: ActivityCharacterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_character)
-        setAttribution(this, text_attribution)
+        binding = ActivityCharacterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setAttribution(this, binding.textAttribution)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         ResourceHolder.getCharacter()
@@ -30,14 +32,14 @@ class CharacterActivity : IDetailActivity() {
                                 + "/standard_fantastic.${thumbnail.extension}")
                         .centerCrop()
                         .placeholder(R.drawable.ic_marvel)
-                        .into(img_thumbnail)
+                        .into(binding.imgThumbnail)
 
                     title = name.substringBefore('(')
-                    text_title.text = title
-                    text_secondary.text = name.substringAfter('(', "")
+                    binding.textTitle.text = title
+                    binding.textSecondary.text = name.substringAfter('(', "")
                         .substringBefore(')')
-                    text_id.text = id.toString()
-                    text_description.text = description.ifEmpty { getString(R.string.msg_no_description) }
+                    binding.textId.text = id.toString()
+                    binding.textDescription.text = description.ifEmpty { getString(R.string.msg_no_description) }
                     var first = true
                     var strUrls = ""
                     character.urls.forEach { url ->
@@ -48,24 +50,24 @@ class CharacterActivity : IDetailActivity() {
 
                         strUrls += "<a href=\"${url.url}\">${url.type.capitalize(Locale.ROOT)}</a>"
                     }
-                    text_urls.text = fromHtml(strUrls)
+                    binding.textUrls.text = fromHtml(strUrls)
                 }
 
-                text_urls.movementMethod = LinkMovementMethod.getInstance()
+                binding.textUrls.movementMethod = LinkMovementMethod.getInstance()
 
-                btn_comics.setOnClickListener {
+                binding.btnComics.setOnClickListener {
                    startResultsActivity(character.id, ResourceType.CHARACTER, ResourceType.COMIC)
                 }
 
-                btn_events.setOnClickListener {
+                binding.btnEvents.setOnClickListener {
                     startResultsActivity(character.id, ResourceType.CHARACTER, ResourceType.EVENT)
                 }
 
-                btn_stories.setOnClickListener {
+                binding.btnStories.setOnClickListener {
                     startResultsActivity(character.id, ResourceType.CHARACTER, ResourceType.STORY)
                 }
 
-                btn_series.setOnClickListener {
+                binding.btnSeries.setOnClickListener {
                     startResultsActivity(character.id, ResourceType.CHARACTER, ResourceType.SERIES)
                 }
             }

@@ -5,28 +5,21 @@ import android.text.method.LinkMovementMethod
 import android.widget.SimpleAdapter
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.*
+import ci.slyest.the.marvel.verse.presentation.databinding.ActivityComicBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_comic.*
-import kotlinx.android.synthetic.main.activity_comic.btn_series
-import kotlinx.android.synthetic.main.activity_comic.btn_stories
-import kotlinx.android.synthetic.main.activity_comic.img_thumbnail
-import kotlinx.android.synthetic.main.activity_comic.text_attribution
-import kotlinx.android.synthetic.main.activity_comic.text_description
-import kotlinx.android.synthetic.main.activity_comic.text_id
-import kotlinx.android.synthetic.main.activity_comic.text_title
-import kotlinx.android.synthetic.main.activity_comic.text_urls
-import kotlinx.android.synthetic.main.activity_comic.toolbar
 import java.util.*
 
 class ComicActivity: IDetailActivity() {
+    private lateinit var binding: ActivityComicBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_comic)
-        setAttribution(this, text_attribution)
+        binding = ActivityComicBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setAttribution(this, binding.textAttribution)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         ResourceHolder.getComic()
@@ -37,12 +30,12 @@ class ComicActivity: IDetailActivity() {
                                 + "/portrait_uncanny.${thumbnail.extension}")
                         .centerCrop()
                         .placeholder(R.drawable.ic_marvel)
-                        .into(img_thumbnail)
+                        .into(binding.imgThumbnail)
 
                     this@ComicActivity.title = title
-                    text_title.text = title
-                    text_id.text = id.toString()
-                    text_rating.text = format
+                    binding.textTitle.text = title
+                    binding.textId.text = id.toString()
+                    binding.textRating.text = format
 
                     val creatorAdapter = SimpleAdapter(this@ComicActivity,
                         creators.items.map { creator ->
@@ -51,7 +44,7 @@ class ComicActivity: IDetailActivity() {
                         R.layout.grid_item,
                         arrayOf("role", "name"),
                         intArrayOf(R.id.text_label, R.id.text_value))
-                    grid_creators.adapter = creatorAdapter
+                    binding.gridCreators.adapter = creatorAdapter
 
                     var first = true
                     var strUrls = ""
@@ -64,29 +57,29 @@ class ComicActivity: IDetailActivity() {
                         strUrls += "<a href=\"${url.url}\">${url.type.capitalize(Locale.ROOT)}</a>"
                     }
 
-                    text_urls.text = fromHtml(strUrls)
-                    text_dates.text = fromHtml(variantDescription)
-                    text_description.text = if (description.isNullOrEmpty())
+                    binding.textUrls.text = fromHtml(strUrls)
+                    binding.textDates.text = fromHtml(variantDescription)
+                    binding.textDescription.text = if (description.isNullOrEmpty())
                         getString(R.string.msg_no_description)
                     else
                         fromHtml(description)
                 }
 
-                text_urls.movementMethod = LinkMovementMethod.getInstance()
+                binding.textUrls.movementMethod = LinkMovementMethod.getInstance()
 
-                btn_characters.setOnClickListener {
+                binding.btnCharacters.setOnClickListener {
                     startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.CHARACTER)
                 }
 
-                btn_events.setOnClickListener {
+                binding.btnEvents.setOnClickListener {
                     startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.EVENT)
                 }
 
-                btn_stories.setOnClickListener {
+                binding.btnStories.setOnClickListener {
                     startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.STORY)
                 }
 
-                btn_series.setOnClickListener {
+                binding.btnSeries.setOnClickListener {
                     startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.SERIES)
                 }
             }

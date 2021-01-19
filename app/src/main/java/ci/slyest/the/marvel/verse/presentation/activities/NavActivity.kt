@@ -16,21 +16,23 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.fromHtml
-import kotlinx.android.synthetic.main.activity_nav.*
-import kotlinx.android.synthetic.main.app_bar_nav.*
-import kotlinx.android.synthetic.main.content_nav.*
+import ci.slyest.the.marvel.verse.presentation.databinding.ActivityNavBinding
+import ci.slyest.the.marvel.verse.presentation.databinding.AppBarNavBinding
 import java.util.*
 
 class NavActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityNavBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nav)
 
-        setSupportActionBar(toolbar)
+        binding = ActivityNavBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val bindingBar = AppBarNavBinding.bind(binding.navView)
+        setSupportActionBar(bindingBar.toolbar)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -40,14 +42,15 @@ class NavActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_characters, R.id.nav_comics, R.id.nav_stories, R.id.nav_events,
                 R.id.nav_series, R.id.nav_creators
-            ), drawer_layout
+            ), binding.drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        nav_view.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
 
-        text_attribution.text =
+        val textAttribution = binding.appBarInclude.contentInclude.textAttribution
+        textAttribution.text =
             fromHtml(getString(R.string.attribution, Calendar.getInstance().get(Calendar.YEAR)))
-        text_attribution.movementMethod = LinkMovementMethod.getInstance()
+        textAttribution.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

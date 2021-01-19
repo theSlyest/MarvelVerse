@@ -8,19 +8,21 @@ import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.common.fromHtml
 import ci.slyest.the.marvel.verse.presentation.common.setAttribution
+import ci.slyest.the.marvel.verse.presentation.databinding.ActivityStoryBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_story.*
 import java.util.*
 
 class StoryActivity: IDetailActivity() {
+    private lateinit var binding: ActivityStoryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_story)
-        setAttribution(this, text_attribution)
+        binding = ActivityStoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setAttribution(this, binding.textAttribution)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         ResourceHolder.getStory()
@@ -32,12 +34,12 @@ class StoryActivity: IDetailActivity() {
                                     + "/portrait_uncanny.${it.extension}")
                             .centerCrop()
                             .placeholder(R.drawable.ic_marvel)
-                            .into(img_thumbnail)
+                            .into(binding.imgThumbnail)
                     }
                     this@StoryActivity.title = title
-                    text_title.text = title
-                    text_id.text = id.toString()
-                    text_rating.text = this.type
+                    binding.textTitle.text = title
+                    binding.textId.text = id.toString()
+                    binding.textRating.text = this.type
 
                     val creatorAdapter = SimpleAdapter(this@StoryActivity,
                         creators.items.map { creator ->
@@ -46,33 +48,32 @@ class StoryActivity: IDetailActivity() {
                         R.layout.grid_item,
                         arrayOf("role", "name"),
                         intArrayOf(R.id.text_label, R.id.text_value))
-                    grid_creators.adapter = creatorAdapter
+                    binding.gridCreators.adapter = creatorAdapter
 
-                    text_description.text = if (description.isEmpty())
+                    binding.textDescription.text = if (description.isEmpty())
                         getString(R.string.msg_no_description)
                     else
                         fromHtml(description)
                 }
 
-                text_urls.movementMethod = LinkMovementMethod.getInstance()
+                binding.textUrls.movementMethod = LinkMovementMethod.getInstance()
 
-                btn_characters.setOnClickListener {
+                binding.btnCharacters.setOnClickListener {
                     startResultsActivity(story.id, ResourceType.STORY, ResourceType.CHARACTER)
                 }
 
-                btn_comics.setOnClickListener {
+                binding.btnComics.setOnClickListener {
                     startResultsActivity(story.id, ResourceType.STORY, ResourceType.COMIC)
                 }
 
-                btn_events.setOnClickListener {
+                binding.btnEvents.setOnClickListener {
                     startResultsActivity(story.id, ResourceType.STORY, ResourceType.EVENT)
                 }
 
-                btn_series.setOnClickListener {
+                binding.btnSeries.setOnClickListener {
                     startResultsActivity(story.id, ResourceType.STORY, ResourceType.SERIES)
                 }
             }
     }
-
 
 }

@@ -11,11 +11,13 @@ import androidx.lifecycle.LiveData
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status
+import ci.slyest.the.marvel.verse.presentation.databinding.FragmentRecyclerBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 
 abstract class IRecyclerFragment: Fragment() {
-
+    private var _binding: FragmentRecyclerBinding? = null
+    protected val binding get() = _binding!!
     protected lateinit var glide: RequestManager
 
     override fun onCreateView(
@@ -23,7 +25,13 @@ abstract class IRecyclerFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recycler, container, false)
+        _binding = FragmentRecyclerBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

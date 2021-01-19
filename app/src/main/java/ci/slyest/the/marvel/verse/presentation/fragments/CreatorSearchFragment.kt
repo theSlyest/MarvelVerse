@@ -7,7 +7,6 @@ import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CreatorSearchViewModel
-import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CreatorSearchFragment : ISearchFragment() {
@@ -38,8 +37,8 @@ class CreatorSearchFragment : ISearchFragment() {
 
         adapter = CreatorAdapter(glide)
         refresh(startsWith)
-        recycler.adapter = adapter
-        recycler.onItemClick { _, position, _ ->
+        binding.recycler.adapter = adapter
+        binding.recycler.onItemClick { _, position, _ ->
             ResourceHolder.putCreator(mViewModel.data.value?.get(position)!!)
             startActivity(Intent(context, CreatorActivity::class.java))
         }

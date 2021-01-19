@@ -8,19 +8,21 @@ import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.common.fromHtml
 import ci.slyest.the.marvel.verse.presentation.common.setAttribution
+import ci.slyest.the.marvel.verse.presentation.databinding.ActivitySeriesBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_series.*
 import java.util.*
 
 class SeriesActivity: IDetailActivity() {
+    private lateinit var binding: ActivitySeriesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_series)
-        setAttribution(this, text_attribution)
+        binding = ActivitySeriesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setAttribution(this, binding.textAttribution)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         ResourceHolder.getSeries()
@@ -31,13 +33,13 @@ class SeriesActivity: IDetailActivity() {
                                 + "/standard_fantastic.${thumbnail.extension}")
                         .centerCrop()
                         .placeholder(R.drawable.ic_marvel)
-                        .into(img_thumbnail)
+                        .into(binding.imgThumbnail)
 
                     this@SeriesActivity.title = title
-                    text_title.text = title
-                    text_id.text = id.toString()
-                    text_rating.text = this.rating
-                    text_secondary.text = if (startYear == endYear)
+                    binding.textTitle.text = title
+                    binding.textId.text = id.toString()
+                    binding.textRating.text = this.rating
+                    binding.textSecondary.text = if (startYear == endYear)
                         startYear.toString()
                     else
                         "$startYear - $endYear"
@@ -49,7 +51,7 @@ class SeriesActivity: IDetailActivity() {
                         R.layout.grid_item,
                         arrayOf("role", "name"),
                         intArrayOf(R.id.text_label, R.id.text_value))
-                    grid_creators.adapter = creatorAdapter
+                    binding.gridCreators.adapter = creatorAdapter
 
                     var first = true
                     var strUrls = ""
@@ -62,28 +64,28 @@ class SeriesActivity: IDetailActivity() {
                         strUrls += "<a href=\"${url.url}\">${url.type.capitalize(Locale.ROOT)}</a>"
                     }
 
-                    text_urls.text = fromHtml(strUrls)
-                    text_description.text = if (description.isNullOrEmpty())
+                    binding.textUrls.text = fromHtml(strUrls)
+                    binding.textDescription.text = if (description.isNullOrEmpty())
                         getString(R.string.msg_no_description)
                     else
                         fromHtml(description)
                 }
 
-                text_urls.movementMethod = LinkMovementMethod.getInstance()
+                binding.textUrls.movementMethod = LinkMovementMethod.getInstance()
 
-                btn_characters.setOnClickListener {
+                binding.btnCharacters.setOnClickListener {
                     startResultsActivity(series.id, ResourceType.SERIES, ResourceType.CHARACTER)
                 }
 
-                btn_comics.setOnClickListener {
+                binding.btnComics.setOnClickListener {
                     startResultsActivity(series.id, ResourceType.SERIES, ResourceType.COMIC)
                 }
 
-                btn_stories.setOnClickListener {
+                binding.btnStories.setOnClickListener {
                     startResultsActivity(series.id, ResourceType.SERIES, ResourceType.STORY)
                 }
 
-                btn_events.setOnClickListener {
+                binding.btnEvents.setOnClickListener {
                     startResultsActivity(series.id, ResourceType.SERIES, ResourceType.EVENT)
                 }
             }
