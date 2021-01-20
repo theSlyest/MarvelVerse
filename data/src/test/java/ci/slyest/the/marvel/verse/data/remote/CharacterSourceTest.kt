@@ -5,7 +5,7 @@ import org.junit.Test
 
 class CharacterSourceTest {
 
-    private val marvelSource = CharacterSource(MarvelModule.service())
+    private val marvelSource = CharacterSource(MarvelModule.characterService())
 
     @Test
     fun charactersSuccess() {

@@ -1,48 +1,40 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
 import io.reactivex.rxjava3.core.Single
-import java.math.BigInteger
-import java.security.MessageDigest
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
-import java.util.*
 
-class CharacterSource(private val characterService: CharacterService) {
+class CharacterSource(private val characterService: CharacterService) : IMarvelSource() {
 
-    private fun getTimestamp(): String = Timestamp(System.currentTimeMillis()).time.toString()
-
-    private fun getHash(ts: String): String {
-        val str = ts + PRIVATE_KEY + PUBLIC_KEY
-        val md = MessageDigest.getInstance("MD5")
-        return BigInteger(1, md.digest(str.toByteArray())).toString(16)
-    }
-
-    fun characters(
-        name: String? = null,
-        nameStartsWith: String? = null,
-        modifiedSince: Date? = null,
-        comics: String? = null,
-        series: String? = null,
-        events: String? = null,
-        stories: String? = null,
-        orderBy: String? = null,
-        limit: Int? = null,
-        offset: Int? = null
-    ): Single<CharacterDataWrapper> {
+    fun characters(req: CharacterRequest): Single<CharacterDataWrapper> {
         val ts = getTimestamp()
-        val hash = getHash(ts)
-        val since: String? = modifiedSince?.run {
-            SimpleDateFormat("yyyy-MM-dd", Locale.US).format(this)
+        return when {
+            req.comicId != null ->
+                characterService.comicCharacters(req.comicId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.series,
+                    req.events, req.stories, req.orderBy, req.limit, req.offset)
+            req.eventId != null ->
+                characterService.eventCharacters(req.eventId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
+                    req.series, req.stories, req.orderBy, req.limit, req.offset)
+            req.seriesId != null ->
+                characterService.seriesCharacters(req.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
+                    req.events, req.stories, req.orderBy, req.limit, req.offset)
+            req.storyId != null ->
+                characterService.storyCharacters(req.storyId!!, PUBLIC_KEY, ts, getHash(ts),
+                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
+                    req.series, req.events, req.orderBy, req.limit, req.offset)
+            else ->
+                characterService.characters(PUBLIC_KEY, ts, getHash(ts), req.name, req.nameStartsWith,
+                    formatDate(req.modifiedSince), req.comics, req.series, req.events, req.stories,
+                    req.orderBy, req.limit, req.offset)
         }
-        return characterService.characters(
-            PUBLIC_KEY, ts, hash, name, nameStartsWith, since,
-            comics, series, events, stories, orderBy, limit, offset)
     }
 
-    fun characterById(id: Int): Single<CharacterDataWrapper> {
-        val ts = getTimestamp()
-        val hash = getHash(ts)
-        return characterService.characterById(id, PUBLIC_KEY, ts, hash)
-    }
+//    fun characterById(id: Int): Single<CharacterDataWrapper> {
+//        val ts = getTimestamp()
+//        val hash = getHash(ts)
+//        return marvelService.characterById(id, PUBLIC_KEY, ts, hash)
+//    }
 }

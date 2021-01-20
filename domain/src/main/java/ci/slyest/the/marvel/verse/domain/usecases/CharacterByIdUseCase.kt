@@ -10,6 +10,6 @@ class CharacterByIdUseCase  : KoinComponent {
 
     private val characterRepository: CharacterRepository by inject()
 
-    operator fun invoke(id: Int): Single<CharacterDataWrapper>
-            = characterRepository.characterById(id)
+//    operator fun invoke(id: Int): Single<CharacterDataWrapper>
+//            = characterRepository.characterById(id)
 }

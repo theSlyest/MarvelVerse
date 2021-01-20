@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,176 +21,198 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/text_attribution"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            style="@style/AppTheme.Attribution"
+            tools:text="Data provided by Marvel. © 2020 MARVEL" />
+
         <LinearLayout
+            android:id="@+id/button_panel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/text_attribution"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_comics"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_comics"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_stories"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_stories"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_events"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_events"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_series"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:shapeAppearance="@style/AppTheme.ButtonShape"
+                style="@style/AppTheme.DetailsButton"
+                android:text="@string/label_series"/>
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_above="@+id/button_panel"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <ImageView
-                    android:id="@+id/img_thumbnail"
-                    android:layout_width="160dp"
-                    android:layout_height="120dp"
-                    app:srcCompat="@drawable/ic_marvel"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/desc_thumbnail" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="16dp"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/text_secondary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="2"
-                        android:lines="1"
-                        android:gravity="bottom"
-                        android:textAllCaps="true"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondaryInverse"
-                        tools:text="Secondary" />
-
-                    <TextView
-                        android:id="@+id/text_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="2"
-                        android:lines="1"
-                        android:layout_marginTop="8dp"
-                        android:textAllCaps="true"
-                        android:textAppearance="?attr/textAppearanceHeadline5"
-                        android:textColor="?android:attr/textColorPrimaryInverse"
-                        tools:text="Name" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="end">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:text="@string/label_id" />
-
-                    <TextView
-                        android:id="@+id/text_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        tools:text="Integer ID" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:lines="1"
-                    android:layout_marginTop="16dp"
-                    android:textAllCaps="true"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:text="@string/label_description" />
-
-                <TextView
-                    android:id="@+id/text_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    tools:text="Description" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:lines="1"
-                    android:layout_marginTop="16dp"
-                    android:textAllCaps="true"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:text="@string/label_urls" />
-
-                <TextView
-                    android:id="@+id/text_urls"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    tools:text="URLs" />
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp">
+                    android:background="@color/colorPrimaryDark"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_comics"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        app:shapeAppearance="@style/AppTheme.ButtonShape"
-                        style="@style/AppTheme.DetailsButton"
-                        android:text="@string/label_comics"/>
+                    <ImageView
+                        android:id="@+id/img_thumbnail"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        app:srcCompat="@drawable/ic_marvel"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/desc_thumbnail" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_stories"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        app:shapeAppearance="@style/AppTheme.ButtonShape"
-                        style="@style/AppTheme.DetailsButton"
-                        android:text="@string/label_stories"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_events"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        app:shapeAppearance="@style/AppTheme.ButtonShape"
-                        style="@style/AppTheme.DetailsButton"
-                        android:text="@string/label_events"/>
+                        <TextView
+                            android:id="@+id/text_secondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:gravity="bottom"
+                            android:textAllCaps="true"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondaryInverse"
+                            tools:text="Secondary" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_series"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        <TextView
+                            android:id="@+id/text_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:layout_marginTop="8dp"
+                            android:textAllCaps="true"
+                            android:textAppearance="?attr/textAppearanceHeadline5"
+                            android:textColor="?android:attr/textColorPrimaryInverse"
+                            tools:text="Name" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:shapeAppearance="@style/AppTheme.ButtonShape"
-                        style="@style/AppTheme.DetailsButton"
-                        android:text="@string/label_series"/>
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp"
+                        android:layout_gravity="end">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:text="@string/label_id" />
+
+                        <TextView
+                            android:id="@+id/text_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            tools:text="Character ID" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:lines="1"
+                        android:layout_marginTop="16dp"
+                        android:textAllCaps="true"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:text="@string/label_description" />
+
+                    <TextView
+                        android:id="@+id/text_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        tools:text="Description" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:lines="1"
+                        android:layout_marginTop="16dp"
+                        android:textAllCaps="true"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:text="@string/label_web" />
+
+                    <TextView
+                        android:id="@+id/text_urls"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textAlignment="center"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        tools:text="URLs" />
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
