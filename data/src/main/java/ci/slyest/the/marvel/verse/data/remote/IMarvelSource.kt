@@ -6,6 +6,7 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
+/** Abstract class for the sources */
 abstract class IMarvelSource {
 
     protected fun getTimestamp(): String = Timestamp(System.currentTimeMillis()).time.toString()

@@ -24,11 +24,6 @@ class SeriesSource(private val seriesService: SeriesService) : IMarvelSource() {
                     req.titleStartsWith, req.startYear, formatDate(req.modifiedSince), req.comics,
                     req.stories, req.creators, req.characters, req.seriesType, req.contains,
                     req.orderBy, req.limit, req.offset)
-            req.comicId != null ->
-                seriesService.comicSeries(req.comicId!!, PUBLIC_KEY, ts, getHash(ts), req.title,
-                    req.titleStartsWith, req.startYear, formatDate(req.modifiedSince), req.stories,
-                    req.events, req.creators, req.characters, req.seriesType, req.contains,
-                    req.orderBy, req.limit, req.offset)
             req.storyId != null ->
                 seriesService.storySeries(req.storyId!!, PUBLIC_KEY, ts, getHash(ts), req.title,
                     req.titleStartsWith, req.startYear, formatDate(req.modifiedSince), req.comics,
