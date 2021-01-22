@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.GridView
 
+/** This custom GridView will adjust its own height to show all its rows. */
 class AutoHeightGridView : GridView {
 
     constructor(context: Context?) : super(context)

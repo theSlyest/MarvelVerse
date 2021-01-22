@@ -1,5 +1,6 @@
 package ci.slyest.the.marvel.verse.presentation.common
 
+/** Keys used to pass data within Intents */
 enum class IntentExtra(val key: String) {
     RESULT_TYPE ("ci.slyest.the.marvel.verse.presentation.result_type"),
     SOURCE_TYPE ("ci.slyest.the.marvel.verse.presentation.source_type"),
