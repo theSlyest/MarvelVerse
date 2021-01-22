@@ -6,33 +6,38 @@ import io.reactivex.rxjava3.core.Single
 
 class StorySource(private val storyService: StoryService) : IMarvelSource() {
 
-    fun stories(req: StoryFilter): Single<StoryDataWrapper> {
+    /**
+     * Perform the right stories request according to the given parameters.
+     * @param filter [StoryFilter] object carrying the request parameters.
+     * @return [Single]<[StoryDataWrapper]> request result.
+     */
+    fun stories(filter: StoryFilter): Single<StoryDataWrapper> {
         val ts = getTimestamp()
         return when {
-            req.comicId != null ->
-                storyService.comicStories(req.comicId!!, PUBLIC_KEY, ts, getHash(ts),
-                    formatDate(req.modifiedSince), req.series, req.events, req.creators,
-                    req.characters, req.orderBy, req.limit, req.offset)
-            req.eventId != null ->
-                storyService.eventStories(req.eventId!!, PUBLIC_KEY, ts, getHash(ts),
-                    formatDate(req.modifiedSince), req.comics, req.series, req.creators,
-                    req.characters, req.orderBy, req.limit, req.offset)
-            req.seriesId != null ->
-                storyService.seriesStories(req.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
-                    formatDate(req.modifiedSince), req.comics, req.events, req.creators,
-                    req.characters, req.orderBy, req.limit, req.offset)
-            req.characterId != null ->
-                storyService.characterStories(req.characterId!!, PUBLIC_KEY, ts, getHash(ts),
-                    formatDate(req.modifiedSince), req.comics, req.series, req.events, req.creators,
-                    req.orderBy, req.limit, req.offset)
-            req.creatorId != null ->
-                storyService.creatorStories(req.characterId!!, PUBLIC_KEY, ts, getHash(ts),
-                    formatDate(req.modifiedSince), req.comics, req.series, req.events, req.characters,
-                    req.orderBy, req.limit, req.offset)
+            filter.comicId != null ->
+                storyService.comicStories(filter.comicId!!, PUBLIC_KEY, ts, getHash(ts),
+                    formatDate(filter.modifiedSince), filter.series, filter.events, filter.creators,
+                    filter.characters, filter.orderBy, filter.limit, filter.offset)
+            filter.eventId != null ->
+                storyService.eventStories(filter.eventId!!, PUBLIC_KEY, ts, getHash(ts),
+                    formatDate(filter.modifiedSince), filter.comics, filter.series, filter.creators,
+                    filter.characters, filter.orderBy, filter.limit, filter.offset)
+            filter.seriesId != null ->
+                storyService.seriesStories(filter.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
+                    formatDate(filter.modifiedSince), filter.comics, filter.events, filter.creators,
+                    filter.characters, filter.orderBy, filter.limit, filter.offset)
+            filter.characterId != null ->
+                storyService.characterStories(filter.characterId!!, PUBLIC_KEY, ts, getHash(ts),
+                    formatDate(filter.modifiedSince), filter.comics, filter.series, filter.events, filter.creators,
+                    filter.orderBy, filter.limit, filter.offset)
+            filter.creatorId != null ->
+                storyService.creatorStories(filter.characterId!!, PUBLIC_KEY, ts, getHash(ts),
+                    formatDate(filter.modifiedSince), filter.comics, filter.series, filter.events, filter.characters,
+                    filter.orderBy, filter.limit, filter.offset)
             else ->
-                storyService.stories(PUBLIC_KEY, ts, getHash(ts), formatDate(req.modifiedSince),
-                    req.comics, req.series, req.events, req.creators, req.characters,
-                    req.orderBy, req.limit, req.offset)
+                storyService.stories(PUBLIC_KEY, ts, getHash(ts), formatDate(filter.modifiedSince),
+                    filter.comics, filter.series, filter.events, filter.creators, filter.characters,
+                    filter.orderBy, filter.limit, filter.offset)
         }
     }
 }

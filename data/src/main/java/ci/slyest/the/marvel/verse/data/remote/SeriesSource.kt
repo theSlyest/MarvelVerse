@@ -6,33 +6,38 @@ import io.reactivex.rxjava3.core.Single
 
 class SeriesSource(private val seriesService: SeriesService) : IMarvelSource() {
 
-    fun series(req: SeriesFilter): Single<SeriesDataWrapper> {
+    /**
+     * Perform the right series request according to the given parameters.
+     * @param filter [SeriesFilter] object carrying the request parameters.
+     * @return [Single]<[SeriesDataWrapper]> request result.
+     */
+    fun series(filter: SeriesFilter): Single<SeriesDataWrapper> {
         val ts = getTimestamp()
         return when {
-            req.characterId != null ->
-                seriesService.characterSeries(req.characterId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.title, req.titleStartsWith, req.startYear, formatDate(req.modifiedSince),
-                    req.comics, req.stories, req.events, req.creators, req.seriesType, req.contains,
-                    req.orderBy, req.limit, req.offset)
-            req.creatorId != null ->
-                seriesService.creatorSeries(req.creatorId!!, PUBLIC_KEY, ts, getHash(ts), req.title,
-                    req.titleStartsWith, req.startYear, formatDate(req.modifiedSince), req.comics,
-                    req.stories, req.events, req.characters, req.seriesType, req.contains,
-                    req.orderBy, req.limit, req.offset)
-            req.eventId != null ->
-                seriesService.eventSeries(req.eventId!!, PUBLIC_KEY, ts, getHash(ts), req.title,
-                    req.titleStartsWith, req.startYear, formatDate(req.modifiedSince), req.comics,
-                    req.stories, req.creators, req.characters, req.seriesType, req.contains,
-                    req.orderBy, req.limit, req.offset)
-            req.storyId != null ->
-                seriesService.storySeries(req.storyId!!, PUBLIC_KEY, ts, getHash(ts), req.title,
-                    req.titleStartsWith, req.startYear, formatDate(req.modifiedSince), req.comics,
-                    req.events, req.creators, req.characters, req.seriesType, req.contains,
-                    req.orderBy, req.limit, req.offset)
+            filter.characterId != null ->
+                seriesService.characterSeries(filter.characterId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.title, filter.titleStartsWith, filter.startYear, formatDate(filter.modifiedSince),
+                    filter.comics, filter.stories, filter.events, filter.creators, filter.seriesType, filter.contains,
+                    filter.orderBy, filter.limit, filter.offset)
+            filter.creatorId != null ->
+                seriesService.creatorSeries(filter.creatorId!!, PUBLIC_KEY, ts, getHash(ts), filter.title,
+                    filter.titleStartsWith, filter.startYear, formatDate(filter.modifiedSince), filter.comics,
+                    filter.stories, filter.events, filter.characters, filter.seriesType, filter.contains,
+                    filter.orderBy, filter.limit, filter.offset)
+            filter.eventId != null ->
+                seriesService.eventSeries(filter.eventId!!, PUBLIC_KEY, ts, getHash(ts), filter.title,
+                    filter.titleStartsWith, filter.startYear, formatDate(filter.modifiedSince), filter.comics,
+                    filter.stories, filter.creators, filter.characters, filter.seriesType, filter.contains,
+                    filter.orderBy, filter.limit, filter.offset)
+            filter.storyId != null ->
+                seriesService.storySeries(filter.storyId!!, PUBLIC_KEY, ts, getHash(ts), filter.title,
+                    filter.titleStartsWith, filter.startYear, formatDate(filter.modifiedSince), filter.comics,
+                    filter.events, filter.creators, filter.characters, filter.seriesType, filter.contains,
+                    filter.orderBy, filter.limit, filter.offset)
             else -> 
-                seriesService.series(PUBLIC_KEY, ts, getHash(ts), req.title, req.titleStartsWith,
-                    req.startYear, formatDate(req.modifiedSince), req.comics, req.stories, req.events,
-                    req.creators, req.characters, req.seriesType, req.contains, req.orderBy, req.limit, req.offset)
+                seriesService.series(PUBLIC_KEY, ts, getHash(ts), filter.title, filter.titleStartsWith,
+                    filter.startYear, formatDate(filter.modifiedSince), filter.comics, filter.stories, filter.events,
+                    filter.creators, filter.characters, filter.seriesType, filter.contains, filter.orderBy, filter.limit, filter.offset)
         }
     }
 }
