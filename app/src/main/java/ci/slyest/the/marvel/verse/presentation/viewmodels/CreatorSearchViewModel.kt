@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.Creator
 import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CreatorRequest
+import ci.slyest.the.marvel.verse.domain.entities.CreatorFilter
 import ci.slyest.the.marvel.verse.domain.usecases.CreatorsUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status
@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.core.Single
 
 class CreatorSearchViewModel(private val useCase: CreatorsUseCase): ICreatorViewModel(), ISearchViewModel<Creator> {
 
-    var request = CreatorRequest()
+    var request = CreatorFilter()
     private lateinit var pagedList: LiveData<PagedList<Creator>>
     override val data: LiveData<PagedList<Creator>>
         get() = pagedList

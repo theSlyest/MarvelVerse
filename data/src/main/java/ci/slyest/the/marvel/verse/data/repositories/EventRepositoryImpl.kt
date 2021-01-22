@@ -2,7 +2,7 @@ package ci.slyest.the.marvel.verse.data.repositories
 
 import ci.slyest.the.marvel.verse.data.remote.EventSource
 import ci.slyest.the.marvel.verse.domain.entities.EventDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.EventRequest
+import ci.slyest.the.marvel.verse.domain.entities.EventFilter
 import ci.slyest.the.marvel.verse.domain.repositories.EventRepository
 import io.reactivex.rxjava3.core.Single
 
@@ -13,9 +13,9 @@ import io.reactivex.rxjava3.core.Single
 class EventRepositoryImpl(private val eventSource: EventSource) : EventRepository {
     /**
      * Perform a request to get a list of characters by calling [EventSource.events].
-     * @param eventRequest Object carrying the request parameters
+     * @param eventFilter Object carrying the request parameters
      * @return a [Single]<[EventDataWrapper]> result object
      */
-    override fun events(eventRequest: EventRequest): Single<EventDataWrapper>
-            = eventSource.events(eventRequest)
+    override fun events(eventFilter: EventFilter): Single<EventDataWrapper>
+            = eventSource.events(eventFilter)
 }

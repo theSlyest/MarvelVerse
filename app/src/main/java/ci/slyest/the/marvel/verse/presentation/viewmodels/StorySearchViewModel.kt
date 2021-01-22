@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.Story
 import ci.slyest.the.marvel.verse.domain.entities.StoryDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.StoryRequest
+import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
 import ci.slyest.the.marvel.verse.domain.usecases.StoriesUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status
@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.core.Single
 
 class StorySearchViewModel(private val useCase: StoriesUseCase): IStoryViewModel(), ISearchViewModel<Story> {
 
-    var request = StoryRequest()
+    var request = StoryFilter()
     private lateinit var pagedList: LiveData<PagedList<Story>>
     override val data
         get() = pagedList

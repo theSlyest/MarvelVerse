@@ -6,7 +6,7 @@ import java.util.Date
  * Comic request class to carry the request parameters.
  * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
  */
-class ComicRequest (
+class ComicFilter (
     var characterId: Int? = null,
     var creatorId: Int? = null,
     var eventId: Int? = null,

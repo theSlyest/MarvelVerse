@@ -1,12 +1,16 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CreatorRequest
+import ci.slyest.the.marvel.verse.domain.entities.CreatorFilter
 import io.reactivex.rxjava3.core.Single
 
+/**
+ * Source class for creator requests. Implements [IMarvelSource].
+ * @property creatorService Required [CreatorService].
+ */
 class CreatorSource(private val creatorService: CreatorService) : IMarvelSource() {
 
-    fun creators(req: CreatorRequest): Single<CreatorDataWrapper> {
+    fun creators(req: CreatorFilter): Single<CreatorDataWrapper> {
         val ts = getTimestamp()
         return when {
             req.comicId != null ->

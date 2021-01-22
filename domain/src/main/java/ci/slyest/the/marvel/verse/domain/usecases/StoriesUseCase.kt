@@ -1,7 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.usecases
 
 import ci.slyest.the.marvel.verse.domain.entities.StoryDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.StoryRequest
+import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
 import ci.slyest.the.marvel.verse.domain.repositories.StoryRepository
 import io.reactivex.rxjava3.core.Single
 import org.koin.core.KoinComponent
@@ -17,9 +17,9 @@ class StoriesUseCase : KoinComponent {
 
     /**
      * Perform a request by calling the [StoryRepository.stories] method.
-     * @param storyRequest object carrying the request parameters.
+     * @param storyFilter object carrying the request parameters.
      * @return a [Single]<[StoryDataWrapper]> result object
      */
-    operator fun invoke(storyRequest: StoryRequest): Single<StoryDataWrapper> =
-        storyRepository.stories(storyRequest)
+    operator fun invoke(storyFilter: StoryFilter): Single<StoryDataWrapper> =
+        storyRepository.stories(storyFilter)
 }

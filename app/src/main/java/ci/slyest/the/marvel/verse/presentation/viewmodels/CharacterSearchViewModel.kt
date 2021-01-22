@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
+import ci.slyest.the.marvel.verse.domain.entities.CharacterFilter
 import ci.slyest.the.marvel.verse.domain.usecases.CharactersUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status
@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.core.Single
 
 class CharacterSearchViewModel(private val useCase: CharactersUseCase): ICharacterViewModel(), ISearchViewModel<Character> {
 
-    var request = CharacterRequest()
+    var request = CharacterFilter()
     private lateinit var pagedList: LiveData<PagedList<Character>>
     override val data: LiveData<PagedList<Character>>
         get() = pagedList

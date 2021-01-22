@@ -6,7 +6,7 @@ import java.util.*
  * Event request class to carry the request parameters.
  * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
  */
-class EventRequest (
+class EventFilter (
     var characterId: Int? = null,
     var comicId: Int? = null,
     var creatorId: Int? = null,

@@ -1,7 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.usecases
 
 import ci.slyest.the.marvel.verse.domain.entities.EventDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.EventRequest
+import ci.slyest.the.marvel.verse.domain.entities.EventFilter
 import ci.slyest.the.marvel.verse.domain.repositories.EventRepository
 import io.reactivex.rxjava3.core.Single
 import org.koin.core.KoinComponent
@@ -17,9 +17,9 @@ class EventsUseCase : KoinComponent {
 
     /**
      * Perform a request by calling the [EventRepository.events] method.
-     * @param eventRequest object carrying the request parameters.
+     * @param eventFilter object carrying the request parameters.
      * @return a [Single]<[EventDataWrapper]> result object
      */
-    operator fun invoke(eventRequest: EventRequest): Single<EventDataWrapper> =
-        eventRepository.events(eventRequest)
+    operator fun invoke(eventFilter: EventFilter): Single<EventDataWrapper> =
+        eventRepository.events(eventFilter)
 }

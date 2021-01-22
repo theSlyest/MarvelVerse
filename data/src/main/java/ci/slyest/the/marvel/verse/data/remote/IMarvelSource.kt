@@ -6,19 +6,33 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
-/** Abstract class for the sources */
+/** Abstract source class */
 abstract class IMarvelSource {
 
+    /**
+     * Get the current timestamp as a [String].
+     * @return a [String] containing the current timestamp.
+     */
     protected fun getTimestamp(): String = Timestamp(System.currentTimeMillis()).time.toString()
 
-    protected fun getHash(ts: String): String {
-        val str = ts + PRIVATE_KEY + PUBLIC_KEY
+    /**
+     * Compute the next request hash: md5(timeStamp + privateKey + publicKey)
+     * @param timeStamp [String] containing a timestamp.
+     * @return [String] containing the hash for the next request.
+     */
+    protected fun getHash(timeStamp: String): String {
+        val str = timeStamp + PRIVATE_KEY + PUBLIC_KEY
         val md = MessageDigest.getInstance("MD5")
         return BigInteger(1, md.digest(str.toByteArray())).toString(16)
     }
 
-    protected fun formatDate(modifiedSince: Date?) =
-        modifiedSince?.run {
+    /**
+     * Convert a date to the format used by the requests.
+     * @param date [Date] object.
+     * @return a [String] containing the given date in a specific format, or NULL if the date is NULL.
+     */
+    protected fun formatDate(date: Date?) =
+        date?.run {
             SimpleDateFormat("yyyy-MM-dd", Locale.US).format(this)
         }
 }

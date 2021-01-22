@@ -6,7 +6,7 @@ import java.util.*
  * Comic request class to carry the request parameters.
  * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
  */
-class CreatorRequest (
+class CreatorFilter (
     var comicId: Int? = null,
     var eventId: Int? = null,
     var seriesId: Int? = null,

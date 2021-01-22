@@ -1,12 +1,16 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
+import ci.slyest.the.marvel.verse.domain.entities.CharacterFilter
 import io.reactivex.rxjava3.core.Single
 
+/**
+ * Source class for character requests. Implements [IMarvelSource].
+ * @property characterService Required [CharacterService].
+ */
 class CharacterSource(private val characterService: CharacterService) : IMarvelSource() {
 
-    fun characters(req: CharacterRequest): Single<CharacterDataWrapper> {
+    fun characters(req: CharacterFilter): Single<CharacterDataWrapper> {
         val ts = getTimestamp()
         return when {
             req.comicId != null ->

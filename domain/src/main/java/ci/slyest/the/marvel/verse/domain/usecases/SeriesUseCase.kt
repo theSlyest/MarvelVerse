@@ -1,7 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.usecases
 
 import ci.slyest.the.marvel.verse.domain.entities.SeriesDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.SeriesRequest
+import ci.slyest.the.marvel.verse.domain.entities.SeriesFilter
 import ci.slyest.the.marvel.verse.domain.repositories.SeriesRepository
 import io.reactivex.rxjava3.core.Single
 import org.koin.core.KoinComponent
@@ -17,9 +17,9 @@ class SeriesUseCase : KoinComponent {
 
     /**
      * Perform a request by calling the [SeriesRepository.series] method.
-     * @param seriesRequest object carrying the request parameters.
+     * @param seriesFilter object carrying the request parameters.
      * @return a [Single]<[SeriesDataWrapper]> result object
      */
-    operator fun invoke(seriesRequest: SeriesRequest): Single<SeriesDataWrapper> =
-        seriesRepository.series(seriesRequest)
+    operator fun invoke(seriesFilter: SeriesFilter): Single<SeriesDataWrapper> =
+        seriesRepository.series(seriesFilter)
 }

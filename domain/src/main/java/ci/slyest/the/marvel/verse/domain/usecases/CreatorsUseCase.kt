@@ -1,7 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.usecases
 
 import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CreatorRequest
+import ci.slyest.the.marvel.verse.domain.entities.CreatorFilter
 import ci.slyest.the.marvel.verse.domain.repositories.CreatorRepository
 import io.reactivex.rxjava3.core.Single
 import org.koin.core.KoinComponent
@@ -17,9 +17,9 @@ class CreatorsUseCase : KoinComponent {
 
     /**
      * Perform a request by calling the [CreatorRepository.creators] method.
-     * @param creatorRequest object carrying the request parameters.
+     * @param creatorFilter object carrying the request parameters.
      * @return a [Single]<[CreatorDataWrapper]> result object
      */
-    operator fun invoke(creatorRequest: CreatorRequest): Single<CreatorDataWrapper> =
-        creatorRepository.creators(creatorRequest)
+    operator fun invoke(creatorFilter: CreatorFilter): Single<CreatorDataWrapper> =
+        creatorRepository.creators(creatorFilter)
 }

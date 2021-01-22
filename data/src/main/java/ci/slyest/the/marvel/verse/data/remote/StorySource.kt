@@ -1,12 +1,12 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.StoryDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.StoryRequest
+import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
 import io.reactivex.rxjava3.core.Single
 
 class StorySource(private val storyService: StoryService) : IMarvelSource() {
 
-    fun stories(req: StoryRequest): Single<StoryDataWrapper> {
+    fun stories(req: StoryFilter): Single<StoryDataWrapper> {
         val ts = getTimestamp()
         return when {
             req.comicId != null ->

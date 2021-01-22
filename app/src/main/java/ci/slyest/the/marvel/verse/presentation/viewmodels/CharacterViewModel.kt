@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.*
 import ci.slyest.the.marvel.verse.domain.entities.Character
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
+import ci.slyest.the.marvel.verse.domain.entities.CharacterFilter
 import ci.slyest.the.marvel.verse.domain.usecases.CharactersUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status
@@ -32,7 +32,7 @@ class CharacterViewModel(private val useCase: CharactersUseCase): ICharacterView
 
     override fun fetch(limit: Int?, offset: Int?) : Single<CharacterDataWrapper> {
         mutableState.postValue(Response(status = Status.LOADING))
-        useCase(CharacterRequest(limit = limit, offset = offset)).let { single ->
+        useCase(CharacterFilter(limit = limit, offset = offset)).let { single ->
             disposable = single.subscribe({
                 mutableState.postValue(Response(status = Status.SUCCESSFUL))
                 disposable.dispose()

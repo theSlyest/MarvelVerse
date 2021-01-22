@@ -1,6 +1,6 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
+import ci.slyest.the.marvel.verse.domain.entities.CharacterFilter
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -12,7 +12,7 @@ class CharacterSourceTest {
     fun charactersSuccess() {
         var code = 0
         var status = ""
-        val request = CharacterRequest(limit = 32, offset = 16)
+        val request = CharacterFilter(limit = 32, offset = 16)
         marvelSource.characters(request)
             .blockingSubscribe({ wrapper ->
                 code = wrapper.code
