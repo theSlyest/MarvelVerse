@@ -2,6 +2,10 @@ package ci.slyest.the.marvel.verse.domain.entities
 
 import java.util.*
 
+/**
+ * Story request class to carry the request parameters.
+ * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
+ */
 class StoryRequest (
     var characterId: Int? = null,
     var comicId: Int? = null,
@@ -14,7 +18,8 @@ class StoryRequest (
     var events: String? = null,
     var creators: String? = null,
     var characters: String? = null,
-    var orderBy: String? = null, // Select one or more from: id, modified (add a "-" to the value sort in descending order)
+    /** Select one or more from: id, modified (add a "-" to the value sort in descending order) */
+    var orderBy: String? = null,
     var limit: Int? = null,
     var offset: Int? = null
 )

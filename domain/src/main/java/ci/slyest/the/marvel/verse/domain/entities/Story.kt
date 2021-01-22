@@ -1,5 +1,9 @@
 package ci.slyest.the.marvel.verse.domain.entities
 
+/**
+ * Story class
+ * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
+ */
 data class Story (
     val id: Int, // optional: The unique ID of the story resource.
     val title: String, // optional: The story title.

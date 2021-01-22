@@ -2,6 +2,10 @@ package ci.slyest.the.marvel.verse.domain.entities
 
 import java.util.*
 
+/**
+ * Series request class to carry the request parameters.
+ * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
+ */
 class SeriesRequest (
     var characterId: Int? = null,
     var comicId: Int? = null,
@@ -17,9 +21,12 @@ class SeriesRequest (
     var events: String? = null,
     var creators: String? = null,
     var characters: String? = null,
-    var seriesType: String? = null, // Select one from: collection, one shot, limited, ongoing
-    var contains: String? = null, // Select one or more from: comic, magazine, trade paperback, hardcover, digest, graphic novel, digital comic, infinite comic
-    var orderBy: String? = null, // Select one or more from: title, modified, startYear, -title, -modified, -startYear
+    /** Select one from: collection, one shot, limited, ongoing */
+    var seriesType: String? = null,
+    /** Select one or more from: comic, magazine, trade paperback, hardcover, digest, graphic novel, digital comic, infinite comic */
+    var contains: String? = null,
+    /** Select one or more from: title, modified, startYear, -title, -modified, -startYear */
+    var orderBy: String? = null,
     var limit: Int? = null,
     var offset: Int? = null
 )

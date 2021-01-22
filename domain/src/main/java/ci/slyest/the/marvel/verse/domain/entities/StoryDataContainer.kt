@@ -1,5 +1,9 @@
 package ci.slyest.the.marvel.verse.domain.entities
 
+/**
+ * Story data container class
+ * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
+ */
 data class StoryDataContainer (
     val offset: Int, // optional: The requested offset (number of skipped results) of the call.
     val limit: Int, // optional: The requested result limit.
