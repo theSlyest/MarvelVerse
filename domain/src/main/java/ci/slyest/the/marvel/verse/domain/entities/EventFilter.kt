@@ -2,7 +2,11 @@ package ci.slyest.the.marvel.verse.domain.entities
 
 import java.util.*
 
-class EventRequest (
+/**
+ * Event request class to carry the request parameters.
+ * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
+ */
+class EventFilter (
     var characterId: Int? = null,
     var comicId: Int? = null,
     var creatorId: Int? = null,
@@ -16,7 +20,8 @@ class EventRequest (
     var series: String? = null,
     var comics: String? = null,
     var stories: String? = null,
-    var orderBy: String? = null, // Select one or more from: name, startDate, modified (add a "-" to the value sort in descending order)
+    /** Select one or more from: name, startDate, modified (add a "-" to the value sort in descending order) */
+    var orderBy: String? = null,
     var limit: Int? = null,
     var offset: Int? = null
 )

@@ -1,56 +1,65 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.ComicRequest
+import ci.slyest.the.marvel.verse.domain.entities.ComicFilter
 import io.reactivex.rxjava3.core.Single
 
+/**
+ * Source class for comic requests. Implements [IMarvelSource].
+ * @property comicService Required [ComicService].
+ */
 class ComicSource(private val comicService: ComicService) : IMarvelSource() {
 
-    fun comics(req: ComicRequest): Single<ComicDataWrapper> {
+    /**
+     * Perform the right comics request according to the given parameters.
+     * @param filter [ComicFilter] object carrying the request parameters.
+     * @return [Single]<[ComicDataWrapper]> request result.
+     */
+    fun comics(filter: ComicFilter): Single<ComicDataWrapper> {
         val ts = getTimestamp()
         return when {
-            req.characterId != null ->
-                comicService.characterComics(req.characterId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
-                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
-                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
-                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
-                    req.creators, req.series, req.events, req.stories, req.sharedAppearances,
-                    req.collaborators, req.orderBy, req.limit, req.offset)
-            req.creatorId != null ->
-                comicService.creatorComics(req.creatorId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
-                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
-                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
-                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
-                    req.characters, req.series, req.events, req.stories, req.sharedAppearances,
-                    req.collaborators, req.orderBy, req.limit, req.offset)
-            req.eventId != null ->
-                comicService.eventComics(req.eventId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
-                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
-                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
-                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
-                    req.creators, req.characters, req.series, req.stories, req.sharedAppearances,
-                    req.collaborators, req.orderBy, req.limit, req.offset)
-            req.seriesId != null ->
-                comicService.seriesComics(req.seriesId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
-                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
-                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
-                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
-                    req.creators, req.characters, req.events, req.stories, req.sharedAppearances,
-                    req.collaborators, req.orderBy, req.limit, req.offset)
-            req.storyId != null ->
-                comicService.storyComics(req.storyId!!, PUBLIC_KEY, ts, getHash(ts), req.format,
-                    req.formatType, req.noVariants, req.dateDescriptor, req.dateRange, req.title,
-                    req.titleStartsWith, req.startYear, req.issueNumber, req.diamondCode, req.digitalId,
-                    req.upc, req.isbn, req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince),
-                    req.creators, req.characters, req.series, req.events, req.sharedAppearances,
-                    req.collaborators, req.orderBy, req.limit, req.offset)
+            filter.characterId != null ->
+                comicService.characterComics(filter.characterId!!, PUBLIC_KEY, ts, getHash(ts), filter.format,
+                    filter.formatType, filter.noVariants, filter.dateDescriptor, filter.dateRange, filter.title,
+                    filter.titleStartsWith, filter.startYear, filter.issueNumber, filter.diamondCode, filter.digitalId,
+                    filter.upc, filter.isbn, filter.ean, filter.issn, filter.hasDigitalIssue, formatDate(filter.modifiedSince),
+                    filter.creators, filter.series, filter.events, filter.stories, filter.sharedAppearances,
+                    filter.collaborators, filter.orderBy, filter.limit, filter.offset)
+            filter.creatorId != null ->
+                comicService.creatorComics(filter.creatorId!!, PUBLIC_KEY, ts, getHash(ts), filter.format,
+                    filter.formatType, filter.noVariants, filter.dateDescriptor, filter.dateRange, filter.title,
+                    filter.titleStartsWith, filter.startYear, filter.issueNumber, filter.diamondCode, filter.digitalId,
+                    filter.upc, filter.isbn, filter.ean, filter.issn, filter.hasDigitalIssue, formatDate(filter.modifiedSince),
+                    filter.characters, filter.series, filter.events, filter.stories, filter.sharedAppearances,
+                    filter.collaborators, filter.orderBy, filter.limit, filter.offset)
+            filter.eventId != null ->
+                comicService.eventComics(filter.eventId!!, PUBLIC_KEY, ts, getHash(ts), filter.format,
+                    filter.formatType, filter.noVariants, filter.dateDescriptor, filter.dateRange, filter.title,
+                    filter.titleStartsWith, filter.startYear, filter.issueNumber, filter.diamondCode, filter.digitalId,
+                    filter.upc, filter.isbn, filter.ean, filter.issn, filter.hasDigitalIssue, formatDate(filter.modifiedSince),
+                    filter.creators, filter.characters, filter.series, filter.stories, filter.sharedAppearances,
+                    filter.collaborators, filter.orderBy, filter.limit, filter.offset)
+            filter.seriesId != null ->
+                comicService.seriesComics(filter.seriesId!!, PUBLIC_KEY, ts, getHash(ts), filter.format,
+                    filter.formatType, filter.noVariants, filter.dateDescriptor, filter.dateRange, filter.title,
+                    filter.titleStartsWith, filter.startYear, filter.issueNumber, filter.diamondCode, filter.digitalId,
+                    filter.upc, filter.isbn, filter.ean, filter.issn, filter.hasDigitalIssue, formatDate(filter.modifiedSince),
+                    filter.creators, filter.characters, filter.events, filter.stories, filter.sharedAppearances,
+                    filter.collaborators, filter.orderBy, filter.limit, filter.offset)
+            filter.storyId != null ->
+                comicService.storyComics(filter.storyId!!, PUBLIC_KEY, ts, getHash(ts), filter.format,
+                    filter.formatType, filter.noVariants, filter.dateDescriptor, filter.dateRange, filter.title,
+                    filter.titleStartsWith, filter.startYear, filter.issueNumber, filter.diamondCode, filter.digitalId,
+                    filter.upc, filter.isbn, filter.ean, filter.issn, filter.hasDigitalIssue, formatDate(filter.modifiedSince),
+                    filter.creators, filter.characters, filter.series, filter.events, filter.sharedAppearances,
+                    filter.collaborators, filter.orderBy, filter.limit, filter.offset)
             else -> 
-                comicService.comics(PUBLIC_KEY, ts, getHash(ts), req.format, req.formatType,
-                    req.noVariants, req.dateDescriptor, req.dateRange, req.title, req.titleStartsWith,
-                    req.startYear, req.issueNumber, req.diamondCode, req.digitalId, req.upc, req.isbn,
-                    req.ean, req.issn, req.hasDigitalIssue, formatDate(req.modifiedSince), req.creators,
-                    req.characters, req.series, req.events, req.stories, req.sharedAppearances,
-                    req.collaborators, req.orderBy, req.limit, req.offset)
+                comicService.comics(PUBLIC_KEY, ts, getHash(ts), filter.format, filter.formatType,
+                    filter.noVariants, filter.dateDescriptor, filter.dateRange, filter.title, filter.titleStartsWith,
+                    filter.startYear, filter.issueNumber, filter.diamondCode, filter.digitalId, filter.upc, filter.isbn,
+                    filter.ean, filter.issn, filter.hasDigitalIssue, formatDate(filter.modifiedSince), filter.creators,
+                    filter.characters, filter.series, filter.events, filter.stories, filter.sharedAppearances,
+                    filter.collaborators, filter.orderBy, filter.limit, filter.offset)
         }
     }
 }

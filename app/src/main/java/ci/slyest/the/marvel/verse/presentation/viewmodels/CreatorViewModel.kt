@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.Creator
 import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CreatorRequest
+import ci.slyest.the.marvel.verse.domain.entities.CreatorFilter
 import ci.slyest.the.marvel.verse.domain.usecases.CreatorsUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status
@@ -33,7 +33,7 @@ class CreatorViewModel(private val useCase: CreatorsUseCase): ICreatorViewModel(
 
     override fun fetch(limit: Int?, offset: Int?) : Single<CreatorDataWrapper> {
         mutableState.postValue(Response(status = Status.LOADING))
-        useCase(CreatorRequest(limit = limit, offset = offset)).let { single ->
+        useCase(CreatorFilter(limit = limit, offset = offset)).let { single ->
             disposable = single.subscribe({
                 mutableState.postValue(Response(status = Status.SUCCESSFUL))
                 disposable.dispose()

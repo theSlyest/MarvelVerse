@@ -1,34 +1,43 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
+import ci.slyest.the.marvel.verse.domain.entities.CharacterFilter
 import io.reactivex.rxjava3.core.Single
 
+/**
+ * Source class for character requests. Implements [IMarvelSource].
+ * @property characterService Required [CharacterService].
+ */
 class CharacterSource(private val characterService: CharacterService) : IMarvelSource() {
 
-    fun characters(req: CharacterRequest): Single<CharacterDataWrapper> {
+    /**
+     * Perform the right characters request according to the given parameters.
+     * @param filter [CharacterFilter] object carrying the request parameters.
+     * @return [Single]<[CharacterDataWrapper]> request result.
+     */
+    fun characters(filter: CharacterFilter): Single<CharacterDataWrapper> {
         val ts = getTimestamp()
         return when {
-            req.comicId != null ->
-                characterService.comicCharacters(req.comicId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.series,
-                    req.events, req.stories, req.orderBy, req.limit, req.offset)
-            req.eventId != null ->
-                characterService.eventCharacters(req.eventId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
-                    req.series, req.stories, req.orderBy, req.limit, req.offset)
-            req.seriesId != null ->
-                characterService.seriesCharacters(req.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
-                    req.events, req.stories, req.orderBy, req.limit, req.offset)
-            req.storyId != null ->
-                characterService.storyCharacters(req.storyId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.name, req.nameStartsWith, formatDate(req.modifiedSince), req.comics,
-                    req.series, req.events, req.orderBy, req.limit, req.offset)
+            filter.comicId != null ->
+                characterService.comicCharacters(filter.comicId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.name, filter.nameStartsWith, formatDate(filter.modifiedSince), filter.series,
+                    filter.events, filter.stories, filter.orderBy, filter.limit, filter.offset)
+            filter.eventId != null ->
+                characterService.eventCharacters(filter.eventId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.name, filter.nameStartsWith, formatDate(filter.modifiedSince), filter.comics,
+                    filter.series, filter.stories, filter.orderBy, filter.limit, filter.offset)
+            filter.seriesId != null ->
+                characterService.seriesCharacters(filter.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.name, filter.nameStartsWith, formatDate(filter.modifiedSince), filter.comics,
+                    filter.events, filter.stories, filter.orderBy, filter.limit, filter.offset)
+            filter.storyId != null ->
+                characterService.storyCharacters(filter.storyId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.name, filter.nameStartsWith, formatDate(filter.modifiedSince), filter.comics,
+                    filter.series, filter.events, filter.orderBy, filter.limit, filter.offset)
             else ->
-                characterService.characters(PUBLIC_KEY, ts, getHash(ts), req.name, req.nameStartsWith,
-                    formatDate(req.modifiedSince), req.comics, req.series, req.events, req.stories,
-                    req.orderBy, req.limit, req.offset)
+                characterService.characters(PUBLIC_KEY, ts, getHash(ts), filter.name, filter.nameStartsWith,
+                    formatDate(filter.modifiedSince), filter.comics, filter.series, filter.events, filter.stories,
+                    filter.orderBy, filter.limit, filter.offset)
         }
     }
 

@@ -68,19 +68,19 @@ class ComicActivity: IDetailActivity() {
                 binding.textUrls.movementMethod = LinkMovementMethod.getInstance()
 
                 binding.btnCharacters.setOnClickListener {
-                    startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.CHARACTER)
+                    startResultsActivity(comic.id, ResourceType.COMIC, ResourceType.CHARACTER)
                 }
 
                 binding.btnEvents.setOnClickListener {
-                    startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.EVENT)
+                    startResultsActivity(comic.id, ResourceType.COMIC, ResourceType.EVENT)
                 }
 
                 binding.btnStories.setOnClickListener {
-                    startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.STORY)
+                    startResultsActivity(comic.id, ResourceType.COMIC, ResourceType.STORY)
                 }
 
                 binding.btnSeries.setOnClickListener {
-                    startResultsActivity(comic.id, ResourceType.CHARACTER, ResourceType.SERIES)
+                    startResultsActivity(comic.id, ResourceType.COMIC, ResourceType.SERIES)
                 }
             }
     }

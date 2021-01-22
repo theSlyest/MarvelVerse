@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * This custom recycler view will auto fit the items on the screen
+ * This custom RecyclerView will auto fit the items on the screen
  * so that they will try to fill the width
- *
- * Credits: Chiu-Ki Chan
- * http://blog.sqisland.com/2014/12/recyclerview-autofit-grid.html
+ * @author Chiu-Ki Chan
+ * @see <a href="http://blog.sqisland.com/2014/12/recyclerview-autofit-grid.html">blog.sqisland.com/2014/12/recyclerview-autofit-grid.html</a>
  */
 class AutoFitGridRecyclerView : RecyclerView {
     private var manager: GridLayoutManager? = null

@@ -1,6 +1,12 @@
 package ci.slyest.the.marvel.verse.domain.entities
 
+/**
+ * Comic price class
+ * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
+ */
 data class ComicPrice (
-    val type: String, // optional:  A description of the price (e.g. print price, digital price).
-    val price: Float // optional: The price (all prices in USD).
+    /** optional:  A description of the price (e.g. print price, digital price). */
+    val type: String,
+    /** optional: The price (all prices in USD). */
+    val price: Float
 )

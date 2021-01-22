@@ -9,10 +9,9 @@ typealias OnRecyclerViewItemLongClickListener = (recyclerView: RecyclerView, pos
 
 /**
  * Adds ItemClickListener to RecyclerView
- *
- * Credits:
- * Hugo Visser (Java) https://www.littlerobots.nl/blog/Handle-Android-RecyclerView-Clicks/
- * Daniele Segato (Kotlin) https://stackoverflow.com/a/35917564/6135042
+ * @author Hugo Visser (Java), Daniele Segato (Kotlin)
+ * @see <a href="https://www.littlerobots.nl/blog/Handle-Android-RecyclerView-Clicks/">Java version</a>
+ * @see <a href="https://stackoverflow.com/a/35917564/6135042">Kotlin version</a>
  */
 class RecyclerViewItemClickSupport private constructor(private val recyclerView: RecyclerView) {
 

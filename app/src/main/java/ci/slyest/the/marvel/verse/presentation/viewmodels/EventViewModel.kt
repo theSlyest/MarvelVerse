@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.Event
 import ci.slyest.the.marvel.verse.domain.entities.EventDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.EventRequest
+import ci.slyest.the.marvel.verse.domain.entities.EventFilter
 import ci.slyest.the.marvel.verse.domain.usecases.EventsUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status
@@ -33,7 +33,7 @@ class EventViewModel(private val useCase: EventsUseCase): IEventViewModel() {
 
     override fun fetch(limit: Int?, offset: Int?) : Single<EventDataWrapper> {
         mutableState.postValue(Response(status = Status.LOADING))
-        useCase(EventRequest(limit = limit, offset = offset)).let { single ->
+        useCase(EventFilter(limit = limit, offset = offset)).let { single ->
             disposable = single.subscribe({
                 mutableState.postValue(Response(status = Status.SUCCESSFUL))
                 disposable.dispose()

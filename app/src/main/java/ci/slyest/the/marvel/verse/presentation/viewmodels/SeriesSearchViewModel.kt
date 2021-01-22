@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.Series
 import ci.slyest.the.marvel.verse.domain.entities.SeriesDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.SeriesRequest
+import ci.slyest.the.marvel.verse.domain.entities.SeriesFilter
 import ci.slyest.the.marvel.verse.domain.usecases.SeriesUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status
@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.core.Single
 
 class SeriesSearchViewModel(private val useCase: SeriesUseCase): ISeriesViewModel(), ISearchViewModel<Series> {
 
-    var request = SeriesRequest()
+    var request = SeriesFilter()
     private lateinit var pagedList: LiveData<PagedList<Series>>
     override val data
         get() = pagedList

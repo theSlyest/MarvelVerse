@@ -1,8 +1,12 @@
 package ci.slyest.the.marvel.verse.domain.entities
 
-import java.util.*
+import java.util.Date
 
-class CharacterRequest (
+/**
+ * Character request class to carry the request parameters.
+ * @see <a href="https://developer.marvel.com/docs">developer.marvel.com/docs</a>
+ */
+class CharacterFilter (
     var comicId: Int? = null,
     var eventId: Int? = null,
     var seriesId: Int? = null,

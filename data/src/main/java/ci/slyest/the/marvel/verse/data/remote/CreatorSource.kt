@@ -1,39 +1,48 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CreatorRequest
+import ci.slyest.the.marvel.verse.domain.entities.CreatorFilter
 import io.reactivex.rxjava3.core.Single
 
+/**
+ * Source class for creator requests. Implements [IMarvelSource].
+ * @property creatorService Required [CreatorService].
+ */
 class CreatorSource(private val creatorService: CreatorService) : IMarvelSource() {
 
-    fun creators(req: CreatorRequest): Single<CreatorDataWrapper> {
+    /**
+     * Perform the right creators request according to the given parameters.
+     * @param filter [CreatorFilter] object carrying the request parameters.
+     * @return [Single]<[CreatorDataWrapper]> request result.
+     */
+    fun creators(filter: CreatorFilter): Single<CreatorDataWrapper> {
         val ts = getTimestamp()
         return when {
-            req.comicId != null ->
-                creatorService.comicCreators(req.comicId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.firstName, req.middleName, req.lastName, req.firstNameStartsWith,
-                    req.middleNameStartsWith, req.lastNameStartsWith, formatDate(req.modifiedSince),
-                    req.series, req.events, req.stories, req.orderBy, req.limit, req.offset)
-            req.eventId != null ->
-                creatorService.eventCreators(req.eventId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.firstName, req.middleName, req.lastName, req.firstNameStartsWith,
-                    req.middleNameStartsWith, req.lastNameStartsWith, formatDate(req.modifiedSince),
-                    req.comics, req.series, req.stories, req.orderBy, req.limit, req.offset)
-            req.seriesId != null ->
-                creatorService.seriesCreators(req.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.firstName, req.middleName, req.lastName, req.firstNameStartsWith,
-                    req.middleNameStartsWith, req.lastNameStartsWith, formatDate(req.modifiedSince),
-                    req.comics, req.events, req.stories, req.orderBy, req.limit, req.offset)
-            req.storyId != null ->
-                creatorService.storyCreators(req.storyId!!, PUBLIC_KEY, ts, getHash(ts),
-                    req.firstName, req.middleName, req.lastName, req.firstNameStartsWith,
-                    req.middleNameStartsWith, req.lastNameStartsWith, formatDate(req.modifiedSince),
-                    req.comics, req.series, req.events, req.orderBy, req.limit, req.offset)
+            filter.comicId != null ->
+                creatorService.comicCreators(filter.comicId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.firstName, filter.middleName, filter.lastName, filter.firstNameStartsWith,
+                    filter.middleNameStartsWith, filter.lastNameStartsWith, formatDate(filter.modifiedSince),
+                    filter.series, filter.events, filter.stories, filter.orderBy, filter.limit, filter.offset)
+            filter.eventId != null ->
+                creatorService.eventCreators(filter.eventId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.firstName, filter.middleName, filter.lastName, filter.firstNameStartsWith,
+                    filter.middleNameStartsWith, filter.lastNameStartsWith, formatDate(filter.modifiedSince),
+                    filter.comics, filter.series, filter.stories, filter.orderBy, filter.limit, filter.offset)
+            filter.seriesId != null ->
+                creatorService.seriesCreators(filter.seriesId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.firstName, filter.middleName, filter.lastName, filter.firstNameStartsWith,
+                    filter.middleNameStartsWith, filter.lastNameStartsWith, formatDate(filter.modifiedSince),
+                    filter.comics, filter.events, filter.stories, filter.orderBy, filter.limit, filter.offset)
+            filter.storyId != null ->
+                creatorService.storyCreators(filter.storyId!!, PUBLIC_KEY, ts, getHash(ts),
+                    filter.firstName, filter.middleName, filter.lastName, filter.firstNameStartsWith,
+                    filter.middleNameStartsWith, filter.lastNameStartsWith, formatDate(filter.modifiedSince),
+                    filter.comics, filter.series, filter.events, filter.orderBy, filter.limit, filter.offset)
             else ->
-                creatorService.creators(PUBLIC_KEY, ts, getHash(ts), req.firstName, req.middleName,
-                    req.lastName, req.firstNameStartsWith, req.middleNameStartsWith,
-                    req.lastNameStartsWith, formatDate(req.modifiedSince), req.comics, req.series,
-                    req.events, req.stories, req.orderBy, req.limit, req.offset)
+                creatorService.creators(PUBLIC_KEY, ts, getHash(ts), filter.firstName, filter.middleName,
+                    filter.lastName, filter.firstNameStartsWith, filter.middleNameStartsWith,
+                    filter.lastNameStartsWith, formatDate(filter.modifiedSince), filter.comics, filter.series,
+                    filter.events, filter.stories, filter.orderBy, filter.limit, filter.offset)
         }
     }
 }
