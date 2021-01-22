@@ -4,7 +4,7 @@ import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.CreatorRequest
 import io.reactivex.rxjava3.core.Single
 
-/** Creator repository interface to be implemented in the data component. */
+/** Creator repository interface to be implemented in the data module. */
 interface CreatorRepository {
     /**
      * Perform a request to get a list of characters

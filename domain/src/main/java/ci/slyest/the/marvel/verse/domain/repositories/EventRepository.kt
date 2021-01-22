@@ -4,7 +4,7 @@ import ci.slyest.the.marvel.verse.domain.entities.EventDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.EventRequest
 import io.reactivex.rxjava3.core.Single
 
-/** Event repository interface to be implemented in the data component. */
+/** Event repository interface to be implemented in the data module. */
 interface EventRepository {
     /**
      * Perform a request to get a list of characters

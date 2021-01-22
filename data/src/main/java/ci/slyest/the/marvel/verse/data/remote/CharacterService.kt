@@ -6,8 +6,16 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ * Retrofit 2 interface for character queries
+ */
 interface CharacterService {
 
+    /**
+     * Get a list of [ci.slyest.the.marvel.verse.domain.entities.Character]
+     * @param apiKey    [String] Marvel API key
+     * @param hash      [String] Hash computed from
+     */
     @GET("characters")
     fun characters(
         @Query("apikey") apiKey: String,

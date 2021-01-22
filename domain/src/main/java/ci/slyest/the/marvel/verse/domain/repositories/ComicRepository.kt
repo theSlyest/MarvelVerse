@@ -4,7 +4,7 @@ import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.ComicRequest
 import io.reactivex.rxjava3.core.Single
 
-/** Comic repository interface to be implemented in the data component. */
+/** Comic repository interface to be implemented in the data module. */
 interface ComicRepository {
     /**
      * Perform a request to get a list of characters

@@ -4,7 +4,7 @@ import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.CharacterRequest
 import io.reactivex.rxjava3.core.Single
 
-/** Character repository interface to be implemented in the data component. */
+/** Character repository interface to be implemented in the data module. */
 interface CharacterRepository {
 
     /**

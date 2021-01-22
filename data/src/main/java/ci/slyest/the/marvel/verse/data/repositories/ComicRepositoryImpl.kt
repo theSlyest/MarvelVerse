@@ -6,8 +6,16 @@ import ci.slyest.the.marvel.verse.domain.entities.ComicRequest
 import ci.slyest.the.marvel.verse.domain.repositories.ComicRepository
 import io.reactivex.rxjava3.core.Single
 
+/**
+ * Implementation of [ComicRepository]
+ * @property comicSource [ComicSource] object
+ */
 class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository {
-
+    /**
+     * Perform a request to get a list of characters by calling [ComicSource.comics].
+     * @param comicRequest Object carrying the request parameters
+     * @return a [Single]<[ComicDataWrapper]> result object
+     */
     override fun comics(comicRequest: ComicRequest): Single<ComicDataWrapper>
             = comicSource.comics(comicRequest)
 }
