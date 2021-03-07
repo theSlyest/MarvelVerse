@@ -1,7 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.usecases
 
 import ci.slyest.the.marvel.verse.domain.entities.Character
-import ci.slyest.the.marvel.verse.domain.entities.CharacterFilter
+import ci.slyest.the.marvel.verse.domain.filters.CharacterFilter
 import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.repositories.CharacterRepository
 import io.reactivex.rxjava3.core.Single

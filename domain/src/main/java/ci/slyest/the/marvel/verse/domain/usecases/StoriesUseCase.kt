@@ -2,7 +2,7 @@ package ci.slyest.the.marvel.verse.domain.usecases
 
 import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Story
-import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
+import ci.slyest.the.marvel.verse.domain.filters.StoryFilter
 import ci.slyest.the.marvel.verse.domain.repositories.StoryRepository
 import io.reactivex.rxjava3.core.Single
 import org.koin.core.KoinComponent

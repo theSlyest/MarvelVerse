@@ -3,7 +3,7 @@ package ci.slyest.the.marvel.verse.data.repositories
 import ci.slyest.the.marvel.verse.data.remote.EventSource
 import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Event
-import ci.slyest.the.marvel.verse.domain.entities.EventFilter
+import ci.slyest.the.marvel.verse.domain.filters.EventFilter
 import ci.slyest.the.marvel.verse.domain.repositories.EventRepository
 import io.reactivex.rxjava3.core.Single
 

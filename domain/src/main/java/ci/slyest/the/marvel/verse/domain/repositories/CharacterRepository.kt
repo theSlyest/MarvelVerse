@@ -2,7 +2,7 @@ package ci.slyest.the.marvel.verse.domain.repositories
 
 import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Character
-import ci.slyest.the.marvel.verse.domain.entities.CharacterFilter
+import ci.slyest.the.marvel.verse.domain.filters.CharacterFilter
 import io.reactivex.rxjava3.core.Single
 
 /** Character repository interface to be implemented in the data module. */
