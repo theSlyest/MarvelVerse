@@ -2,7 +2,7 @@ package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Event
-import ci.slyest.the.marvel.verse.domain.entities.EventFilter
+import ci.slyest.the.marvel.verse.domain.filters.EventFilter
 import io.reactivex.rxjava3.core.Single
 
 /**

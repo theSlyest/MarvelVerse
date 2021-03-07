@@ -1,4 +1,4 @@
-package ci.slyest.the.marvel.verse.domain.entities
+package ci.slyest.the.marvel.verse.domain.filters
 
 import java.util.*
 

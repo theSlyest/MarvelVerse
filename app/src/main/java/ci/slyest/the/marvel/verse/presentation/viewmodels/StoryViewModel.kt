@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Story
-import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
+import ci.slyest.the.marvel.verse.domain.filters.StoryFilter
 import ci.slyest.the.marvel.verse.domain.usecases.StoriesUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
 import ci.slyest.the.marvel.verse.presentation.common.Status

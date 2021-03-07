@@ -2,7 +2,7 @@ package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Series
-import ci.slyest.the.marvel.verse.domain.entities.SeriesFilter
+import ci.slyest.the.marvel.verse.domain.filters.SeriesFilter
 import io.reactivex.rxjava3.core.Single
 
 class SeriesSource(private val seriesService: SeriesService) : IMarvelSource() {
