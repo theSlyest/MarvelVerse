@@ -3,8 +3,8 @@ package ci.slyest.the.marvel.verse.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Story
-import ci.slyest.the.marvel.verse.domain.entities.StoryDataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
 import ci.slyest.the.marvel.verse.domain.usecases.StoriesUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
@@ -31,7 +31,7 @@ class StoryViewModel(private val useCase: StoriesUseCase): IStoryViewModel() {
             dataSource?.viewModel = this
     }
 
-    override fun fetch(limit: Int?, offset: Int?) : Single<StoryDataWrapper> {
+    override fun fetch(limit: Int?, offset: Int?) : Single<DataWrapper<Story>> {
         mutableState.postValue(Response(status = Status.LOADING))
         useCase(StoryFilter(limit = limit, offset = offset)).let { single ->
             disposable = single.subscribe({

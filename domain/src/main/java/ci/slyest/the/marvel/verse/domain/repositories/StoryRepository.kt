@@ -1,6 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.repositories
 
-import ci.slyest.the.marvel.verse.domain.entities.StoryDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.Story
 import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
 import io.reactivex.rxjava3.core.Single
 
@@ -9,7 +10,7 @@ interface StoryRepository {
     /**
      * Perform a request to get a list of characters
      * @param storyFilter Object carrying the request parameters
-     * @return a [Single]<[StoryDataWrapper]> result object
+     * @return a [Single]<[DataWrapper]<[Story]>> result object
      */
-    fun stories(storyFilter: StoryFilter): Single<StoryDataWrapper>
+    fun stories(storyFilter: StoryFilter): Single<DataWrapper<Story>>
 }

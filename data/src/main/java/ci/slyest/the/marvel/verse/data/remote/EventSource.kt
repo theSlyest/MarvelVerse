@@ -1,6 +1,7 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.EventDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.Event
 import ci.slyest.the.marvel.verse.domain.entities.EventFilter
 import io.reactivex.rxjava3.core.Single
 
@@ -13,9 +14,9 @@ class EventSource(private val eventService: EventService) : IMarvelSource() {
     /**
      * Perform the right events request according to the given parameters.
      * @param filter [EventFilter] object carrying the request parameters.
-     * @return [Single]<[EventDataWrapper]> request result.
+     * @return [Single]<[DataWrapper]<[Event]>> request result.
      */
-    fun events(filter: EventFilter): Single<EventDataWrapper> {
+    fun events(filter: EventFilter): Single<DataWrapper<Event>> {
         val ts = getTimestamp()
         return when {
             filter.comicId != null ->

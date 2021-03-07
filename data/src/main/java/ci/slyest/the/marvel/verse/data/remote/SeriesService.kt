@@ -1,6 +1,7 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.SeriesDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.Series
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -51,7 +52,7 @@ interface SeriesService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<SeriesDataWrapper>
+    ): Single<DataWrapper<Series>>
 
     /**
      * Fetches lists of comic series in which a specific event takes place, with optional filters.
@@ -91,7 +92,7 @@ interface SeriesService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<SeriesDataWrapper>
+    ): Single<DataWrapper<Series>>
 
     /**
      * Fetches lists of comic series in which a specific character appears, with optional filters.
@@ -131,7 +132,7 @@ interface SeriesService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<SeriesDataWrapper>
+    ): Single<DataWrapper<Series>>
 
     /**
      * Fetches lists of comic series in which a specific creator's work appears, with optional filters.
@@ -171,7 +172,7 @@ interface SeriesService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<SeriesDataWrapper>
+    ): Single<DataWrapper<Series>>
 
     /**
      * Fetches lists of comic series in which the specified story takes place, with optional filters.
@@ -211,5 +212,5 @@ interface SeriesService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<SeriesDataWrapper>
+    ): Single<DataWrapper<Series>>
 }

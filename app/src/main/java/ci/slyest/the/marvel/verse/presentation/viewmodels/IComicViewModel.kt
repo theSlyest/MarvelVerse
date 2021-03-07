@@ -1,6 +1,7 @@
 package ci.slyest.the.marvel.verse.presentation.viewmodels
 
-import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.Comic
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import io.reactivex.rxjava3.core.Single
 
 abstract class IComicViewModel: IMarvelViewModel() {
@@ -10,5 +11,5 @@ abstract class IComicViewModel: IMarvelViewModel() {
         const val PREFETCH_DISTANCE = IMarvelViewModel.PREFETCH_DISTANCE
     }
 
-    abstract override fun fetch(limit: Int?, offset: Int?): Single<ComicDataWrapper>
+    abstract override fun fetch(limit: Int?, offset: Int?): Single<DataWrapper<Comic>>
 }

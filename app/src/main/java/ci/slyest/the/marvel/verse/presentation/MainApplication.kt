@@ -5,6 +5,7 @@ import ci.slyest.the.marvel.verse.data.di.dataModule
 import ci.slyest.the.marvel.verse.presentation.di.presentationModule
 import org.koin.core.context.startKoin
 
+/** Global Application class */
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
