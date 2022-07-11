@@ -4,9 +4,9 @@ import androidx.paging.DataSource
 import androidx.paging.PositionalDataSource
 import io.reactivex.rxjava3.disposables.Disposable
 
-abstract class IMarvelDataSource<T>: PositionalDataSource<T>() {
+abstract class IMarvelDataSource<T : Any>: PositionalDataSource<T>() {
 
-    abstract class Factory<T> : DataSource.Factory<Int, T>() {
+    abstract class Factory<T : Any> : DataSource.Factory<Int, T>() {
 
         abstract val source: IMarvelDataSource<T>
 

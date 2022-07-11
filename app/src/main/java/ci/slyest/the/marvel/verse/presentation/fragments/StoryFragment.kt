@@ -6,7 +6,7 @@ import ci.slyest.the.marvel.verse.presentation.adapters.StoryAdapter
 import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.StoryViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StoryFragment : IRecyclerFragment() {
 

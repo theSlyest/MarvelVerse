@@ -1,9 +1,8 @@
 package ci.slyest.the.marvel.verse.data.repositories
 
 import ci.slyest.the.marvel.verse.data.remote.CreatorSource
-import ci.slyest.the.marvel.verse.domain.entities.Creator
+import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
 import ci.slyest.the.marvel.verse.domain.filters.CreatorFilter
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.repositories.CreatorRepository
 import io.reactivex.rxjava3.core.Single
 
@@ -15,8 +14,8 @@ class CreatorRepositoryImpl(private val creatorSource: CreatorSource) : CreatorR
     /**
      * Perform a request to get a list of characters by calling [CreatorSource.creators].
      * @param creatorFilter Object carrying the request parameters
-     * @return a [Single]<[DataWrapper]<[Creator]>> result object
+     * @return a [Single]<[CreatorDataWrapper]> result object
      */
-    override fun creators(creatorFilter: CreatorFilter): Single<DataWrapper<Creator>>
+    override fun creators(creatorFilter: CreatorFilter): Single<CreatorDataWrapper>
             = creatorSource.creators(creatorFilter)
 }

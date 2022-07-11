@@ -1,12 +1,12 @@
 package ci.slyest.the.marvel.verse.domain.usecases
 
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.Event
+import ci.slyest.the.marvel.verse.domain.entities.EventDataWrapper
 import ci.slyest.the.marvel.verse.domain.filters.EventFilter
 import ci.slyest.the.marvel.verse.domain.repositories.EventRepository
 import io.reactivex.rxjava3.core.Single
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
 
 /**
  * Events list use case: depends on [EventRepository] implementation to perform a request.
@@ -19,8 +19,8 @@ class EventsUseCase : KoinComponent {
     /**
      * Perform a request by calling the [EventRepository.events] method.
      * @param eventFilter object carrying the request parameters.
-     * @return a [Single]<[DataWrapper]<[Event]>> result object
+     * @return a [Single]<[EventDataWrapper]> result object
      */
-    operator fun invoke(eventFilter: EventFilter): Single<DataWrapper<Event>> =
+    operator fun invoke(eventFilter: EventFilter): Single<EventDataWrapper> =
         eventRepository.events(eventFilter)
 }

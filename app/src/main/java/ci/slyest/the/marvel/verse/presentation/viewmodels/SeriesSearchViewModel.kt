@@ -3,8 +3,8 @@ package ci.slyest.the.marvel.verse.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Series
+import ci.slyest.the.marvel.verse.domain.entities.SeriesDataWrapper
 import ci.slyest.the.marvel.verse.domain.filters.SeriesFilter
 import ci.slyest.the.marvel.verse.domain.usecases.SeriesUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
@@ -24,7 +24,7 @@ class SeriesSearchViewModel(private val useCase: SeriesUseCase): ISeriesViewMode
             LivePagedListBuilder(SeriesDataSource.Factory(this), pagingConfig).build()
     }
 
-    override fun fetch(limit: Int?, offset: Int?) : Single<DataWrapper<Series>> {
+    override fun fetch(limit: Int?, offset: Int?) : Single<SeriesDataWrapper> {
         mutableState.postValue(Response(status = Status.LOADING))
         request.limit = limit
         request.offset = offset

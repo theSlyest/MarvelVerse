@@ -1,7 +1,6 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.Event
+import ci.slyest.the.marvel.verse.domain.entities.EventDataWrapper
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -46,7 +45,7 @@ interface EventService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Event>>
+    ): Single<EventDataWrapper>
 
     /**
      * Fetches lists of events in which a specific comic appears, with optional filters.
@@ -80,7 +79,7 @@ interface EventService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Event>>
+    ): Single<EventDataWrapper>
 
     /**
      * Fetches lists of events in which a specific character appears, with optional filters.
@@ -114,7 +113,7 @@ interface EventService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Event>>
+    ): Single<EventDataWrapper>
 
     /**
      * Fetches lists of events featuring the work of a specific creator, with optional filters.
@@ -148,7 +147,7 @@ interface EventService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Event>>
+    ): Single<EventDataWrapper>
 
     /**
      * Fetches lists of events which occur in a specific series, with optional filters.
@@ -182,7 +181,7 @@ interface EventService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Event>>
+    ): Single<EventDataWrapper>
 
     /**
      * Fetches lists of events in which a specific story appears, with optional filters.
@@ -216,5 +215,5 @@ interface EventService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Event>>
+    ): Single<EventDataWrapper>
 }

@@ -1,7 +1,6 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.Comic
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -78,7 +77,7 @@ interface ComicService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Comic>>
+    ): Single<ComicDataWrapper>
 
     /**
      * Fetches lists of comics containing a specific character, with optional filters.
@@ -144,7 +143,7 @@ interface ComicService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Comic>>
+    ): Single<ComicDataWrapper>
 
     /**
      * Fetches lists of comics in which the work of a specific creator appears, with optional filters.
@@ -210,7 +209,7 @@ interface ComicService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Comic>>
+    ): Single<ComicDataWrapper>
 
     /**
      * Fetches lists of comics which take place during a specific event, with optional filters.
@@ -276,7 +275,7 @@ interface ComicService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Comic>>
+    ): Single<ComicDataWrapper>
 
     /**
      * Fetches lists of comics which are published as part of a specific series, with optional filters.
@@ -342,7 +341,7 @@ interface ComicService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Comic>>
+    ): Single<ComicDataWrapper>
 
     /**
      * Fetches lists of comics in which a specific story appears, with optional filters.
@@ -408,5 +407,5 @@ interface ComicService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Comic>>
+    ): Single<ComicDataWrapper>
 }

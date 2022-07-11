@@ -1,9 +1,8 @@
 package ci.slyest.the.marvel.verse.data.repositories
 
 import ci.slyest.the.marvel.verse.data.remote.CharacterSource
-import ci.slyest.the.marvel.verse.domain.entities.Character
+import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.filters.CharacterFilter
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.repositories.CharacterRepository
 import io.reactivex.rxjava3.core.Single
 
@@ -15,8 +14,8 @@ class CharacterRepositoryImpl(private val characterSource: CharacterSource) : Ch
     /**
      * Perform a request to get a list of characters by calling [CharacterSource.characters].
      * @param characterFilter Object carrying the request parameters
-     * @return a [Single]<[DataWrapper]<[Character]>> result object
+     * @return a [Single]<[CharacterDataWrapper]> result object
      */
-    override fun characters(characterFilter: CharacterFilter): Single<DataWrapper<Character>>
+    override fun characters(characterFilter: CharacterFilter): Single<CharacterDataWrapper>
             = characterSource.characters(characterFilter)
 }

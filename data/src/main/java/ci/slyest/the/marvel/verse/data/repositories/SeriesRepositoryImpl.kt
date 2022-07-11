@@ -1,8 +1,7 @@
 package ci.slyest.the.marvel.verse.data.repositories
 
 import ci.slyest.the.marvel.verse.data.remote.SeriesSource
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.Series
+import ci.slyest.the.marvel.verse.domain.entities.SeriesDataWrapper
 import ci.slyest.the.marvel.verse.domain.filters.SeriesFilter
 import ci.slyest.the.marvel.verse.domain.repositories.SeriesRepository
 import io.reactivex.rxjava3.core.Single
@@ -15,8 +14,8 @@ class SeriesRepositoryImpl(private val seriesSource: SeriesSource) : SeriesRepos
     /**
      * Perform a request to get a list of characters by calling [SeriesSource.series].
      * @param seriesFilter Object carrying the request parameters.
-     * @return a [Single]<[DataWrapper]<[Series]>> result object.
+     * @return a [Single]<[SeriesDataWrapper]> result object.
      */
-    override fun series(seriesFilter: SeriesFilter): Single<DataWrapper<Series>>
+    override fun series(seriesFilter: SeriesFilter): Single<SeriesDataWrapper>
             = seriesSource.series(seriesFilter)
 }

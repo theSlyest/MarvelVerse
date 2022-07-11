@@ -1,7 +1,6 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.Character
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -43,7 +42,7 @@ interface CharacterService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Character>>
+    ): Single<CharacterDataWrapper>
 
     /**
      * Fetches lists of characters which appear in a specific comic with optional filters.
@@ -74,7 +73,7 @@ interface CharacterService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Character>>
+    ): Single<CharacterDataWrapper>
 
     /**
      * Fetches lists of characters which appear in a specific event, with optional filters.
@@ -105,7 +104,7 @@ interface CharacterService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Character>>
+    ): Single<CharacterDataWrapper>
 
     /**
      * Fetches lists of characters which appear in specific series, with optional filters.
@@ -136,7 +135,7 @@ interface CharacterService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Character>>
+    ): Single<CharacterDataWrapper>
 
     /**
      * Fetches lists of comic characters appearing in a single story, with optional filters.
@@ -167,7 +166,7 @@ interface CharacterService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Character>>
+    ): Single<CharacterDataWrapper>
 
 //    @GET("characters/{id}")
 //    fun characterById(
@@ -175,5 +174,5 @@ interface CharacterService {
 //        @Query("apikey") apiKey: String,
 //        @Query("ts") ts: String,
 //        @Query("hash") hash: String
-//    ): Single<DataWrapper<Character>>
+//    ): Single<CharacterDataWrapper>
 }

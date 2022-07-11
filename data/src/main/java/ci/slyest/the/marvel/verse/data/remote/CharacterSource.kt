@@ -1,8 +1,7 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.Character
+import ci.slyest.the.marvel.verse.domain.entities.CharacterDataWrapper
 import ci.slyest.the.marvel.verse.domain.filters.CharacterFilter
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import io.reactivex.rxjava3.core.Single
 
 /**
@@ -14,9 +13,9 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
     /**
      * Perform the right characters request according to the given parameters.
      * @param filter [CharacterFilter] object carrying the request parameters.
-     * @return [Single]<[DataWrapper]<[Character]>> request result.
+     * @return [Single]<[CharacterDataWrapper]> request result.
      */
-    fun characters(filter: CharacterFilter): Single<DataWrapper<Character>> {
+    fun characters(filter: CharacterFilter): Single<CharacterDataWrapper> {
         val ts = getTimestamp()
         return when {
             filter.comicId != null ->
@@ -42,7 +41,7 @@ class CharacterSource(private val characterService: CharacterService) : IMarvelS
         }
     }
 
-//    fun characterById(id: Int): Single<DataWrapper<Character>> {
+//    fun characterById(id: Int): Single<CharacterDataWrapper> {
 //        val ts = getTimestamp()
 //        val hash = getHash(ts)
 //        return marvelService.characterById(id, PUBLIC_KEY, ts, hash)

@@ -1,7 +1,6 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.Story
+import ci.slyest.the.marvel.verse.domain.entities.StoryDataWrapper
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -42,7 +41,7 @@ interface StoryService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Story>>
+    ): Single<StoryDataWrapper>
 
     /**
      * Fetches lists of comic stories featuring a specific character, with optional filters.
@@ -72,7 +71,7 @@ interface StoryService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Story>>
+    ): Single<StoryDataWrapper>
 
     /**
      * Fetches lists of comic stories in a specific comic issue, with optional filters.
@@ -102,7 +101,7 @@ interface StoryService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Story>>
+    ): Single<StoryDataWrapper>
 
     /**
      * Fetches lists of comic stories from a specific event, with optional filters.
@@ -132,7 +131,7 @@ interface StoryService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Story>>
+    ): Single<StoryDataWrapper>
 
     /**
      * Fetches lists of comic stories from a specific series, with optional filters.
@@ -162,7 +161,7 @@ interface StoryService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Story>>
+    ): Single<StoryDataWrapper>
 
     /**
      * Fetches lists of comic stories by a specific creator, with optional filters.
@@ -192,5 +191,5 @@ interface StoryService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Story>>
+    ): Single<StoryDataWrapper>
 }

@@ -1,7 +1,6 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.Creator
-import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -52,7 +51,7 @@ interface CreatorService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Creator>>
+    ): Single<CreatorDataWrapper>
 
     /**
      * Fetches lists of comic creators whose work appears in a specific comic, with optional filters.
@@ -92,7 +91,7 @@ interface CreatorService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Creator>>
+    ): Single<CreatorDataWrapper>
 
     /**
      * Fetches lists of comic creators whose work appears in a specific event, with optional filters.
@@ -132,7 +131,7 @@ interface CreatorService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Creator>>
+    ): Single<CreatorDataWrapper>
 
     /**
      * Fetches lists of comic creators whose work appears in a specific series, with optional filters.
@@ -172,7 +171,7 @@ interface CreatorService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Creator>>
+    ): Single<CreatorDataWrapper>
 
     /**
      * Fetches lists of comic creators whose work appears in a specific story, with optional filters.
@@ -212,5 +211,5 @@ interface CreatorService {
         @Query("orderBy") orderBy: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?
-    ): Single<DataWrapper<Creator>>
+    ): Single<CreatorDataWrapper>
 }
