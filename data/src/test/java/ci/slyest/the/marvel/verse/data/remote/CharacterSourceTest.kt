@@ -1,6 +1,6 @@
 package ci.slyest.the.marvel.verse.data.remote
 
-import ci.slyest.the.marvel.verse.domain.entities.CharacterFilter
+import ci.slyest.the.marvel.verse.domain.filters.CharacterFilter
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

@@ -1,13 +1,16 @@
 package ci.slyest.the.marvel.verse.presentation.activities
 
 import android.app.SearchManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import ci.slyest.the.marvel.verse.presentation.R
 import ci.slyest.the.marvel.verse.presentation.common.IntentExtra
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
@@ -56,6 +59,31 @@ class SearchActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         handleIntent(intent)
+
+        addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Inflate the menu; this adds items to the action bar if it is present.
+                menuInflater.inflate(R.menu.menu_search, menu)
+
+                // Get the SearchView and set the searchable configuration
+                val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+                searchView = (menu?.findItem(R.id.action_search)?.actionView as SearchView).apply {
+                    // Assumes current activity is the searchable activity
+                    setSearchableInfo(searchManager.getSearchableInfo(componentName))
+                }
+
+                if (sourceId == -1)
+                    searchView.isIconified = false
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == android.R.id.home) {
+                    finish()
+                    return true
+                }
+                return false
+            }
+        })
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -84,31 +112,6 @@ class SearchActivity : AppCompatActivity() {
                     loadFragment(resultType, sourceType, sourceId, startsWith)
             }
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_search, menu)
-
-        // Get the SearchView and set the searchable configuration
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView = (menu?.findItem(R.id.action_search)?.actionView as SearchView).apply {
-            // Assumes current activity is the searchable activity
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        }
-
-        if (sourceId == -1)
-            searchView.isIconified = false
-
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 
 //    private fun hideTabs() {

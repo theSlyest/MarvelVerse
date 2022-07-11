@@ -6,7 +6,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
-    implementation "org.koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8

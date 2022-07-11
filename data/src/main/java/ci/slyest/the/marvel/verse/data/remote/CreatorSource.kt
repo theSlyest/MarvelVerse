@@ -1,7 +1,7 @@
 package ci.slyest.the.marvel.verse.data.remote
 
 import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.CreatorFilter
+import ci.slyest.the.marvel.verse.domain.filters.CreatorFilter
 import io.reactivex.rxjava3.core.Single
 
 /**

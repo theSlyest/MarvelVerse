@@ -1,11 +1,11 @@
 package ci.slyest.the.marvel.verse.domain.usecases
 
 import ci.slyest.the.marvel.verse.domain.entities.StoryDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
+import ci.slyest.the.marvel.verse.domain.filters.StoryFilter
 import ci.slyest.the.marvel.verse.domain.repositories.StoryRepository
 import io.reactivex.rxjava3.core.Single
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * Stories list use case: depends on [StoryRepository] implementation to perform a request.

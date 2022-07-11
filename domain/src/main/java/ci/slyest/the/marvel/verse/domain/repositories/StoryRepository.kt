@@ -1,7 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.repositories
 
 import ci.slyest.the.marvel.verse.domain.entities.StoryDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.StoryFilter
+import ci.slyest.the.marvel.verse.domain.filters.StoryFilter
 import io.reactivex.rxjava3.core.Single
 
 /** Story repository interface to be implemented in the data module. */

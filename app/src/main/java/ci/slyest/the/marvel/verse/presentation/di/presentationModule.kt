@@ -2,7 +2,7 @@ package ci.slyest.the.marvel.verse.presentation.di
 
 import ci.slyest.the.marvel.verse.domain.usecases.*
 import ci.slyest.the.marvel.verse.presentation.viewmodels.*
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

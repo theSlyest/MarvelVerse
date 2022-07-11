@@ -7,7 +7,7 @@ import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.common.ResourceType
 import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CreatorSearchViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreatorSearchFragment : ISearchFragment() {
 

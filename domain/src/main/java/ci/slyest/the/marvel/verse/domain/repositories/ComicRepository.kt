@@ -1,7 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.repositories
 
 import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
-import ci.slyest.the.marvel.verse.domain.entities.ComicFilter
+import ci.slyest.the.marvel.verse.domain.filters.ComicFilter
 import io.reactivex.rxjava3.core.Single
 
 /** Comic repository interface to be implemented in the data module. */

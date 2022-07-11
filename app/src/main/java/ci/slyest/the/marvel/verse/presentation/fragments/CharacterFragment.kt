@@ -6,7 +6,7 @@ import ci.slyest.the.marvel.verse.presentation.adapters.CharacterAdapter
 import ci.slyest.the.marvel.verse.presentation.common.ResourceHolder
 import ci.slyest.the.marvel.verse.presentation.custom.onItemClick
 import ci.slyest.the.marvel.verse.presentation.viewmodels.CharacterViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterFragment : IRecyclerFragment() {
     private val mViewModel by viewModel<CharacterViewModel>()

@@ -6,8 +6,11 @@ import android.content.Context
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +22,7 @@ import ci.slyest.the.marvel.verse.presentation.common.fromHtml
 import ci.slyest.the.marvel.verse.presentation.databinding.ActivityNavBinding
 import ci.slyest.the.marvel.verse.presentation.databinding.AppBarNavBinding
 import java.util.*
+
 
 class NavActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNavBinding
@@ -51,19 +55,23 @@ class NavActivity : AppCompatActivity() {
         textAttribution.text =
             fromHtml(getString(R.string.attribution, Calendar.getInstance().get(Calendar.YEAR)))
         textAttribution.movementMethod = LinkMovementMethod.getInstance()
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_tabs, menu)
+        addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_tabs, menu)
 
-        // Get the SearchView and set the searchable configuration
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu?.findItem(R.id.action_search)?.actionView as SearchView).apply {
-            // Assumes current activity is the searchable activity
-            setSearchableInfo(searchManager.getSearchableInfo(ComponentName(context, SearchActivity::class.java)))
-        }
-        return true
+                // Get the SearchView and set the searchable configuration
+                val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+                (menu.findItem(R.id.action_search)?.actionView as SearchView).apply {
+                    // Assumes current activity is the searchable activity
+                    setSearchableInfo(searchManager.getSearchableInfo(ComponentName(context, SearchActivity::class.java)))
+                }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
