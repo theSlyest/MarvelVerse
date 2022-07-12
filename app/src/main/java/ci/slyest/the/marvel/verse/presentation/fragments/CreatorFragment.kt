@@ -16,9 +16,9 @@ class CreatorFragment : IRecyclerFragment() {
         observeState(mViewModel.state)
 
         val adapter = CreatorAdapter(glide)
-        CreatorViewModel.pagedList?.observe(viewLifecycleOwner, { pagedList ->
+        CreatorViewModel.pagedList?.observe(viewLifecycleOwner) { pagedList ->
             adapter.submitList(pagedList)
-        })
+        }
 
         binding.recycler.adapter = adapter
         binding.recycler.onItemClick { _, position, _ ->

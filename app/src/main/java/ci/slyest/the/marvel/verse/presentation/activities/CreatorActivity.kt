@@ -46,7 +46,7 @@ class CreatorActivity : IDetailActivity() {
                         else
                             strUrls += " | "
 
-                        strUrls += "<a href=\"${url.url}\">${url.type.capitalize(Locale.ROOT)}</a>"
+                        strUrls += "<a href=\"${url.url}\">${url.type.replaceFirstChar { it.titlecase(Locale.ROOT) }}</a>"
                     }
                     binding.textUrls.text = fromHtml(strUrls)
                 }

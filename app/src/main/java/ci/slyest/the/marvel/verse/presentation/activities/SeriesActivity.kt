@@ -46,7 +46,9 @@ class SeriesActivity: IDetailActivity() {
 
                     val creatorAdapter = SimpleAdapter(this@SeriesActivity,
                         creators.items.map { creator ->
-                            mapOf("role" to creator.role.capitalize(Locale.ROOT), "name" to creator.name)
+                            mapOf(
+                                "role" to creator.role.replaceFirstChar { it.titlecase(Locale.ROOT) },
+                                "name" to creator.name)
                         },
                         R.layout.grid_item,
                         arrayOf("role", "name"),
@@ -61,7 +63,7 @@ class SeriesActivity: IDetailActivity() {
                         else
                             strUrls += " | "
 
-                        strUrls += "<a href=\"${url.url}\">${url.type.capitalize(Locale.ROOT)}</a>"
+                        strUrls += "<a href=\"${url.url}\">${url.type.replaceFirstChar { it.titlecase(Locale.ROOT) }}</a>"
                     }
 
                     binding.textUrls.text = fromHtml(strUrls)

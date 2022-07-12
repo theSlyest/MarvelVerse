@@ -16,9 +16,9 @@ class EventFragment : IRecyclerFragment() {
         observeState(mViewModel.state)
 
         val adapter = EventAdapter(glide)
-        EventViewModel.pagedList!!.observe(viewLifecycleOwner, { pagedList ->
+        EventViewModel.pagedList!!.observe(viewLifecycleOwner) { pagedList ->
             adapter.submitList(pagedList)
-        })
+        }
 
         binding.recycler.adapter = adapter
         binding.recycler.onItemClick { _, position, _ ->

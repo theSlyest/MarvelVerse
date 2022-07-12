@@ -16,9 +16,9 @@ class StoryFragment : IRecyclerFragment() {
         observeState(mViewModel.state)
 
         val adapter = StoryAdapter(glide)
-        StoryViewModel.pagedList!!.observe(viewLifecycleOwner, { pagedList ->
+        StoryViewModel.pagedList!!.observe(viewLifecycleOwner) { pagedList ->
             adapter.submitList(pagedList)
-        })
+        }
 
         binding.recycler.adapter = adapter
         binding.recycler.onItemClick { _, position, _ ->

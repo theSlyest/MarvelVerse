@@ -1,7 +1,6 @@
 package ci.slyest.the.marvel.verse.presentation.activities
 
 import android.app.SearchManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -67,7 +66,7 @@ class SearchActivity : AppCompatActivity() {
 
                 // Get the SearchView and set the searchable configuration
                 val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-                searchView = (menu?.findItem(R.id.action_search)?.actionView as SearchView).apply {
+                searchView = (menu.findItem(R.id.action_search)?.actionView as SearchView).apply {
                     // Assumes current activity is the searchable activity
                     setSearchableInfo(searchManager.getSearchableInfo(componentName))
                 }
