@@ -1,7 +1,9 @@
 package ci.slyest.the.marvel.verse.presentation.sources
 
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.entities.Series
 import ci.slyest.the.marvel.verse.presentation.viewmodels.ISeriesViewModel
+import io.reactivex.rxjava3.core.Single
 
 class SeriesDataSource(var viewModel: ISeriesViewModel)
     : IMarvelDataSource<Series>() {
@@ -10,18 +12,18 @@ class SeriesDataSource(var viewModel: ISeriesViewModel)
         override val source = SeriesDataSource(viewModel)
     }
 
-    private var initSingle =
+    private var initSingle : Single<DataWrapper<Series>>? =
         viewModel.fetch(ISeriesViewModel.PAGE_SIZE + 2 * ISeriesViewModel.PREFETCH_DISTANCE).cache()
 
     init {
-        disposable = initSingle.subscribe { wrapper ->
+        disposable = initSingle!!.subscribe { wrapper ->
             disposable.dispose()
             count = wrapper.data.total
         }
     }
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Series>) {
-        val data = initSingle.blockingGet().data.results
+        val data = initSingle!!.blockingGet().data.results
         val position = computeInitialLoadPosition(params, count!!)
 //        val loadSize = computeInitialLoadSize(params, position, count!!)
 

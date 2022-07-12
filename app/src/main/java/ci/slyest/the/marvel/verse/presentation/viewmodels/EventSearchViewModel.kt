@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ci.slyest.the.marvel.verse.domain.entities.Event
-import ci.slyest.the.marvel.verse.domain.entities.EventDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
 import ci.slyest.the.marvel.verse.domain.filters.EventFilter
 import ci.slyest.the.marvel.verse.domain.usecases.EventsUseCase
 import ci.slyest.the.marvel.verse.presentation.common.Response
@@ -24,7 +24,7 @@ class EventSearchViewModel(private val useCase: EventsUseCase): IEventViewModel(
             LivePagedListBuilder(EventDataSource.Factory(this), pagingConfig).build()
     }
 
-    override fun fetch(limit: Int?, offset: Int?) : Single<EventDataWrapper> {
+    override fun fetch(limit: Int?, offset: Int?) : Single<DataWrapper<Event>> {
         mutableState.postValue(Response(status = Status.LOADING))
         request.limit = limit
         request.offset = offset

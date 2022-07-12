@@ -1,6 +1,7 @@
 package ci.slyest.the.marvel.verse.domain.repositories
 
-import ci.slyest.the.marvel.verse.domain.entities.CreatorDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.Creator
 import ci.slyest.the.marvel.verse.domain.filters.CreatorFilter
 import io.reactivex.rxjava3.core.Single
 
@@ -9,7 +10,7 @@ interface CreatorRepository {
     /**
      * Perform a request to get a list of characters
      * @param creatorFilter Object carrying the request parameters
-     * @return a [Single]<[CreatorDataWrapper]> result object
+     * @return a [Single]<[DataWrapper<Creator>]> result object
      */
-    fun creators(creatorFilter: CreatorFilter): Single<CreatorDataWrapper>
+    fun creators(creatorFilter: CreatorFilter): Single<DataWrapper<Creator>>
 }

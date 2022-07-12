@@ -1,7 +1,8 @@
 package ci.slyest.the.marvel.verse.data.repositories
 
 import ci.slyest.the.marvel.verse.data.remote.ComicSource
-import ci.slyest.the.marvel.verse.domain.entities.ComicDataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.DataWrapper
+import ci.slyest.the.marvel.verse.domain.entities.Comic
 import ci.slyest.the.marvel.verse.domain.filters.ComicFilter
 import ci.slyest.the.marvel.verse.domain.repositories.ComicRepository
 import io.reactivex.rxjava3.core.Single
@@ -14,8 +15,8 @@ class ComicRepositoryImpl(private val comicSource: ComicSource): ComicRepository
     /**
      * Perform a request to get a list of characters by calling [ComicSource.comics].
      * @param comicFilter Object carrying the request parameters
-     * @return a [Single]<[ComicDataWrapper]> result object
+     * @return a [Single]<[DataWrapper<Comic>]> result object
      */
-    override fun comics(comicFilter: ComicFilter): Single<ComicDataWrapper>
+    override fun comics(comicFilter: ComicFilter): Single<DataWrapper<Comic>>
             = comicSource.comics(comicFilter)
 }

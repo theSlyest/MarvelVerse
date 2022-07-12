@@ -47,8 +47,8 @@ class CharacterSearchFragment : ISearchFragment() {
     override fun refresh(startsWith: String?) {
         mViewModel.request.nameStartsWith = startsWith
         mViewModel.applyRequest()
-        mViewModel.data.observe(viewLifecycleOwner, { pagedList ->
+        mViewModel.data.observe(viewLifecycleOwner) { pagedList ->
             adapter.submitList(pagedList)
-        })
+        }
     }
 }
